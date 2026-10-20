@@ -43,16 +43,77 @@ const site = defineCollection({
   }),
 });
 
-// Service facts (name, price, timeline) from the frontmatter of content/services/*.md.
-// The page body schema is added with the service templates (stage 3).
+// Service pages: content/services/*.md. Facts (name, price, timeline) plus the rendered fields.
+// The Ops & AI page has its own layout and schema (stage 4), so its page fields are optional here.
+const faqEntry = z.union([
+  z.object({ q: z.string(), a: z.union([z.string(), z.array(z.string())]) }),
+  z.object({ shared: z.enum(['finish', 'deliver', 'faster', 'care', 'credit']) }),
+]);
+
 const services = defineCollection({
   loader: glob({ base: './content/services', pattern: '*.md' }),
+  schema: z
+    .object({
+      slug: z.string(),
+      name: z.string(),
+      from: z.number(),
+      timeline: z.string(),
+      template: z.enum(['ServicePage', 'OpsServicePage']),
+      pain: z.string().optional(),
+      familiar: z.array(z.string()).optional(),
+      get: z.array(z.string()).optional(),
+      steps: z.array(z.object({ label: z.string(), text: z.string() })).optional(),
+      need: z.array(z.string()).optional(),
+      tools: z.array(z.string()).optional(),
+      packages: z
+        .array(
+          z.object({
+            price: z.string(),
+            name: z.string(),
+            popular: z.boolean().optional(),
+            lead: z.string().optional(),
+            items: z.array(z.string()),
+            after: z.string().optional(),
+          }),
+        )
+        .optional(),
+      goesUpWith: z.string().optional(),
+      priceNote: z.object({ heading: z.string().optional(), text: z.string() }).optional(),
+      rushName: z.string().optional(),
+      faq: z.array(faqEntry).optional(),
+    })
+    .refine(
+      (d) =>
+        d.template !== 'ServicePage' ||
+        [d.pain, d.familiar, d.get, d.steps, d.need, d.tools, d.packages, d.goesUpWith, d.rushName, d.faq].every(
+          (v) => v !== undefined,
+        ),
+      { message: 'A ServicePage needs pain, familiar, get, steps, need, tools, packages, goesUpWith, rushName and faq' },
+    ),
+});
+
+// Shared service page labels and repeated FAQ answers: content/shared.md frontmatter.
+const shared = defineCollection({
+  loader: glob({ base: './content', pattern: 'shared.md' }),
   schema: z.object({
-    slug: z.string(),
-    name: z.string(),
-    from: z.number(),
-    timeline: z.string(),
-    template: z.enum(['ServicePage', 'OpsServicePage']),
+    servicePage: z.object({
+      priceLabel: z.string(),
+      timeLabel: z.string(),
+      guaranteeLabel: z.string(),
+      guaranteeText: z.string(),
+      scrollLabel: z.string(),
+      familiarHeading: z.string(),
+      getHeading: z.string(),
+      stepsHeading: z.string(),
+      needHeading: z.string(),
+      toolsHeading: z.string(),
+      priceHeading: z.string(),
+      popularLabel: z.string(),
+      goesUpHeading: z.string(),
+      questionsHeading: z.string(),
+      bookLabel: z.string(),
+    }),
+    faq: z.record(z.enum(['finish', 'deliver', 'faster', 'care', 'credit']), z.object({ q: z.string(), a: z.string() })),
   }),
 });
 
@@ -109,4 +170,4 @@ const home = defineCollection({
   }),
 });
 
-export const collections = { site, services, home };
+export const collections = { site, services, shared, home };

@@ -1,3 +1,45 @@
+---
+# Shared strings for the service pages. Rendered; the notes below the frontmatter are not.
+# Labels follow the Figma service page template (12:948).
+servicePage:
+  priceLabel: "Price"
+  timeLabel: "Time"
+  guaranteeLabel: "Delivery Guarantee"
+  guaranteeText: "Full refund if I don't deliver the agreed scope on time"
+  scrollLabel: "Scroll to details"
+  familiarHeading: "Sounds familiar?"
+  getHeading: "What you get"
+  stepsHeading: "How it works"
+  needHeading: "What I need from you"
+  toolsHeading: "Tools"
+  priceHeading: "Price"
+  popularLabel: "Most common"
+  goesUpHeading: "Goes up with"
+  questionsHeading: "Questions"
+  bookLabel: "Book a free call"
+
+# Repeated FAQ entries, used by service pages with `shared: <key>`.
+# care: decided by Diana (stage 3): the care window is shown as its own FAQ entry.
+# {project} in "faster" is replaced by each page's rushName.
+faq:
+  finish:
+    q: "Will you finish on time?"
+    a: "Yes. My work stays inside the timeline we agree in the scope. The timeline changes only in two cases: the scope grows, or the project waits for your input (access, files, answers, feedback). If that happens I tell you right away and we agree new dates in writing."
+  deliver:
+    q: "What if you don't deliver?"
+    a: "Every project has a Delivery Guarantee: if I don't deliver the agreed scope on time, you get a full refund. I guarantee delivery, not business results."
+  faster:
+    q: "Can you do it faster?"
+    a: "Sometimes. A rush {project}, about half the standard timeline, adds 30% and is only possible when I have an open slot."
+  care:
+    # Built from the "Care and after-project" notes below (14-day care window for the four standard services).
+    q: "What happens after handoff?"
+    a: "You get a 14-day care window: anything I built that stops working is fixed free. New features and changes caused by your tools or business changing are not included."
+  credit:
+    q: "I already bought a teardown. Do I get credit?"
+    a: "Yes, 50% of the teardown fee if you start within 30 days."
+---
+
 # Shared rules and repeated blocks
 
 ## Price rule (every service page)

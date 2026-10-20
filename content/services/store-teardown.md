@@ -4,7 +4,79 @@ name: Store Teardown
 from: 300
 timeline: 3 to 5 working days
 template: ServicePage
+# Rendered fields. Wording follows the Figma page (12:948) where it exists; facts from the notes below.
+pain: "Your store gets visitors. Most leave. I'll show you why."
+familiar:
+  - "Traffic is fine, orders are not."
+  - "The store 'looks off' but nobody can say what exactly."
+  - "You changed things and don't know if it helped."
+  - "Your team argues about what to fix first."
+get:
+  - "Review of your key pages: home, collection, product, cart, checkout (scope depends on the package)."
+  - "Every problem I find, ranked by effort and likely impact, in plain language. The number of findings depends on your store: it can be a few big problems or many small ones, and you get all of them."
+  - "Annotated screenshots showing each problem."
+  - "Mockups for the highest-priority fixes. The number of mockups is agreed in the scope after my first look at your store."
+  # Figma says "A short video walkthrough and/or a 30-minute call"; the call length depends on the package, so the content wording is used.
+  - "A call or video walkthrough to go through the findings (format depends on the package)."
+steps:
+  - label: "Day 1"
+    text: "You send access and tell me about your goals."
+  - label: "Days 2 to 3"
+    text: "I go through the store on desktop and mobile and note every friction point."
+  - label: "Days 3 to 4"
+    text: "I rank the issues and design mockups for the top fixes."
+  - label: "Day 5"
+    text: "You get the report and we talk it through."
+need:
+  - "Staff or collaborator access to the store, or a screen-share call."
+  - "Read access to analytics if you have it (optional, makes the review sharper)."
+  - "What you sell best and who buys it."
+tools:
+  - "Shopify admin."
+  - "GA4 and Shopify analytics, Triple Whale and Amplitude if the brand uses them."
+  - "Microsoft Clarity and Hotjar for heatmaps and session recordings."
+  - "PageSpeed Insights for speed checks."
+  - "Figma for mockups."
+  - "Claude for analysis, a screen-recording tool for the walkthrough."
+packages:
+  - price: "$300"
+    name: "Focus"
+    items:
+      - "One page type (usually the product page)."
+      - "Annotated screenshots and a ranked list of everything I find on it."
+    after: "No mockups."
+  - price: "$600"
+    name: "Full funnel"
+    popular: true
+    items:
+      - "All key pages (home, collection, product, cart, checkout),"
+      - "A ranked list of findings, and mockups for the highest-priority fixes."
+  - price: "$1,000"
+    name: "Deep"
+    lead: "everything in Full funnel, plus:"
+    items:
+      - "A review of how visitors actually behave (heatmaps and session recordings, plus analytics where available)"
+      - "A speed and mobile performance check"
+      - "A 30-day action plan that puts the fixes in order by week"
+      - "A video walkthrough, a 60-minute call and 14 days of follow-up questions"
+      - "A competitor benchmark is available as an optional add-on when it is relevant to your market."
+goesUpWith: "More page types, more than one store or market, how much data and tracking is already in place. Behavior data (heatmaps, recordings) needs a few days of traffic on the store, so the Deep package can take longer if tracking has to be set up first."
+priceNote:
+  heading: "Your teardown pays you back"
+  text: "Hire me for the fix within 30 days, and 50% of your teardown fee goes toward the project."
+rushName: "teardown"
+faq:
+  - q: "Will this guarantee higher conversion?"
+    a: "No. It shows you what is most likely holding sales back, in order. Results depend on what gets fixed."
+  - q: "Do I have to hire you to fix it?"
+    a: "No. The report works for your own team or any developer. If you do hire me within 30 days, 50% of the teardown fee is credited."
+  - shared: finish
+  - shared: deliver
+  - shared: faster
+  - shared: care
 ---
+
+# Original copy notes (not rendered)
 
 ## Top
 **Pain line:** Your store gets visitors. Most leave. I'll show you why.
