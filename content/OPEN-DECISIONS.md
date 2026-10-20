@@ -4,7 +4,7 @@ Copy / design
 1. Final stat trio in About block (see home.md).
 2. Teardown price block: heading for the "credit" bullet (name undecided).
 3. Returning-client discount: DECIDED 15%.
-4. Is a quick first look at a store free? Not decided.
+4. DECIDED: free mini-look (about 15 min, 2 to 3 observations) is OK. Where it is offered (outreach only vs also form leads) and whether the site mentions it: not decided, so the site does not mention it for now.
 5. FAQ answers for the 11 questions in the Figma landing are not written.
 6. Figma fixes needed: Teardown card says "mockups for the top three" (remove number); Email Flows card text; Ops & AI position; Delivery Guarantee line near hero; Store link field in form; privacy link on consent checkbox; footer line; The System Club card photo mismatch.
 7. Proof screenshots per service (Proof block stays empty without them).
