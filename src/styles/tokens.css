@@ -83,7 +83,6 @@
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-swap: cubic-bezier(0.65, 0, 0.35, 1); /* symmetric, for cards trading places */
-  --dur-reveal: 1.4s;
   --dur-expand: 1s;
   --dur-state: 0.45s; /* hover / press states */
 }
