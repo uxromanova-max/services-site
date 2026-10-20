@@ -4,7 +4,69 @@ name: Product Page Sprint
 from: 600
 timeline: 1 to 2 weeks
 template: ServicePage
+# Rendered fields, from the notes below (no Figma frame for this page; layout from the service template).
+pain: "Your best product page is doing the hardest job in your store. Let's make it easier to buy from."
+familiar:
+  - "People view the product but don't add to cart."
+  - "The page is long, but the answers to common questions are missing."
+  - "It looks fine on desktop and clumsy on mobile."
+  - "Photos, reviews and delivery info are scattered."
+get:
+  - "New page structure: gallery, headline, benefits, variants, trust elements, FAQ, reviews, cross-sell."
+  - "Copy blocks for key sections (sharpened from your existing copy, or written, depending on the package)."
+  - "Design for desktop and mobile."
+  - "Built into your Shopify theme (higher packages) or delivered as design and build notes (base package)."
+  - "A reusable layout your team can copy to other products."
+steps:
+  - label: "Days 1 to 2"
+    text: "Kickoff call, review of the current page and customer questions."
+  - label: "Days 3 to 5"
+    text: "Structure and design, you review."
+  - label: "Days 6 to 9"
+    text: "Build or build notes, one round of changes."
+  - label: "Day 10"
+    text: "Live, handoff and a short how-to."
+need:
+  - "Store access, product photos and any video."
+  - "Reviews, FAQs and common support questions."
+  - "One person who gives feedback within 2 working days."
+tools:
+  - "Shopify theme editor."
+  - "Figma."
+  - "Your reviews and subscription apps if you use them."
+  - "Analytics (GA4, Microsoft Clarity or Hotjar, if connected to your store)."
+  - "PageSpeed Insights for speed checks."
+  - "Judge.me or Junip for reviews."
+  - "Skio for subscriptions."
+packages:
+  - price: "$600"
+    name: "Design"
+    items:
+      - "One product page, design for desktop and mobile, build notes."
+      - "You or your developer builds it."
+  - price: "$1,000"
+    name: "Design + build"
+    popular: true
+    items:
+      - "The same, built live in your theme."
+  - price: "$1,500"
+    name: "Full"
+    items:
+      - "Design, build, new copy and image layouts, plus the layout applied to 2 more products."
+goesUpWith: "More products, custom-coded sections, bundles or complex variants, no ready photos."
+rushName: "sprint"
+faq:
+  - q: "Do you write code?"
+    a: "Yes, when the project needs it. Most of the work happens with theme sections and apps. When the design calls for a custom section or a new page, I build it in Liquid. I tell you at the start what is standard and what needs custom code."
+  - q: "Can you do my whole catalog?"
+    a: "Yes, as a Store Refresh."
+  - shared: finish
+  - shared: deliver
+  - shared: faster
+  - shared: credit
 ---
+
+# Original copy notes (not rendered)
 
 ## Top
 **Pain line:** Your best product page is doing the hardest job in your store. Let's make it easier to buy from.

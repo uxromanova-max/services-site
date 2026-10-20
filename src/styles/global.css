@@ -87,6 +87,12 @@ a {
 .icon-arrow-down-right {
   --icon: url('/icons/arrow-down-right.svg');
 }
+.icon-arrow-down {
+  --icon: url('/icons/arrow-down.svg');
+}
+.icon-bullet-arrow {
+  --icon: url('/icons/bullet-arrow.svg');
+}
 .icon-arrow-up-right-24 {
   --icon: url('/icons/arrow-up-right-24.svg');
   width: 24px;
@@ -105,6 +111,13 @@ a {
 .section-label {
   font-size: var(--text-body);
   font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+}
+
+/* Service page block heading: "SOUNDS FAMILIAR?", "WHAT YOU GET", ... (18 Medium) */
+.block-label {
+  font-size: var(--text-lead);
+  font-weight: var(--weight-medium);
   text-transform: uppercase;
 }
 

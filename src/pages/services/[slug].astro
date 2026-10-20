@@ -1,0 +1,17 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import ServicePage from '../../templates/ServicePage.astro';
+
+// Standard service pages. The Ops & AI page uses its own template (stage 4).
+export async function getStaticPaths() {
+  const services = await getCollection('services', (s) => s.data.template === 'ServicePage');
+  return services.map((s) => ({ params: { slug: s.data.slug }, props: { service: s.data } }));
+}
+
+interface Props {
+  service: CollectionEntry<'services'>['data'];
+}
+const { service } = Astro.props;
+---
+
+<ServicePage service={service} />

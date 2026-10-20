@@ -4,7 +4,7 @@ Rule for Figma vs /content (decided): Figma wins on layout, structure, visual de
 
 Copy / design
 1. Final stat trio in About block (see home.md).
-2. Teardown price block: heading for the "credit" bullet (name undecided).
+2. Teardown price block: heading for the "credit" bullet. DECIDED by Figma: "Your teardown pays you back".
 3. Returning-client discount: DECIDED 15%.
 4. DECIDED: the free mini-look is done by Diana herself inside cold outreach (she reviews the store and writes what is not working and how she can help). It is not offered or promised anywhere on the site. Nothing to build.
 5. FAQ answers for the 11 questions in the Figma landing are not written.
@@ -50,6 +50,19 @@ Stage 2 (home)
 - Hover frames 6:146 / 6:195 / 6:224 use other photos than the landing frame. The site keeps the landing photos and adds the dark overlay on hover.
 - Service cards have no timeline in Figma, so timelines show only on the service pages.
 - Form service and Cal.com are connected at the end of the project (Diana); the form keeps its CHECK marker until then.
+
+Stage 3 (service pages: Teardown, Product Page Sprint, Email Flows, Store Refresh)
+- Service copy moved into frontmatter of content/services/*.md; original notes kept below and not rendered. Shared labels and repeated FAQ answers in content/shared.md frontmatter.
+- Figma fix: Teardown "What you get" last bullet says "A short video walkthrough and/or a 30-minute call"; the call length depends on the package (Deep = 60 minutes), so the site uses the content bullet "A call or video walkthrough to go through the findings (format depends on the package)."
+- The "After" line (what changes after the project) has no place in the Figma top block, so it is not shown. Should it appear somewhere?
+- The price heading is just "Price" as in Figma; the range line from content ("$300 to $1,000, depends on how much is reviewed") is not shown.
+- Proof block is hidden on all four pages until real screenshots exist (item 7). "Related work" links are not shown either.
+- Decorative images (wide banner after the lists, three images next to "What I need / Tools") are the Figma placeholder texture and are the same on all four pages. Will each service get its own images?
+- "Care window after handoff: 14 days" has no place in the Figma template, so it is not shown on the service pages. Where should it go (FAQ entry, price note, guarantee block)?
+- Email Flows: "Extra flow: $150 each. Extra custom-designed email: $150 to $250." is shown as a note under the price cards (where the Teardown page has its credit note).
+- Tools for Product Page Sprint, Email Flows and Store Refresh were one sentence in the notes; on the page they are a bullet list with the same words (first letter capitalised, full stop added).
+- Package descriptions are split into "- " lines by sentence, as in the Figma Teardown cards.
+- Teardown walkthrough recording tool (item 9): the page says "a screen-recording tool" (Figma wording), no tool named.
 
 Technical
 - Form service choice (verify free limits). Cal.com account/link. Custom domain later.

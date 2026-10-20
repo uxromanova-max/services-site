@@ -22,6 +22,7 @@
   --color-dash: rgba(0, 0, 0, 0.33); /* dashed rules: FAQ, form fields */
   --color-chip: #f7f7f7;
   --color-overlay: rgba(0, 0, 0, 0.76); /* selected work hover */
+  --color-step: #a2a2a2; /* "[ Day 1 ]" labels */
 
   /* Type families */
   --font-display: 'Jeju Myeongjo', 'Times New Roman', serif;
@@ -44,6 +45,7 @@
 
   --weight-light: 300;
   --weight-regular: 400;
+  --weight-medium: 500;
   --weight-semibold: 600;
   --weight-bold: 700;
 
