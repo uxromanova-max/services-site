@@ -1,0 +1,21 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import TextPage from '../templates/TextPage.astro';
+import { isPublic } from '../lib/env';
+
+// /privacy and /terms. Drafts are built for previews only.
+export async function getStaticPaths() {
+  const pages = await getCollection('legal', (p) => isPublic(p));
+  return pages.map((p) => ({ params: { legal: p.data.slug }, props: { entry: p } }));
+}
+
+interface Props {
+  entry: CollectionEntry<'legal'>;
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<TextPage title={entry.data.title} draft={entry.data.draft}>
+  <Content />
+</TextPage>

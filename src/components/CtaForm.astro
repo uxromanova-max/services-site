@@ -3,6 +3,14 @@ import { getCollection } from 'astro:content';
 import { getSite, isUnresolved } from '../lib/site';
 import { legalHref } from '../lib/routes';
 
+interface Props {
+  /** The contact page uses the CTA heading as its h1. */
+  headingLevel?: 'h1' | 'h2';
+  /** Target of "Book a call directly"; the contact page points it at its own booking section. */
+  bookHref?: string;
+}
+const { headingLevel = 'h2', bookHref } = Astro.props;
+const Heading = headingLevel;
 const site = await getSite();
 const cta = site.cta;
 const services = (await getCollection('services')).map((s) => s.data);
@@ -19,7 +27,7 @@ const privacyHref = await legalHref('privacy');
 <section class="cta container" aria-labelledby="cta-title">
   <div class="intro">
     <p class="eyebrow">{cta.eyebrow}</p>
-    <h2 id="cta-title" class="heading">{cta.heading}</h2>
+    <Heading id="cta-title" class="heading">{cta.heading}</Heading>
     <p class="text">{cta.text}</p>
   </div>
   <form class="form" method="post" action={actionReady ? cta.formAction : undefined}>
@@ -78,7 +86,7 @@ const privacyHref = await legalHref('privacy');
       </button>
       <div class="direct">
         <p class="direct-lead">{cta.bookLead}</p>
-        <a class="direct-link" href={site.bookingUrl}>
+        <a class="direct-link" href={bookHref ?? site.bookingUrl}>
           {cta.bookLabel}
           <span class="icon icon-arrow-up-right" aria-hidden="true"></span>
         </a>
