@@ -1,0 +1,153 @@
+---
+import { Picture } from 'astro:assets';
+import footerBg from '../assets/figma/footer-bg.png';
+import { getSite, isUnresolved } from '../lib/site';
+
+interface Props {
+  /** Links to legal pages; null while the page is a draft in production or not built yet. */
+  privacyHref?: string | null;
+  termsHref?: string | null;
+}
+
+const { privacyHref = null, termsHref = null } = Astro.props;
+const site = await getSite();
+const f = site.footer;
+const linkedinReady = !isUnresolved(f.linkedinUrl);
+---
+
+<footer class="footer">
+  <div class="card">
+    <Picture
+      class="bg"
+      src={footerBg}
+      formats={['avif', 'webp']}
+      fallbackFormat="webp"
+      widths={[608, 1216, 2432]}
+      sizes="(max-width: 1280px) calc(100vw - 2 * var(--footer-inset)), 1216px"
+      alt=""
+      loading="lazy"
+      decoding="async"
+    />
+    <div class="top">
+      <p class="heading">{f.heading}</p>
+      <a class="book" href={site.bookingUrl}>
+        {f.bookLabel}
+        <span class="icon icon-arrow-right" aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="bottom">
+      <p>{f.copyright}</p>
+      <p>{f.madeBy} <span class="deco">{site.name}</span></p>
+      {privacyHref && <a class="legal" href={privacyHref}>{f.privacyLabel}</a>}
+      {termsHref && <a class="legal" href={termsHref}>{f.termsLabel}</a>}
+      {
+        linkedinReady ? (
+          <a class="linkedin" href={f.linkedinUrl} rel="me noopener" target="_blank">
+            {f.linkedinLabel}
+            <span class="icon icon-arrow-up-right" aria-hidden="true" />
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        ) : (
+          <span class="linkedin unresolved">
+            {f.linkedinLabel} ({f.linkedinUrl})
+          </span>
+        )
+      }
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    max-width: var(--frame);
+    margin-inline: auto;
+    padding: var(--footer-inset);
+  }
+  .card {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-8);
+    min-height: 483px;
+    padding: var(--footer-pad);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    background: #111; /* shows while the image loads */
+    color: var(--color-on-dark);
+  }
+  .card :global(picture),
+  .card :global(.bg) {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-6);
+  }
+  .heading {
+    max-width: 450px;
+    font-family: var(--font-display);
+    font-size: var(--text-display);
+    line-height: var(--leading-display);
+    text-transform: uppercase;
+  }
+  .book {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-top: 15px;
+    padding: var(--space-2) var(--space-6);
+    border: 1px solid currentColor;
+    font-weight: var(--weight-regular);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-4) var(--space-8);
+    font-size: var(--text-small);
+  }
+  .deco {
+    font-family: var(--font-deco);
+  }
+  .legal {
+    text-underline-position: from-font;
+  }
+  .linkedin {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 2px;
+    border-bottom: 1px solid currentColor;
+    font-size: var(--text-body);
+    font-weight: var(--weight-regular);
+    text-decoration: none;
+  }
+
+  @media (max-width: 48rem) {
+    .card {
+      min-height: 0;
+    }
+    .top {
+      flex-direction: column;
+    }
+    .book {
+      margin-top: 0;
+    }
+    .bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

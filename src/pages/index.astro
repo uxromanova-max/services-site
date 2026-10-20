@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import { getSite } from '../lib/site';
+
+const site = await getSite();
+---
+
+<Base landingNav>
+  <h1 class="visually-hidden">{site.name}</h1>
+  <!-- Home sections are built in stage 2. -->
+  <div class="shell-spacer"></div>
+</Base>
+
+<style>
+  .shell-spacer {
+    min-height: 50vh;
+  }
+</style>

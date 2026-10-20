@@ -1,0 +1,55 @@
+---
+import '@fontsource/geist/latin-300.css';
+import '@fontsource/geist/latin-400.css';
+import '@fontsource/geist/latin-600.css';
+import '@fontsource/geist/latin-700.css';
+import '@fontsource/sometype-mono/latin-400-italic.css';
+import '@fontsource/cinzel-decorative/latin-400.css';
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { allowIndexing, isProduction } from '../lib/env';
+import { getSite } from '../lib/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Draft pages are noindex and carry a banner outside production. */
+  draft?: boolean;
+  /** Landing variant of the nav (location lines under the name). */
+  landingNav?: boolean;
+}
+
+const { title, description, draft = false, landingNav = false } = Astro.props;
+const site = await getSite();
+const pageTitle = title ? `${title} · ${site.name}` : site.name;
+const noindex = !allowIndexing || draft;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    {description && <meta name="description" content={description} />}
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="preload" href="/fonts/jeju-myeongjo-latin-400.woff2" as="font" type="font/woff2" crossorigin />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    {draft && !isProduction && <p class="draft-banner unresolved">Draft page: not published in production.</p>}
+    <Nav showLocation={landingNav} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .draft-banner {
+    padding: var(--space-2) var(--gutter-nav);
+    font-size: var(--text-small);
+  }
+</style>
