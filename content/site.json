@@ -1,0 +1,20 @@
+{
+  "_source": "Nav and footer wording from Figma (Landing 10:797, footer symbol 24:2499). Figma wins on wording of existing blocks; facts come from /content.",
+  "name": "Diana Romanova",
+  "location": ["Based in Poland", "Remote Worldwide"],
+  "nav": {
+    "bookLabel": "Book a call"
+  },
+  "footer": {
+    "heading": "Let’s take the busywork off your plate",
+    "bookLabel": "Book a call",
+    "copyright": "© Copyright 2026. All rights reserved.",
+    "madeBy": "Made by",
+    "privacyLabel": "Privacy Policy",
+    "termsLabel": "Terms and Delivery Guarantee",
+    "linkedinLabel": "Linkedin",
+    "linkedinUrl": "https://www.linkedin.com/in/romanova23/"
+  },
+  "bookingUrl": "/contact",
+  "email": "uxromanova@gmail.com"
+}

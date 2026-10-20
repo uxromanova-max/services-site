@@ -1,0 +1,74 @@
+/*
+ * Design tokens from Figma "Services website" (desktop frames, 1280px).
+ * The file has no Figma variables; values are read from layer styles.
+ * Change a value here, not in components.
+ */
+@font-face {
+  font-family: 'Jeju Myeongjo';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  /* Latin subset of JejuMyeongjo (Sandoll / Jeju Province), see public/fonts/README.md */
+  src: url('/fonts/jeju-myeongjo-latin-400.woff2') format('woff2');
+}
+
+:root {
+  /* Colour */
+  --color-ink: #000;
+  --color-paper: #fff;
+  --color-on-dark: #fff;
+
+  /* Type families */
+  --font-display: 'Jeju Myeongjo', 'Times New Roman', serif;
+  --font-sans: 'Geist', system-ui, sans-serif;
+  --font-mono: 'Sometype Mono', ui-monospace, monospace;
+  --font-deco: 'Cinzel Decorative', serif;
+
+  /* Type scale (Figma px; fluid below the desktop frame) */
+  --text-display: clamp(2.25rem, 1.5rem + 3vw, 3.25rem); /* 52 */
+  --leading-display: 1.077; /* 56 / 52 */
+  --text-lead: 1.125rem; /* 18 — text pages */
+  --text-body: 1rem; /* 16 */
+  --text-small: 0.875rem; /* 14 */
+  --tracking-small: 0.08em; /* 1.12px at 14px */
+
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* Layout */
+  --frame: 80rem; /* 1280 */
+  --content: 67rem; /* 1072 */
+  --gutter-nav: 3rem; /* 48 */
+  --gutter: 6.5rem; /* 104 */
+  --footer-inset: 2rem; /* 32 */
+  --footer-pad: 2.5rem; /* 40: text inset inside the dark card */
+  --radius-card: 1.25rem; /* 20 */
+
+  /* Spacing */
+  --space-2: 0.5rem; /* 8 */
+  --space-4: 1rem; /* 16 */
+  --space-6: 1.5rem; /* 24 */
+  --space-8: 2rem; /* 32 */
+  --space-18: 4.5rem; /* 72 */
+
+  --focus-ring: 2px solid currentColor;
+}
+
+/* Provisional responsive rules (no mobile frames yet) */
+@media (max-width: 64rem) {
+  :root {
+    --gutter: 2.5rem;
+    --gutter-nav: 2.5rem;
+    --footer-inset: 1.5rem;
+  }
+}
+@media (max-width: 48rem) {
+  :root {
+    --gutter: 1.25rem;
+    --gutter-nav: 1.25rem;
+    --footer-inset: 0.75rem;
+    --footer-pad: 1.5rem;
+  }
+}

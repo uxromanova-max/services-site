@@ -15,7 +15,12 @@ Language of the site: English. First person ("I"), one person, not an agency.
 ## Source of truth
 1. **Design:** Figma file key `https://www.figma.com/design/iZyXFbTsyWM6F1Bl3BenCd/Services-website?node-id=0-1&t=FQ62Y5TOMWg2VayR-1` (Landing page node `10-797`, 1280px desktop). Also frames for: service template, Ops & AI service page, case template, text pages. Pull tokens (colors, type, spacing) from Figma; do not guess.
 2. **Copy:** everything in `/content`. Never invent or rewrite copy, prices, numbers, tool names, claims or testimonials. If copy is missing, leave a visible `CHECK:` marker in the content file and ask Diana.
-3. If Figma and `/content` disagree, ask. Do not choose silently. Known mismatches are listed in `content/OPEN-DECISIONS.md`.
+3. If Figma and `/content` disagree (rule set by Diana):
+   - **Figma wins** on layout, structure, visual design and the wording of existing blocks.
+   - **/content wins** on facts: prices, timelines, package contents, guarantee rules, tool lists, case roles.
+   - Where Figma has outdated facts, use `/content` and list the Figma fix in `content/OPEN-DECISIONS.md`.
+   - Anything this rule does not cover: do not guess, list it for Diana in `content/OPEN-DECISIONS.md`.
+4. Placeholder text in Figma frames (case and text page templates) is layout only; never copy it.
 
 ## Mobile
 Designs are **desktop only for now**. Mobile frames will be added by Diana later. Build responsive with sensible fluid layouts (single column stacking, no horizontal scroll), but mark mobile as provisional and do not polish it to pixel level until mobile frames exist.
@@ -47,13 +52,16 @@ Work stage by stage, one commit per stage, and after each stage take screenshots
 - Diana writes Shopify Liquid and custom sections/pages. Do not write "no custom code" on the site.
 - Stats on the About strip are not final (see OPEN-DECISIONS). Do not add "UGC videos made" or "AI agents built" counts.
 
+## Drafts
+Pages with `draft: true` (cases and legal pages until their copy is final) are left out of production builds: they never appear in nav, footer, sitemap or links, and always carry `noindex`. Preview builds show them with a banner. The CHECK/TODO guard still fails a production build if a page with markers is made public.
+
 ## Git
 Commit messages end with:
 ```
-Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
-Claude-Session: https://claude.ai/code/session_011AZBaekNM7uo4seEnJWYBx
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_016LQZt2F487BrNs7z6izoNo
 ```
-Push to a feature branch per stage when possible; do not force-push.
+One branch per stage, based on `main` (`stage-1-setup`, `stage-2-home`, ...). Open a PR for each; Diana reviews and merges before the next stage starts. Do not force-push.
 
 ## Owner
 Diana Romanova, uxromanova@gmail.com. She reviews in Russian; site copy stays in English. Keep questions short and ask only when blocked.
