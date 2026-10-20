@@ -39,5 +39,18 @@
     "bookLead": "Prefer to pick a time?",
     "bookLabel": "Book a call directly",
     "formAction": "CHECK: form service not chosen yet (Formspree or Web3Forms)"
+  },
+  "contact": {
+    "_source": "Contact/booking page (no Figma frame; provisional). Built from the CTA block, an inline Cal.com embed, a fallback link and email.",
+    "title": "Contact",
+    "calUrl": "CHECK: Cal.com booking link (connected at the end of the project)"
+  },
+  "thanks": {
+    "title": "CHECK: thank-you page title",
+    "text": "CHECK: thank-you text after the form is sent"
+  },
+  "notFound": {
+    "title": "CHECK: 404 page title",
+    "text": "CHECK: 404 text and a link back to the home page"
   }
 }

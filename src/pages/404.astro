@@ -1,0 +1,12 @@
+---
+import TextPage from '../templates/TextPage.astro';
+import { getSite } from '../lib/site';
+
+// Provisional: there is no Figma frame for the 404 page.
+const site = await getSite();
+---
+
+<TextPage title={site.notFound.title}>
+  <p>{site.notFound.text}</p>
+  <p><a href="/">{site.name}</a></p>
+</TextPage>

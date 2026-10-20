@@ -1,0 +1,12 @@
+---
+import TextPage from '../templates/TextPage.astro';
+import { getSite } from '../lib/site';
+
+// Provisional: shown after the form is sent (form service connected at the end of the project).
+const site = await getSite();
+---
+
+<TextPage title={site.thanks.title}>
+  <p>{site.thanks.text}</p>
+  <p><a href="/">{site.name}</a></p>
+</TextPage>

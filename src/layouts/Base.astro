@@ -12,6 +12,7 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import { allowIndexing, isProduction } from '../lib/env';
 import { getSite } from '../lib/site';
+import { legalHref } from '../lib/routes';
 
 interface Props {
   title?: string;
@@ -26,6 +27,8 @@ const { title, description, draft = false, landingNav = false } = Astro.props;
 const site = await getSite();
 const pageTitle = title ? `${title} · ${site.name}` : site.name;
 const noindex = !allowIndexing || draft;
+const privacyHref = await legalHref('privacy');
+const termsHref = await legalHref('terms');
 ---
 
 <!doctype html>
@@ -45,7 +48,7 @@ const noindex = !allowIndexing || draft;
     <main id="main">
       <slot />
     </main>
-    <Footer />
+    <Footer privacyHref={privacyHref} termsHref={termsHref} />
   </body>
 </html>
 

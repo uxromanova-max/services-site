@@ -38,6 +38,9 @@ const site = defineCollection({
       bookLabel: z.string(),
       formAction: z.string(),
     }),
+    contact: z.object({ title: z.string(), calUrl: z.string() }),
+    thanks: z.object({ title: z.string(), text: z.string() }),
+    notFound: z.object({ title: z.string(), text: z.string() }),
     bookingUrl: z.string(),
     email: z.string(),
   }),
@@ -149,6 +152,16 @@ const cases = defineCollection({
   }),
 });
 
+// Text pages (Privacy Policy, Terms & Delivery Guarantee): Markdown body in content/legal/*.md.
+const legal = defineCollection({
+  loader: glob({ base: './content/legal', pattern: '*.md' }),
+  schema: z.object({
+    draft: z.boolean().default(false),
+    slug: z.enum(['privacy', 'terms']),
+    title: z.string(),
+  }),
+});
+
 // Shared service page labels and repeated FAQ answers: content/shared.md frontmatter.
 const shared = defineCollection({
   loader: glob({ base: './content', pattern: 'shared.md' }),
@@ -238,4 +251,4 @@ const home = defineCollection({
   }),
 });
 
-export const collections = { site, services, cases, shared, home };
+export const collections = { site, services, cases, legal, shared, home };

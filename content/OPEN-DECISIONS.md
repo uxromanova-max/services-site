@@ -82,6 +82,14 @@ Stage 5 (case template)
 - Image slots use the Figma placeholder texture until Diana supplies real images per case.
 - When the copy arrives: fill the fields in content/cases/<slug>.md (empty fields and sections hide), then set draft: false to publish.
 
+Stage 6 (text pages, contact, thank-you, 404)
+- Privacy Policy and Terms & Delivery Guarantee use the Figma text page template (24:2435). Both are drafts (draft: true in content/legal/*.md) with CHECK placeholders from legal-outline.md until a Polish accountant/lawyer reviews them; production builds leave them out, so the footer links, the consent-checkbox link and the "Delivery Guarantee" links appear only in previews for now.
+- Terms page title is "Terms and Delivery Guarantee" (footer wording); the Figma frame's "Delivery Guarantee" is a section heading. The section uses the Figma wording (short version) followed by the remaining rules from shared.md verbatim, including the open "20 days (calendar or working days)" question.
+- Contact page (/contact, provisional, no frame): CTA form block as the page heading, a booking section with a reserved space for the Cal.com inline embed, a fallback "Book a call directly" link and the email. All "Book a call" buttons on the site point to /contact.
+- Email shown on the contact page: uxromanova@gmail.com (home.md notes: replace when a professional address exists).
+- Thank-you page (/thanks) and 404 page: built on the text page template, provisional; title and text are CHECK placeholders. Diana: send one or two lines for each.
+- Cal.com link and the form service are connected at the end of the project (Diana's decision); the CHECK markers stay until then.
+
 Technical
 - Form service choice (verify free limits). Cal.com account/link. Custom domain later.
 - Mobile Figma frames to come later.

@@ -1,0 +1,70 @@
+---
+import Base from '../layouts/Base.astro';
+
+interface Props {
+  title: string;
+  draft?: boolean;
+}
+
+const { title, draft = false } = Astro.props;
+---
+
+<Base title={title} draft={draft}>
+  <article class="text-page container">
+    <h1 class="title">{title}</h1>
+    <div class="body">
+      <slot />
+    </div>
+  </article>
+</Base>
+
+<style>
+  /* Figma "Text page template" (24:2435): centred title, 809px text column. */
+  .text-page {
+    max-width: calc(809px + 2 * var(--gutter));
+    padding-top: calc(145px - var(--nav-h));
+    padding-bottom: 100px;
+  }
+  .title {
+    font-family: var(--font-display);
+    font-size: var(--text-display);
+    font-weight: var(--weight-regular);
+    line-height: normal;
+    text-align: center;
+  }
+  .body {
+    margin-top: 0;
+    font-size: var(--text-lead);
+    text-align: justify;
+  }
+  .body :global(p),
+  .body :global(ul),
+  .body :global(ol) {
+    margin: 0 0 1.2em;
+  }
+  .body :global(strong) {
+    font-weight: var(--weight-bold);
+  }
+  .body :global(h2) {
+    margin: 2em 0 0.8em;
+    font-size: var(--text-lead);
+    font-weight: var(--weight-medium);
+    text-transform: uppercase;
+  }
+  .body :global(ul) {
+    padding-left: 27px;
+  }
+  .body :global(a) {
+    text-underline-position: from-font;
+  }
+
+  @media (max-width: 48rem) {
+    .text-page {
+      padding-top: var(--space-12);
+      padding-bottom: var(--space-16);
+    }
+    .body {
+      text-align: left;
+    }
+  }
+</style>

@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaForm from '../components/CtaForm.astro';
+import { getSite, isUnresolved } from '../lib/site';
+
+// Provisional: there is no Figma frame for this page yet.
+const site = await getSite();
+const c = site.contact;
+const calReady = !isUnresolved(c.calUrl);
+---
+
+<Base title={c.title}>
+  <CtaForm headingLevel="h1" bookHref="#booking" />
+  <section class="container booking" id="booking" aria-labelledby="booking-title">
+    <h2 id="booking-title" class="block-label">{site.cta.bookLead}</h2>
+    <div class:list={['embed', { unresolved: !calReady }]} id="cal-embed">
+      {calReady ? null : <p>{c.calUrl}</p>}
+    </div>
+    <p class="fallback">
+      {
+        calReady ? (
+          <a class="link-arrow" href={c.calUrl} rel="noopener" target="_blank">
+            {site.cta.bookLabel}
+            <span class="icon icon-arrow-up-right" aria-hidden="true" />
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        ) : (
+          <span class="unresolved">{site.cta.bookLabel} ({c.calUrl})</span>
+        )
+      }
+      <a class="email" href={`mailto:${site.email}`}>{site.email}</a>
+    </p>
+  </section>
+</Base>
+
+<style>
+  .booking {
+    padding-bottom: var(--space-16);
+  }
+  .embed {
+    display: grid;
+    place-items: center;
+    min-height: 560px;
+    margin-top: var(--space-6);
+    border: 1px dashed var(--color-dash);
+  }
+  .fallback {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+  }
+  .email {
+    font-weight: var(--weight-regular);
+    text-underline-position: from-font;
+  }
+</style>

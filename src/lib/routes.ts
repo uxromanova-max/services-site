@@ -8,9 +8,9 @@ export async function caseHref(slug: string): Promise<string | null> {
   return isPublic(entry) ? `/work/${slug}` : null;
 }
 
-// Legal pages are wired up in stage 6.
-export async function legalHref(_page: 'privacy' | 'terms'): Promise<string | null> {
-  return null;
+export async function legalHref(page: 'privacy' | 'terms'): Promise<string | null> {
+  const entry = await getEntry('legal', page);
+  return isPublic(entry) ? `/${page}` : null;
 }
 
 export const serviceHref = (slug: string) => `/services/${slug}`;
@@ -22,5 +22,12 @@ export const getBuiltCases = () => getCollection('cases', (c) => isPublic(c));
 export async function getPublicRoutes(): Promise<string[]> {
   const services = await getCollection('services');
   const cases = await getCollection('cases', (c) => !c.data.draft);
-  return ['/', ...services.map((s) => serviceHref(s.data.slug)), ...cases.map((c) => `/work/${c.data.slug}`)];
+  const legal = await getCollection('legal', (l) => !l.data.draft);
+  return [
+    '/',
+    ...services.map((s) => serviceHref(s.data.slug)),
+    ...cases.map((c) => `/work/${c.data.slug}`),
+    ...legal.map((l) => `/${l.data.slug}`),
+    '/contact',
+  ];
 }
