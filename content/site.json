@@ -41,8 +41,7 @@
     "formAction": "CHECK: form service not chosen yet (Formspree or Web3Forms)"
   },
   "contact": {
-    "_source": "Contact/booking page (no Figma frame; provisional). Built from the CTA block, an inline Cal.com embed, a fallback link and email.",
-    "title": "Contact",
+    "_source": "Contact/booking page (no Figma frame; provisional). Diana (design review): Cal.com booking widget first, no email form. Heading uses the nav label \"Book a call\".",
     "calUrl": "CHECK: Cal.com booking link (connected at the end of the project)"
   },
   "thanks": {

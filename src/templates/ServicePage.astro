@@ -78,8 +78,8 @@ const faq = await resolveFaq(s);
   }
   .steps {
     display: grid;
-    grid-template-columns: repeat(4, 204px);
-    justify-content: space-between;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 8%; /* 204px columns with 85px gaps in the 1072px Figma column */
     margin: 40px 0 0;
     padding: 0;
     list-style: none;

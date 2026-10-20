@@ -40,6 +40,11 @@ const termsHref = await legalHref('terms');
     {description && <meta name="description" content={description} />}
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="preload" href="/fonts/jeju-myeongjo-latin-400.woff2" as="font" type="font/woff2" crossorigin />
+    <script is:inline>
+      // Scroll reveal is on only when motion is allowed and the browser can observe scrolling.
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window)
+        document.documentElement.classList.add('reveal');
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -49,6 +54,46 @@ const termsHref = await legalHref('terms');
       <slot />
     </main>
     <Footer privacyHref={privacyHref} termsHref={termsHref} />
+    <script is:inline>
+      // Scroll reveal (Diana, design review): blocks fade up as they enter the screen; cards and
+      // list items in a row follow each other with a short delay. Runs before first paint, so
+      // nothing flashes; without JS or with reduced motion everything is simply visible.
+      (function () {
+        var root = document.documentElement;
+        if (!root.classList.contains('reveal')) return;
+        var STAGGER = '.grid > li, .packages > li, .steps > li, .match-rows > li, .cost-cards > li, .faq .item, .break-card, .arrow-list > li';
+        var targets = [];
+        function mark(el) {
+          var parent = el.parentElement;
+          var index = parent ? parent.__revealIndex || 0 : 0;
+          if (parent) parent.__revealIndex = index + 1;
+          el.style.setProperty('--reveal-delay', Math.min(index, 6) * 0.08 + 's');
+          el.setAttribute('data-reveal', '');
+          targets.push(el);
+        }
+        function walk(el, depth) {
+          if (el.matches('script, style, .draft-banner')) return;
+          if (el.matches(STAGGER)) return mark(el);
+          var split = depth === 0 || el.querySelector(STAGGER);
+          if (!split || depth > 5 || !el.children.length) return mark(el);
+          for (var i = 0; i < el.children.length; i++) walk(el.children[i], depth + 1);
+        }
+        var main = document.getElementById('main');
+        if (main) for (var i = 0; i < main.children.length; i++) walk(main.children[i], 0);
+        document.querySelectorAll('.footer .card').forEach(mark);
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (!e.isIntersecting) return;
+              e.target.classList.add('is-visible');
+              io.unobserve(e.target);
+            });
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
+        );
+        targets.forEach(function (el) { io.observe(el); });
+      })();
+    </script>
   </body>
 </html>
 

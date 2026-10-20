@@ -49,12 +49,12 @@
   --weight-semibold: 600;
   --weight-bold: 700;
 
-  /* Layout */
-  --frame: 80rem; /* 1280 */
-  --content: 67rem; /* 1072 */
-  --gutter-nav: 3rem; /* 48 */
-  --gutter: 6.5rem; /* 104 */
-  --footer-inset: 2rem; /* 32 */
+  /* Layout. Diana (design review): wider layout, side gutters never below 56px.
+     Columns are proportional to the Figma 1072px content column, so they scale with the width. */
+  --content: 105rem; /* 1680: max content width on very wide screens */
+  --gutter-nav: 3.5rem; /* 56 */
+  --gutter: 3.5rem; /* 56 */
+  --footer-inset: 2rem; /* 32: footer card and full-width bands, all sides */
   --nav-h: 6.5rem; /* nav band height; the landing hero is drawn from the frame top under it */
   --footer-pad: 2.5rem; /* 40: text inset inside the dark card */
   --radius-card: 1.25rem; /* 20 */
@@ -71,6 +71,13 @@
   --radius-pill: 100px;
 
   --focus-ring: 2px solid currentColor;
+}
+
+/* Motion (Diana, design review): subtle and smooth; off for prefers-reduced-motion. */
+:root {
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-reveal: 0.9s;
+  --dur-expand: 0.7s;
 }
 
 /* Provisional responsive rules (no mobile frames yet) */

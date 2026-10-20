@@ -41,7 +41,7 @@ const site = await getSite();
     justify-content: space-between;
     align-items: flex-start;
     gap: var(--space-4);
-    max-width: var(--frame);
+    max-width: calc(var(--content) + 2 * var(--gutter-nav));
     margin-inline: auto;
     padding: var(--space-8) var(--gutter-nav) 0;
   }

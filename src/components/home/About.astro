@@ -69,9 +69,9 @@ const linkPending = about.link.href === '';
   /* Figma "about" (5:73): 1280 x 713. Text column starts 437px into the 1072px content. */
   .about {
     display: grid;
-    grid-template-columns: 282px 1fr;
+    /* 282 | 155 | 635 of the 1072px Figma column, scaled to the current width */
+    grid-template-columns: minmax(0, 282fr) minmax(0, 155fr) minmax(0, 635fr);
     grid-template-rows: auto 1fr;
-    column-gap: calc(437px - 282px);
     padding-top: 122px;
     padding-bottom: 80px;
   }
@@ -84,24 +84,23 @@ const linkPending = about.link.href === '';
     grid-column: 1;
     grid-row: 2;
     margin-top: 102px; /* photo top at 243 in the frame */
-    width: 282px;
   }
   .photo :global(img:first-child) {
-    width: 282px;
-    height: 390px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 282 / 390;
     object-fit: cover;
   }
   .corner {
     position: absolute;
-    left: 252px;
+    right: -13px;
     top: -17px;
   }
   .body {
-    grid-column: 2;
+    grid-column: 3;
     grid-row: 1 / span 2;
     display: flex;
     flex-direction: column;
-    max-width: 635px;
   }
   .text {
     font-size: var(--text-intro);
@@ -119,7 +118,7 @@ const linkPending = about.link.href === '';
   }
   .stats {
     display: grid;
-    grid-template-columns: 220px 241px 1fr;
+    grid-template-columns: 220fr 241fr 174fr;
     margin: auto 0 0;
     padding-top: var(--space-12);
   }
@@ -157,6 +156,7 @@ const linkPending = about.link.href === '';
     }
     .photo {
       margin-top: 0;
+      max-width: 360px;
     }
     .stats {
       grid-template-columns: repeat(3, minmax(0, 1fr));

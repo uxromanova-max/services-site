@@ -38,7 +38,7 @@ const site = defineCollection({
       bookLabel: z.string(),
       formAction: z.string(),
     }),
-    contact: z.object({ title: z.string(), calUrl: z.string() }),
+    contact: z.object({ calUrl: z.string() }),
     thanks: z.object({ title: z.string(), text: z.string() }),
     notFound: z.object({ title: z.string(), text: z.string() }),
     bookingUrl: z.string(),

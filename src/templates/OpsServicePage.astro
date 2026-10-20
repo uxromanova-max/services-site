@@ -54,7 +54,7 @@ const faq = await resolveFaq(s);
     </ul>
   </section>
 
-  <div class="container">
+  <div class="band-wrap">
     <section class="system" aria-labelledby="system-title">
       <Picture
         class="band-bg"
@@ -62,8 +62,8 @@ const faq = await resolveFaq(s);
         alt=""
         width={1072}
         height={333}
-        widths={[536, 1072]}
-        sizes="(max-width: 1280px) calc(100vw - 2 * var(--gutter)), 1072px"
+        widths={[1072, 1600, 2144]}
+        sizes="calc(100vw - 64px)"
         formats={['avif', 'webp']}
         fallbackFormat="webp"
         quality={55}
@@ -223,7 +223,7 @@ const faq = await resolveFaq(s);
     font-weight: var(--weight-regular);
   }
   .match-rows {
-    width: min(903px, 100%);
+    width: 84.2%; /* 903 of the 1072px Figma column */
     margin: 29px 0 0;
     padding: 16px 0;
     list-style: none;
@@ -240,19 +240,23 @@ const faq = await resolveFaq(s);
     border-top: 1px dashed var(--color-line);
   }
   .match-rows p {
-    width: min(492px, 100%);
+    width: 65%; /* 492 of 903 */
   }
   .match-rows strong {
     font-weight: var(--weight-medium);
   }
 
+  /* Full width with a 32px inset, like the footer card (Diana, design review). */
+  .band-wrap {
+    padding-inline: var(--footer-inset);
+  }
   .system {
     position: relative;
     isolation: isolate;
     overflow: hidden;
     min-height: 333px;
     margin-top: 82px;
-    padding: 93px 86px 60px;
+    padding: 93px calc(var(--gutter) - var(--footer-inset) + 86px) 60px;
     border-radius: var(--radius-card);
     background: #111;
     color: var(--color-on-dark);
@@ -290,7 +294,7 @@ const faq = await resolveFaq(s);
     align-items: flex-start;
   }
   .steps {
-    width: min(800px, 100%);
+    width: 74.6%; /* 800 of the 1072px Figma column */
     margin: 42px auto 0;
     padding: 0;
     list-style: none;
@@ -329,7 +333,7 @@ const faq = await resolveFaq(s);
   }
   .key-message {
     max-width: 643px;
-    margin: 72px 140px 0 auto;
+    margin: 72px 12.7% 0 auto; /* right edge on the steps list */
     font-size: var(--text-small);
     letter-spacing: var(--tracking-small);
     text-align: right;
@@ -337,8 +341,7 @@ const faq = await resolveFaq(s);
 
   .two-lists {
     display: grid;
-    grid-template-columns: 469px 469px;
-    column-gap: 94px;
+    grid-template-columns: minmax(0, 469fr) minmax(0, 94fr) minmax(0, 469fr);
     position: relative;
     margin-top: 88px;
     padding-top: 88px;
@@ -350,6 +353,9 @@ const faq = await resolveFaq(s);
     left: var(--gutter);
     right: var(--gutter);
     border-top: 1px solid var(--color-line);
+  }
+  .two-lists > section:last-child {
+    grid-column: 3;
   }
   .arrow-list {
     display: grid;
@@ -398,7 +404,8 @@ const faq = await resolveFaq(s);
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 784px;
+    /* cards: 784 of the 1072px Figma column */
+    max-width: calc(min(var(--content), 100vw - 2 * var(--gutter)) * 0.731);
     margin-inline: auto;
     padding: 56px var(--gutter);
     box-sizing: content-box;
@@ -442,19 +449,19 @@ const faq = await resolveFaq(s);
   .cost-cards p {
     max-width: 360px;
   }
+  /* Centred under the cards (Diana, design review). */
   .cost-footnote {
-    align-self: flex-end;
     max-width: 599px;
     margin-top: 40px;
     font-size: var(--text-small);
     font-weight: var(--weight-regular);
-    text-align: right;
+    text-align: center;
   }
 
   .breaks {
     display: grid;
-    grid-template-columns: 324px 324px 324px;
-    column-gap: 50px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 4.66%; /* 324px columns with 50px gaps in the 1072px Figma column */
     margin-top: 88px;
     row-gap: 64px;
   }
@@ -501,11 +508,16 @@ const faq = await resolveFaq(s);
   /* Provisional below the desktop frame. */
   @media (max-width: 75rem) {
     .two-lists {
-      grid-template-columns: 1fr 1fr;
-      column-gap: var(--space-8);
+      grid-template-columns: 1fr var(--space-8) 1fr;
+    }
+    .steps {
+      width: 100%;
     }
     .key-message {
       margin-right: 0;
+    }
+    .match-rows {
+      width: 100%;
     }
     .breaks {
       grid-template-columns: 1fr 1fr;
@@ -535,6 +547,12 @@ const faq = await resolveFaq(s);
       grid-template-columns: 1fr;
       row-gap: var(--space-12);
     }
+    .two-lists > section:last-child {
+      grid-column: 1;
+    }
+    .match-rows p {
+      width: 100%;
+    }
     .break-card:nth-of-type(odd),
     .break-card:nth-of-type(even) {
       grid-column: 1;
@@ -548,7 +566,6 @@ const faq = await resolveFaq(s);
     }
     .cost-footnote {
       text-align: left;
-      align-self: flex-start;
     }
     .step-head {
       flex-wrap: wrap;

@@ -17,38 +17,47 @@ const [l1, l2, l3, l4] = hero.headline;
 ---
 
 <section class="hero" aria-labelledby="hero-title">
-  <h1 id="hero-title" class="headline">
-    <span class="l1">{l1}</span>
-    <span class="l2">{l2}</span>
-    <span class="l3">{l3}</span>
-    <span class="l4">{l4}</span>
-  </h1>
-  <img class="dash" src={heroDash} alt="" width="39" height="41" />
-  <a class="book" href={bookingUrl}>
-    {hero.button}
-    <span class="icon icon-arrow-right" aria-hidden="true"></span>
-  </a>
-  <div class="intro">
-    <p class="subline">{hero.subline}</p>
-    <p class="guarantee">
-      {hero.guarantee.map((line, i) => (
-        <>
-          {i > 0 && <br />}
-          {line}
-        </>
-      ))}
-    </p>
+  <div class="stage">
+    <h1 id="hero-title" class="headline">
+      <span class="l1">{l1}</span>
+      <span class="l2">{l2}</span>
+      <span class="l3">{l3}</span>
+      <span class="l4">{l4}</span>
+    </h1>
+    <img class="dash" src={heroDash} alt="" width="39" height="41" />
+    <a class="book" href={bookingUrl}>
+      {hero.button}
+      <span class="icon icon-arrow-right" aria-hidden="true"></span>
+    </a>
+    <div class="intro">
+      <p class="subline">{hero.subline}</p>
+      <p class="guarantee">
+        {hero.guarantee.map((line, i) => (
+          <>
+            {i > 0 && <br />}
+            {line}
+          </>
+        ))}
+      </p>
+    </div>
   </div>
   <p class="proof">{hero.proof}</p>
 </section>
 
 <style>
-  /* Desktop: positions from the Figma Hero frame (3:4, 1280 x 832, nav included). */
+  /* Desktop: the Figma Hero frame (3:4, 1280 x 832, nav included). The composition (935px wide,
+     193px from the frame edge in Figma) stays centred whatever the screen width. */
   .hero {
     position: relative;
-    max-width: var(--frame);
     height: 832px;
-    margin: calc(-1 * var(--nav-h)) auto 0;
+    margin-top: calc(-1 * var(--nav-h));
+  }
+  .stage {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(50% - 447px); /* 640 - 193 */
+    width: 935px;
   }
   .headline {
     font-family: var(--font-display);
@@ -60,11 +69,11 @@ const [l1, l2, l3, l4] = hero.headline;
     white-space: nowrap;
   }
   .l1 {
-    left: 150px;
+    left: 0;
     top: 191px;
   }
   .l2 {
-    left: 220px;
+    left: 70px;
     top: 254px;
   }
   .l3,
@@ -73,21 +82,21 @@ const [l1, l2, l3, l4] = hero.headline;
     text-align: right;
   }
   .l3 {
-    right: calc(100% - 908px);
+    right: calc(100% - 758px);
     top: 280px;
   }
   .l4 {
-    right: calc(100% - 1045px);
+    right: calc(100% - 895px);
     top: 336px;
   }
   .dash {
     position: absolute;
-    left: 538px;
+    left: 388px;
     top: 280px;
   }
   .book {
     position: absolute;
-    right: calc(100% - 409px);
+    right: calc(100% - 260px);
     top: 516px;
     display: inline-flex;
     align-items: center;
@@ -100,7 +109,7 @@ const [l1, l2, l3, l4] = hero.headline;
   }
   .intro {
     position: absolute;
-    left: 703px;
+    left: 553px;
     top: 516px;
     width: 382px;
   }
@@ -115,8 +124,8 @@ const [l1, l2, l3, l4] = hero.headline;
   }
   .proof {
     position: absolute;
-    left: 0;
-    right: 0;
+    left: var(--gutter);
+    right: var(--gutter);
     bottom: 1px;
     font-size: var(--text-small);
     letter-spacing: var(--tracking-small);
@@ -129,6 +138,10 @@ const [l1, l2, l3, l4] = hero.headline;
       height: auto;
       margin-top: 0;
       padding: var(--space-16) var(--gutter) var(--space-8);
+    }
+    .stage {
+      position: static;
+      width: auto;
       display: flex;
       flex-direction: column;
       gap: var(--space-8);
@@ -163,6 +176,7 @@ const [l1, l2, l3, l4] = hero.headline;
       max-width: 382px;
     }
     .proof {
+      margin-top: var(--space-8);
       text-align: left;
     }
   }

@@ -20,7 +20,7 @@ interface Props {
 const { needHeading, toolsHeading, need, tools, wideImage, wideHeight, labelOffset = 24, gap = 80 } = Astro.props;
 ---
 
-<div class="container need-tools" style={`--label-offset: ${labelOffset}px; --wide-h: ${wideHeight}px; --col-gap: ${gap}px`}>
+<div class="container need-tools" style={`--label-offset: ${labelOffset}px; --wide-h-n: ${wideHeight}; --col-gap: ${gap}px`}>
   <div class="need-col">
     <section aria-labelledby="need-title">
       <h2 id="need-title" class="block-label">{needHeading}</h2>
@@ -41,8 +41,11 @@ const { needHeading, toolsHeading, need, tools, wideImage, wideHeight, labelOffs
 <style>
   .need-tools {
     display: grid;
-    grid-template-columns: 380px 624px;
-    justify-content: space-between;
+    /* 380 | 68 | 624 of the 1072px Figma column */
+    grid-template-columns: minmax(0, 380fr) minmax(0, 68fr) minmax(0, 624fr);
+  }
+  .side-images {
+    grid-column: 3;
   }
   .need-col {
     display: flex;
@@ -61,35 +64,24 @@ const { needHeading, toolsHeading, need, tools, wideImage, wideHeight, labelOffs
   }
   .side-images {
     display: grid;
-    grid-template-columns: 306px 306px;
-    justify-content: space-between;
+    grid-template-columns: 1fr 1fr;
     align-content: start;
-    row-gap: 8px;
+    gap: 8px 12px;
   }
   .side-images :global(img) {
-    width: 306px;
-    height: 309px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 306 / 309;
     object-fit: cover;
   }
   .side-images :global(.wide) {
     grid-column: 1 / -1;
-    width: 624px;
-    height: var(--wide-h);
+    aspect-ratio: 624 / var(--wide-h-n);
   }
 
   @media (max-width: 75rem) {
     .need-tools {
-      grid-template-columns: 1fr 1fr;
-      column-gap: var(--space-8);
-    }
-    .side-images {
-      grid-template-columns: 1fr 1fr;
-      column-gap: 8px;
-    }
-    .side-images :global(img),
-    .side-images :global(.wide) {
-      width: 100%;
-      height: auto;
+      grid-template-columns: 1fr var(--space-8) 1fr;
     }
   }
   @media (max-width: 48rem) {
