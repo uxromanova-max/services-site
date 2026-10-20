@@ -103,6 +103,10 @@ Design review 3 (stage-7c-review3)
 - Done: service pages FAQ link reads "Book a call" (Figma: "Book a free call"; Figma fix) with the header animation; proof placeholder images restored between the price block and the FAQ on the four standard service pages; Selected Works: names keep their weight on hover, hover title in regular weight, title at the top and tags at the bottom with 24px inside; services grid "Learn more" in regular; case Project Information values in black; hero elements appear one after another on page load.
 - Fix: links that are also scroll-reveal targets kept the reveal transition and lost their hover animation; the reveal styles are now removed once an element has appeared.
 
+Design review 4 (stage-7d-motion)
+- Done: Selected Works: the text inside a card is laid out at its final width and appears only once the card is fully open, so it never reflows while the card grows. "What it costs to run" band: the background no longer moves on scroll (bands with a background image are left out of the scroll animation). Hero load-in is faster (about 1.4s in total), with varied motion: headline lines out of a soft blur, the button from the left, the intro from the right, the proof photo fading in.
+- Scroll reveal now has variety: photos, headings and large blocks come out of a blur; labels and small notes fade in; paired columns (lists, form and intro, rows) meet from left and right; cards appear in a wave. Small elements are grouped (FAQ list, arrow lists) instead of animating one by one. Mobile uses only vertical and blur motion.
+
 Technical
 - Form service choice (verify free limits). Cal.com account/link. Custom domain later.
 - Mobile Figma frames to come later.

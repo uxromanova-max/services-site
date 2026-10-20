@@ -124,12 +124,14 @@ const [l1, l2, l3, l4] = hero.headline;
     text-align: center;
   }
 
-  /* Load-in (Diana, design review 3): each element of the hero appears in turn, softly.
-     Runs only when motion is allowed (html.reveal is set in Base.astro). */
-  @keyframes hero-in {
+  /* Load-in (Diana, design reviews 3-4): the hero assembles in about 1.4s. Headline lines come out
+     of a soft blur one after another, the dash fades in, the button arrives from the left and the
+     intro from the right, the proof line fades in last. Only when motion is allowed. */
+  @keyframes hero-blur {
     from {
       opacity: 0;
-      transform: translateY(40px);
+      filter: blur(12px);
+      transform: translateY(18px);
     }
   }
   @keyframes hero-fade {
@@ -137,38 +139,44 @@ const [l1, l2, l3, l4] = hero.headline;
       opacity: 0;
     }
   }
-  :global(.reveal) .headline span,
-  :global(.reveal) .book,
-  :global(.reveal) .intro,
-  :global(.reveal) .proof {
-    animation: hero-in 1.3s var(--ease-reveal) both;
+  @keyframes hero-left {
+    from {
+      opacity: 0;
+      transform: translateX(-32px);
+    }
   }
-  :global(.reveal) .dash {
-    animation: hero-fade 1.2s var(--ease-reveal) both;
+  @keyframes hero-right {
+    from {
+      opacity: 0;
+      transform: translateX(32px);
+    }
+  }
+  :global(.reveal) .headline span {
+    animation: hero-blur 0.95s var(--ease-reveal) both;
   }
   :global(.reveal) .headline .l1 {
-    animation-delay: 0.15s;
+    animation-delay: 0.05s;
   }
   :global(.reveal) .headline .l2 {
-    animation-delay: 0.32s;
-  }
-  :global(.reveal) .dash {
-    animation-delay: 0.55s;
+    animation-delay: 0.16s;
   }
   :global(.reveal) .headline .l3 {
-    animation-delay: 0.62s;
+    animation-delay: 0.3s;
   }
   :global(.reveal) .headline .l4 {
-    animation-delay: 0.79s;
+    animation-delay: 0.41s;
+  }
+  :global(.reveal) .dash {
+    animation: hero-fade 0.8s var(--ease-reveal) 0.36s both;
   }
   :global(.reveal) .book {
-    animation-delay: 1s;
+    animation: hero-left 0.9s var(--ease-reveal) 0.55s both;
   }
   :global(.reveal) .intro {
-    animation-delay: 1.12s;
+    animation: hero-right 0.9s var(--ease-reveal) 0.62s both;
   }
   :global(.reveal) .proof {
-    animation-delay: 1.3s;
+    animation: hero-fade 0.9s var(--ease-reveal) 0.8s both;
   }
 
   /* Provisional below the desktop frame: stack in reading order. */

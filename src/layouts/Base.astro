@@ -56,32 +56,50 @@ const termsHref = await legalHref('terms');
     </main>
     <Footer privacyHref={privacyHref} termsHref={termsHref} />
     <script is:inline>
-      // Scroll reveal (Diana, design review): blocks fade up as they enter the screen; cards and
-      // list items in a row follow each other with a short delay. Runs before first paint, so
-      // nothing flashes; without JS or with reduced motion everything is simply visible.
+      // Scroll reveal (Diana, design reviews 1-4). Blocks appear as they enter the screen, with a
+      // few related motions so the page does not move in one direction only:
+      //   blur  - photos, bands and large display headings come out of a soft blur
+      //   fade  - small labels and notes simply fade in
+      //   left / right - the two columns of a split layout meet in the middle
+      //   up    - everything else, and cards in a row as a short wave
+      // Backgrounds of the dark bands never move. Runs before first paint, so nothing flashes;
+      // without JS or with reduced motion everything is simply visible.
       (function () {
         var root = document.documentElement;
         if (!root.classList.contains('reveal')) return;
-        var STAGGER = '.grid > li, .packages > li, .steps > li, .match-rows > li, .cost-cards > li, .faq .item, .break-card, .arrow-list > li';
+        var STAGGER = '.grid > li, .packages > li, .steps > li, .match-rows > li, .cost-cards > li, .break-card, .proof > img';
+        // Blocks that are opened up so their parts can move differently.
+        var SPLIT = '.about, .body, .lists, .two-lists, .need-tools, .cta, .faq, .works, .top, .booking, .text-page, .cost, .cost-inner, .how, .match, .price-block, .services, .breaks, .row, .pair';
+        var SKIP = 'script, style, .draft-banner, .hero, .band-bg, picture:has(.band-bg)';
+        var VARIANTS = [
+          ['blur', 'img, picture, figure, .photo, .side-images, .embed, .system, .title, .heading, .match-title, .wide'],
+          ['fade', '.section-label, .block-label, .eyebrow, .key-message, .ongoing, .head, .cost-title, .cost-intro, .cost-footnote, .price-note, .stats, .more, .fallback'],
+          ['left', '.lists > :first-child, .two-lists > :first-child, .need-col, .cta .intro, .row > :first-child'],
+          ['right', '.lists > :last-child, .two-lists > :last-child, .cta .form, .row > :last-child, .faq .list'],
+        ];
         var targets = [];
-        function mark(el) {
+        function variantOf(el) {
+          for (var i = 0; i < VARIANTS.length; i++) if (el.matches(VARIANTS[i][1])) return VARIANTS[i][0];
+          return 'up';
+        }
+        function mark(el, variant) {
           var parent = el.parentElement;
           var index = parent ? parent.__revealIndex || 0 : 0;
           if (parent) parent.__revealIndex = index + 1;
-          el.style.setProperty('--reveal-delay', Math.min(index, 6) * 0.08 + 's');
-          el.setAttribute('data-reveal', '');
+          el.style.setProperty('--reveal-delay', Math.min(index, 5) * 0.09 + 's');
+          el.setAttribute('data-reveal', variant || variantOf(el));
           targets.push(el);
         }
         function walk(el, depth) {
-          if (el.matches('script, style, .draft-banner, .hero')) return;
-          if (el.matches(STAGGER)) return mark(el);
-          var split = depth === 0 || el.querySelector(STAGGER);
+          if (el.matches(SKIP)) return;
+          if (el.matches(STAGGER)) return mark(el, 'up');
+          var split = depth === 0 || el.matches(SPLIT) || el.querySelector(STAGGER);
           if (!split || depth > 5 || !el.children.length) return mark(el);
           for (var i = 0; i < el.children.length; i++) walk(el.children[i], depth + 1);
         }
         var main = document.getElementById('main');
         if (main) for (var i = 0; i < main.children.length; i++) walk(main.children[i], 0);
-        document.querySelectorAll('.footer .card').forEach(mark);
+        document.querySelectorAll('.footer .card').forEach(function (el) { mark(el, 'fade'); });
         var io = new IntersectionObserver(
           function (entries) {
             entries.forEach(function (e) {
@@ -95,7 +113,7 @@ const termsHref = await legalHref('terms');
               setTimeout(function () {
                 el.removeAttribute('data-reveal');
                 el.classList.remove('is-visible');
-              }, (delay + 1.5) * 1000);
+              }, (delay + 1.4) * 1000);
             });
           },
           { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
