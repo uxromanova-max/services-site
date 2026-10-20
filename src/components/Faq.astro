@@ -1,0 +1,128 @@
+---
+interface Props {
+  heading: string;
+  bookLabel: string;
+  bookingUrl: string;
+  items: { q: string; a: string | string[] }[];
+}
+
+const { heading, bookLabel, bookingUrl, items } = Astro.props;
+const id = `faq-${heading.length}`;
+---
+
+<section class="faq container" aria-labelledby={id}>
+  <h2 id={id} class="section-label title">{heading}</h2>
+  <div class="list">
+    {
+      items.map((item) => (
+        <details class="item">
+          <summary>
+            <span class="q">{item.q}</span>
+            <span class="icon icon-arrow-down-right closed" aria-hidden="true" />
+            <span class="icon icon-arrow-up-right open" aria-hidden="true" />
+          </summary>
+          {Array.isArray(item.a) ? (
+            <ol class="a steps">
+              {item.a.map((step) => <li>{step}</li>)}
+            </ol>
+          ) : (
+            <p class:list={['a', { unresolved: /CHECK|TODO/.test(item.a) }]}>{item.a}</p>
+          )}
+        </details>
+      ))
+    }
+  </div>
+  <a class="link-arrow book" href={bookingUrl}>
+    {bookLabel}
+    <span class="icon icon-arrow-up-right" aria-hidden="true"></span>
+  </a>
+</section>
+
+<style>
+  /* Figma "faq" (6:349) and "faq - opened" (9:545). List column: 510px starting 562px into the content. */
+  .faq {
+    display: grid;
+    grid-template-columns: 1fr 510px;
+    grid-template-rows: auto 1fr;
+    column-gap: var(--space-8);
+    padding-top: 60px;
+    padding-bottom: 32px;
+  }
+  .title {
+    grid-column: 1;
+    margin-top: 12px;
+  }
+  .list {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+  .book {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: end;
+    justify-self: start;
+    margin-bottom: 4px;
+  }
+  .item {
+    border-bottom: 1px dashed var(--color-dash);
+  }
+  summary {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) 0;
+    cursor: pointer;
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  .q {
+    flex: 1;
+  }
+  .open,
+  .item[open] .closed {
+    display: none;
+  }
+  .item[open] .open {
+    display: inline-block;
+  }
+  .item[open] summary {
+    padding-bottom: 0;
+    align-items: flex-start;
+  }
+  .item[open] .icon {
+    margin-top: 3px;
+  }
+  .a {
+    max-width: 486px;
+    margin: 0;
+    padding: 10px 0 var(--space-3);
+    font-size: var(--text-small);
+  }
+  .steps {
+    padding-left: 1.25em;
+  }
+  .steps li + li {
+    margin-top: 4px;
+  }
+
+  @media (max-width: 64rem) {
+    .faq {
+      grid-template-columns: 1fr;
+      grid-template-rows: none;
+      row-gap: var(--space-6);
+      padding-top: var(--space-12);
+      padding-bottom: var(--space-12);
+    }
+    .title,
+    .list,
+    .book {
+      grid-column: 1;
+      grid-row: auto;
+    }
+    .title {
+      margin-top: 0;
+    }
+  }
+</style>

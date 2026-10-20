@@ -1,0 +1,169 @@
+---
+import heroDash from '../../assets/figma/hero-dash.svg?url';
+
+interface Props {
+  hero: {
+    headline: string[];
+    subline: string;
+    guarantee: string[];
+    button: string;
+    proof: string;
+  };
+  bookingUrl: string;
+}
+
+const { hero, bookingUrl } = Astro.props;
+const [l1, l2, l3, l4] = hero.headline;
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <h1 id="hero-title" class="headline">
+    <span class="l1">{l1}</span>
+    <span class="l2">{l2}</span>
+    <span class="l3">{l3}</span>
+    <span class="l4">{l4}</span>
+  </h1>
+  <img class="dash" src={heroDash} alt="" width="39" height="41" />
+  <a class="book" href={bookingUrl}>
+    {hero.button}
+    <span class="icon icon-arrow-right" aria-hidden="true"></span>
+  </a>
+  <div class="intro">
+    <p class="subline">{hero.subline}</p>
+    <p class="guarantee">
+      {hero.guarantee.map((line, i) => (
+        <>
+          {i > 0 && <br />}
+          {line}
+        </>
+      ))}
+    </p>
+  </div>
+  <p class="proof">{hero.proof}</p>
+</section>
+
+<style>
+  /* Desktop: positions from the Figma Hero frame (3:4, 1280 x 832, nav included). */
+  .hero {
+    position: relative;
+    max-width: var(--frame);
+    height: 832px;
+    margin: calc(-1 * var(--nav-h)) auto 0;
+  }
+  .headline {
+    font-family: var(--font-display);
+    font-size: 52px;
+    font-weight: var(--weight-regular);
+  }
+  .headline span {
+    position: absolute;
+    white-space: nowrap;
+  }
+  .l1 {
+    left: 150px;
+    top: 191px;
+  }
+  .l2 {
+    left: 220px;
+    top: 254px;
+  }
+  .l3,
+  .l4 {
+    line-height: 56px;
+    text-align: right;
+  }
+  .l3 {
+    right: calc(100% - 908px);
+    top: 280px;
+  }
+  .l4 {
+    right: calc(100% - 1045px);
+    top: 336px;
+  }
+  .dash {
+    position: absolute;
+    left: 538px;
+    top: 280px;
+  }
+  .book {
+    position: absolute;
+    right: calc(100% - 409px);
+    top: 516px;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-2) var(--space-8);
+    border-bottom: 1px solid currentColor;
+    font-weight: var(--weight-regular);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .intro {
+    position: absolute;
+    left: 703px;
+    top: 516px;
+    width: 382px;
+  }
+  .subline {
+    text-align: justify;
+  }
+  .guarantee {
+    margin-top: 1.0625rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-small);
+    font-style: italic;
+  }
+  .proof {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 1px;
+    font-size: var(--text-small);
+    letter-spacing: var(--tracking-small);
+    text-align: center;
+  }
+
+  /* Provisional below the desktop frame: stack in reading order. */
+  @media (max-width: 74.99rem) {
+    .hero {
+      height: auto;
+      margin-top: 0;
+      padding: var(--space-16) var(--gutter) var(--space-8);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+    }
+    .headline {
+      font-size: var(--text-display);
+      line-height: var(--leading-display);
+    }
+    .headline span,
+    .dash,
+    .book,
+    .intro,
+    .proof {
+      position: static;
+    }
+    .headline span {
+      display: block;
+      white-space: normal;
+      text-align: left;
+    }
+    .l2 {
+      padding-left: 1.5em;
+    }
+    .dash {
+      display: none;
+    }
+    .book {
+      align-self: flex-start;
+    }
+    .intro {
+      width: auto;
+      max-width: 382px;
+    }
+    .proof {
+      text-align: left;
+    }
+  }
+</style>

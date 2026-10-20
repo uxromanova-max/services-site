@@ -48,7 +48,7 @@ Work stage by stage, one commit per stage, and after each stage take screenshots
 ## Honesty rules (hard)
 - No invented metrics, clients, testimonials, logos or tools. Use only what is in `/content`.
 - Guarantee is for **delivery, not business results**. Never write "guaranteed growth/conversion/revenue".
-- Case roles: ORA Studio = Diana's own brand (founder, solo). ModaBlvck = employment (AI & E-commerce Operations Specialist, Sept 2024 to Apr 2026); publication permission is unconfirmed. The System Club = founder, closed Oct 2026, shown as a build case.
+- Case roles: ORA Studio = Diana's own brand (founder, solo). ModaBlvck = employment (AI & E-commerce Operations Specialist, Sept 2024 to Apr 2026); publication permission confirmed by Diana. The System Club = founder, closed Oct 2026, shown as a build case.
 - Diana writes Shopify Liquid and custom sections/pages. Do not write "no custom code" on the site.
 - Stats on the About strip are not final (see OPEN-DECISIONS). Do not add "UGC videos made" or "AI agents built" counts.
 

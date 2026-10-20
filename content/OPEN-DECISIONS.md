@@ -10,7 +10,7 @@ Copy / design
 5. FAQ answers for the 11 questions in the Figma landing are not written.
 6. Figma fixes needed: Teardown card says "mockups for the top three" (remove number); Email Flows card text; Ops & AI position; Delivery Guarantee line near hero; Store link field in form; privacy link on consent checkbox; footer line; The System Club card photo mismatch.
 7. Proof screenshots per service (Proof block stays empty without them).
-8. ModaBlvck: permission to publish as a case.
+8. ModaBlvck: permission to publish as a case. DECIDED: yes.
 9. Which recording tool for Teardown walkthrough (for example Loom).
 10. Confirm packages and the Ops & AI price range.
 11. Revision rounds count; real availability for "How fast can you start".
@@ -38,6 +38,18 @@ Stage 1 (setup)
 - LinkedIn URL: DECIDED, https://www.linkedin.com/in/romanova23/
 - Heading font JejuMyeongjo: DECIDED, licence confirmed by Diana (source: https://www.figma.com/fonts/jeju-myeongjo/).
 - "Book a call" links point to /contact until the Cal.com link exists (stage 6).
+
+Stage 2 (home)
+- DECIDED: "More about me and my CV" will link to the CV file; until the final CV exists it is shown as plain text (not clickable).
+- DECIDED: ModaBlvck may be published as a case (item 8).
+- DECIDED: "outside Europe" answer: calls from 10:00 to 24:00 Warsaw time, covering Europe and the US. Wording on the site: "Yes, remotely. I take calls from 10:00 to 24:00 Warsaw time, so the hours work for both Europe and the US." Confirm the wording.
+- DECIDED: Email Flows card mentions the template system ("... plus reusable email templates."). Figma fix: the Product Page Sprint card repeats this text; the site uses the home.md text.
+- DECIDED: The System Club hover text and tags follow Figma. Card photo matches (item 6 resolved for this photo).
+- DECIDED: answers for the five missing FAQ questions supplied by Diana.
+- DECIDED: FAQ "What if the automation breaks?" on the home page uses the same answer as the Ops & AI page.
+- Hover frames 6:146 / 6:195 / 6:224 use other photos than the landing frame. The site keeps the landing photos and adds the dark overlay on hover.
+- Service cards have no timeline in Figma, so timelines show only on the service pages.
+- Form service and Cal.com are connected at the end of the project (Diana); the form keeps its CHECK marker until then.
 
 Technical
 - Form service choice (verify free limits). Cal.com account/link. Custom domain later.

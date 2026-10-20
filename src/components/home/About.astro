@@ -1,0 +1,176 @@
+---
+import { Image } from 'astro:assets';
+import portrait from '../../assets/figma/about-portrait.png';
+import corner from '../../assets/figma/about-corner.svg?url';
+import { isUnresolved } from '../../lib/site';
+
+interface Props {
+  about: {
+    heading: string;
+    text: string;
+    link: { label: string; href: string };
+    portraitAlt: string;
+    stats: { value: string; label: string }[];
+  };
+}
+
+const { about } = Astro.props;
+const linkReady = about.link.href !== '' && !isUnresolved(about.link.href);
+const linkPending = about.link.href === '';
+---
+
+<section class="about container" aria-labelledby="about-title">
+  <h2 id="about-title" class="section-label label">{about.heading}</h2>
+  <div class="photo">
+    <Image
+      src={portrait}
+      alt={about.portraitAlt}
+      width={282}
+      height={390}
+      densities={[1, 2]}
+      formats={['avif', 'webp']}
+      loading="lazy"
+    />
+    <img class="corner" src={corner} alt="" width="43" height="45" />
+  </div>
+  <div class="body">
+    <p class="text">{about.text}</p>
+    {
+      linkReady ? (
+        <a class="more" href={about.link.href}>
+          {about.link.label}
+          <span class="icon icon-arrow-right" aria-hidden="true" />
+        </a>
+      ) : linkPending ? (
+        <span class="more">
+          {about.link.label}
+          <span class="icon icon-arrow-right" aria-hidden="true" />
+        </span>
+      ) : (
+        <span class="more unresolved">
+          {about.link.label} ({about.link.href})
+        </span>
+      )
+    }
+    <dl class="stats">
+      {
+        about.stats.map((s) => (
+          <div class="stat">
+            <dt class="label-text">{s.label}</dt>
+            <dd class="value">{s.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
+
+<style>
+  /* Figma "about" (5:73): 1280 x 713. Text column starts 437px into the 1072px content. */
+  .about {
+    display: grid;
+    grid-template-columns: 282px 1fr;
+    grid-template-rows: auto 1fr;
+    column-gap: calc(437px - 282px);
+    padding-top: 122px;
+    padding-bottom: 80px;
+  }
+  .label {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .photo {
+    position: relative;
+    grid-column: 1;
+    grid-row: 2;
+    margin-top: 102px; /* photo top at 243 in the frame */
+    width: 282px;
+  }
+  .photo :global(img:first-child) {
+    width: 282px;
+    height: 390px;
+    object-fit: cover;
+  }
+  .corner {
+    position: absolute;
+    left: 252px;
+    top: -17px;
+  }
+  .body {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    display: flex;
+    flex-direction: column;
+    max-width: 635px;
+  }
+  .text {
+    font-size: var(--text-intro);
+    text-align: justify;
+  }
+  .more {
+    align-self: flex-end;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: 1.25rem;
+    padding: 2px;
+    font-weight: var(--weight-regular);
+    text-decoration: none;
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: 220px 241px 1fr;
+    margin: auto 0 0;
+    padding-top: var(--space-12);
+  }
+  .stat {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    gap: var(--space-4);
+  }
+  .value {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--text-stat);
+    line-height: 24px;
+  }
+  .label-text {
+    max-width: 174px;
+    font-size: var(--text-small);
+    letter-spacing: var(--tracking-small);
+  }
+
+  @media (max-width: 64rem) {
+    .about {
+      grid-template-columns: 1fr;
+      grid-template-rows: none;
+      row-gap: var(--space-8);
+      padding-top: var(--space-16);
+      padding-bottom: var(--space-16);
+    }
+    .label,
+    .photo,
+    .body {
+      grid-column: 1;
+      grid-row: auto;
+    }
+    .photo {
+      margin-top: 0;
+    }
+    .stats {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: var(--space-4);
+    }
+  }
+  @media (max-width: 30rem) {
+    .text {
+      font-size: var(--text-lead);
+      text-align: left;
+    }
+    .stats {
+      grid-template-columns: 1fr;
+      row-gap: var(--space-6);
+    }
+  }
+</style>

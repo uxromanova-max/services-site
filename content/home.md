@@ -1,7 +1,108 @@
 ---
-page: home
-status: copy v1 from Notion; Figma landing is the layout source. Where Figma text differs, Figma wins for wording but ask about prices/claims.
+# Home page. Everything in this frontmatter is rendered on the site.
+# Wording follows the Figma landing (10:797); facts (prices) come from content/services/*.md.
+# The notes below the frontmatter are the original copy notes and are NOT rendered.
+
+hero:
+  headline: ["Your e-commerce brand", "shouldn't run", "on late nights", "& manual work"]
+  subline: "I fix the pages that decide whether people buy, and I build AI agent systems that take over the repetitive operations: support, reporting, content, handoffs."
+  guarantee: ["Fixed scope. Fixed price.", "Full refund if I don’t deliver."]
+  button: "Book a 20-minute call"
+  proof: "I run my own e-commerce brand with an AI agent team · Former Creative Director · Former AI & E-commerce Operations Specialist"
+
+about:
+  heading: "Who is behind this"
+  text: "I started in design and ended up running whole stores. I led a design team as Creative Director, ran e-commerce operations and AI agents for a fashion brand, and now run my own brand, ORA Studio, with a team of AI agents I built myself. That mix is the point: I can redesign the product page, set up the email flow behind it, and build the system that keeps it running."
+  link:
+    label: "More about me and my CV"
+    # Will link to the CV file once the final version exists. Leave empty to show it as plain text.
+    href: ""
+  portraitAlt: "Diana Romanova"
+  stats:
+    - value: "4+"
+      label: "Years in e-commerce"
+    - value: "2"
+      label: "stores run end to end with AI agents, no team"
+    - value: "7"
+      label: "Years across design, product and operations"
+
+work:
+  heading: "Selected Works"
+  items:
+    - name: "ORA Studio"
+      case: ora-studio
+      image: ora
+      description: "My own DTC brand, built and run solo on Shopify"
+      tags: "Shopify · Email flows · UGC creative · AI agents · Meta Ads"
+    - name: "ModaBlvck"
+      case: modablvck
+      image: modablvck
+      description: "AI and e-commerce operations for a fashion brand"
+      tags: "AI agents · Operations · Ad creative · Store UX"
+    - name: "The System Club"
+      case: the-system-club
+      image: system-club
+      description: "A digital store for freelancers, launched with AI agents"
+      tags: "AI agents · Store build · Automation · Content system"
+  wideCaption: "ORA Studio"
+
+services:
+  heading: "What I can do for you"
+  guaranteeLead: "Every project comes with a"
+  guaranteeLink: "Delivery Guarantee"
+  learnMore: "Learn more"
+  # Order follows the Figma grid; the photo cell sits before Store Refresh.
+  items:
+    - service: store-teardown
+      text: "A clear list of what to fix first, with mockups for the highest-priority fixes."
+    - service: product-page-sprint
+      # Figma card repeats the Email Flows text here; content (home.md) wins on what the service is.
+      text: "Your best-selling product page, redesigned to make buying easier."
+    - service: email-flows
+      text: "Welcome, abandoned cart and post-purchase flows, designed, written and live, plus reusable email templates."
+    - photo: true
+    - service: store-refresh
+      text: "A cleaner Shopify store that looks like your brand and works on mobile."
+    - service: ops-ai-systems
+      text: "SOPs, task boards and AI agents so the work stops living in one person's head."
+      dark: true
+  ongoingHeading: "Need ongoing help after a project"
+  ongoingText: "I offer monthly support for brands I've already worked with"
+
+faq:
+  heading: "Frequently Asked Questions"
+  bookLabel: "Book a call"
+  items:
+    - q: "Do you write code?"
+      a: "Yes, when the project needs it. Most of the work happens with theme sections and apps. When the design calls for a custom section or a new page, I build it in Liquid. I tell you at the start what is standard and what needs custom code."
+    - q: "How do you charge?"
+      a: "Fixed price per project, with a deposit upfront. Details are in the plan I send after the call."
+    - q: "How fast can you start?"
+      a: "Usually within a week of the scope being signed. I only take a few projects at a time so each one gets full attention. When you book a call, I tell you my next open slot."
+    - q: "What do I need to prepare?"
+      a: "Store access and a few examples of what you like. I send a short list."
+    - q: "Do you work with brands outside Europe?"
+      a: "Yes, remotely. I take calls from 10:00 to 24:00 Warsaw time, so the hours work for both Europe and the US."
+    - q: "What if it doesn't work for us?"
+      a: "Everything is agreed in scope before work starts. If I can't help, I say so on the call."
+    - q: "How do we get started?"
+      # A list renders as numbered steps.
+      a:
+        - "We have a 20-minute call. I ask about your store and goals, and you get an honest yes or no on whether I can help."
+        - "I send a one-page scope with a fixed price, dates and a delivery checklist."
+        - "You approve it, pay the deposit, and send access. The clock starts when I have what I need."
+    - q: "What tools do you work with?"
+      a: "Shopify (including custom Liquid sections and pages), Figma, Klaviyo, Omnisend and MailerLite, GA4, Microsoft Clarity and Hotjar, Notion, Claude, ChatGPT and Gemini, Zapier, n8n and Make.com, Gorgias and Zendesk. Each service page lists exactly what I use for that project, and I work in your accounts, so you keep everything."
+    - q: "How long until I see results?"
+      a: "You see the first deliverable within the project timeline, from 3 to 5 working days for a Teardown to 2 to 4 weeks for a Store Refresh. For Ops & AI Systems, the first working agent usually runs within 2 weeks. Business results, such as higher conversion or more orders, depend on your traffic and on what gets fixed, so I don’t promise a number. I do show you what changed and how to track it."
+    - q: "What if I don't know what to automate yet?"
+      a: "That’s a normal place to start. Book a call and I’ll look at your week with you: which tasks eat the most hours, which have clear rules, and which should stay manual. If it’s too early to automate, I’ll tell you honestly. If you want a written answer, a Store Teardown or the SOP pack shows where the biggest gains are before you invest in agents."
+    - q: "What if the automation breaks?"
+      # Same answer as on the Ops & AI page (approved by Diana).
+      a: "Every build includes error alerts and a fallback to a person, so a failure doesn't pass unnoticed. For 30 days after handoff I fix anything I built that stops working, free. After that you can choose Agent Care or a fix ticket."
 ---
+
+# Original copy notes (not rendered)
 
 # Home page content
 

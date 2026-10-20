@@ -17,19 +17,29 @@
   --color-ink: #000;
   --color-paper: #fff;
   --color-on-dark: #fff;
+  --color-muted: rgba(0, 0, 0, 0.53); /* service card price */
+  --color-line: rgba(0, 0, 0, 0.1); /* services grid borders */
+  --color-dash: rgba(0, 0, 0, 0.33); /* dashed rules: FAQ, form fields */
+  --color-chip: #f7f7f7;
+  --color-overlay: rgba(0, 0, 0, 0.76); /* selected work hover */
 
   /* Type families */
   --font-display: 'Jeju Myeongjo', 'Times New Roman', serif;
   --font-sans: 'Geist', system-ui, sans-serif;
   --font-mono: 'Sometype Mono', ui-monospace, monospace;
   --font-deco: 'Cinzel Decorative', serif;
+  --font-accent: 'Cormorant Infant', serif; /* selected work hover titles */
 
   /* Type scale (Figma px; fluid below the desktop frame) */
   --text-display: clamp(2.25rem, 1.5rem + 3vw, 3.25rem); /* 52 */
   --leading-display: 1.077; /* 56 / 52 */
+  --text-stat: 2rem; /* 32: about stats, work hover titles */
+  --text-card: 1.6875rem; /* 27: service card titles */
+  --text-intro: 1.5rem; /* 24: about text, "Need ongoing help" */
   --text-lead: 1.125rem; /* 18 — text pages */
   --text-body: 1rem; /* 16 */
   --text-small: 0.875rem; /* 14 */
+  --text-caption: 0.75rem; /* 12 */
   --tracking-small: 0.08em; /* 1.12px at 14px */
 
   --weight-light: 300;
@@ -43,6 +53,7 @@
   --gutter-nav: 3rem; /* 48 */
   --gutter: 6.5rem; /* 104 */
   --footer-inset: 2rem; /* 32 */
+  --nav-h: 6.5rem; /* nav band height; the landing hero is drawn from the frame top under it */
   --footer-pad: 2.5rem; /* 40: text inset inside the dark card */
   --radius-card: 1.25rem; /* 20 */
 
@@ -50,8 +61,12 @@
   --space-2: 0.5rem; /* 8 */
   --space-4: 1rem; /* 16 */
   --space-6: 1.5rem; /* 24 */
+  --space-3: 0.75rem; /* 12 */
   --space-8: 2rem; /* 32 */
-  --space-18: 4.5rem; /* 72 */
+  --space-12: 3rem; /* 48 */
+  --space-16: 4rem; /* 64 */
+  --space-18: 4.5rem; /* 72: section label from section top */
+  --radius-pill: 100px;
 
   --focus-ring: 2px solid currentColor;
 }

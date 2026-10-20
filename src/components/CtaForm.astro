@@ -1,0 +1,286 @@
+---
+import { getCollection } from 'astro:content';
+import { getSite, isUnresolved } from '../lib/site';
+import { legalHref } from '../lib/routes';
+
+const site = await getSite();
+const cta = site.cta;
+const services = (await getCollection('services')).map((s) => s.data);
+// Figma chip order: Teardown, Product Page Sprint, Email Flows, Store Refresh, Ops & AI, Other.
+const order = ['store-teardown', 'product-page-sprint', 'email-flows', 'store-refresh', 'ops-ai-systems'];
+const chips = [
+  ...order.map((slug) => services.find((s) => s.slug === slug)?.name ?? slug),
+  cta.otherLabel,
+];
+const actionReady = !isUnresolved(cta.formAction);
+const privacyHref = await legalHref('privacy');
+---
+
+<section class="cta container" aria-labelledby="cta-title">
+  <div class="intro">
+    <p class="eyebrow">{cta.eyebrow}</p>
+    <h2 id="cta-title" class="heading">{cta.heading}</h2>
+    <p class="text">{cta.text}</p>
+  </div>
+  <form class="form" method="post" action={actionReady ? cta.formAction : undefined}>
+    <fieldset class="service">
+      <legend class="legend">{cta.serviceLabel}</legend>
+      <div class="chips">
+        {
+          chips.map((label) => (
+            <label class="chip">
+              <input type="checkbox" name="service" value={label} />
+              <span>{label}</span>
+            </label>
+          ))
+        }
+      </div>
+    </fieldset>
+    <div class="fields">
+      <label class="field half">
+        <span class="visually-hidden">{cta.fields.name}</span>
+        <input type="text" name="name" autocomplete="name" placeholder={cta.fields.name} required />
+      </label>
+      <label class="field half">
+        <span class="visually-hidden">{cta.fields.email}</span>
+        <input type="email" name="email" autocomplete="email" placeholder={cta.fields.email} required />
+      </label>
+      <label class="field">
+        <span class="visually-hidden">{cta.fields.storeLink}</span>
+        <input type="url" name="store" inputmode="url" placeholder={cta.fields.storeLink} />
+      </label>
+      <label class="field">
+        <span class="visually-hidden">{cta.fields.details}</span>
+        <textarea name="details" rows="1" placeholder={cta.fields.details}></textarea>
+      </label>
+    </div>
+    <label class="consent">
+      <input type="checkbox" name="consent" required />
+      <span>
+        {cta.consentLead}{' '}
+        {
+          privacyHref ? (
+            <a href={privacyHref}>{cta.consentLink}</a>
+          ) : (
+            <>
+              <span class="u">{cta.consentLink}</span>
+              <span class="unresolved">(CHECK: Privacy Policy page not published)</span>
+            </>
+          )
+        }
+      </span>
+    </label>
+    {!actionReady && <p class="unresolved">{cta.formAction}</p>}
+    <div class="actions">
+      <button class="submit" type="submit">
+        {cta.submit}
+        <span class="icon icon-arrow-right" aria-hidden="true"></span>
+      </button>
+      <div class="direct">
+        <p class="direct-lead">{cta.bookLead}</p>
+        <a class="direct-link" href={site.bookingUrl}>
+          {cta.bookLabel}
+          <span class="icon icon-arrow-up-right" aria-hidden="true"></span>
+        </a>
+      </div>
+    </div>
+  </form>
+</section>
+
+<style>
+  /* Figma "cta" (24:2615): 1280 x 594. Form column 510px starting 562px into the content. */
+  .cta {
+    display: grid;
+    grid-template-columns: 1fr 510px;
+    column-gap: var(--space-8);
+    padding-top: 96px;
+    padding-bottom: 82px;
+  }
+  .eyebrow {
+    text-transform: uppercase;
+  }
+  .heading {
+    max-width: 420px;
+    margin-top: 26px;
+    margin-left: -4px;
+    font-family: var(--font-display);
+    font-size: var(--text-display);
+    font-weight: var(--weight-regular);
+    line-height: var(--leading-display);
+    text-transform: uppercase;
+  }
+  .text {
+    max-width: 427px;
+    margin-top: 16px;
+    margin-left: -4px;
+  }
+  .service {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  .legend {
+    padding: 0 4px;
+    font-size: var(--text-small);
+  }
+  .chips {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-2);
+    margin-top: 12px;
+  }
+  .chip {
+    position: relative;
+  }
+  .chip input {
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+  .chip span {
+    display: flex;
+    justify-content: center;
+    padding: 4px var(--space-4);
+    border-radius: var(--radius-pill);
+    background: var(--color-chip);
+    font-weight: var(--weight-regular);
+    white-space: nowrap;
+  }
+  .chip input:checked + span {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+  .chip input:focus-visible + span {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+  }
+  .fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 24px;
+    row-gap: 22px;
+    margin-top: 22px;
+  }
+  .field {
+    grid-column: 1 / -1;
+  }
+  .field.half {
+    grid-column: auto;
+  }
+  .field input,
+  .field textarea {
+    display: block;
+    width: 100%;
+    padding: var(--space-2) 4px;
+    border: 0;
+    border-bottom: 1px dashed var(--color-dash);
+    border-radius: 0;
+    background: none;
+    font: inherit;
+    color: inherit;
+    resize: vertical;
+    field-sizing: content;
+  }
+  .field ::placeholder {
+    color: var(--color-ink);
+    opacity: 0.7;
+  }
+  .consent {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: 16px;
+    font-size: var(--text-small);
+  }
+  .consent > span {
+    opacity: 0.8;
+  }
+  .consent input {
+    appearance: none;
+    flex: none;
+    width: 16px;
+    height: 16px;
+    margin: 4px;
+    border: 1px solid var(--color-ink);
+    border-radius: 0;
+    cursor: pointer;
+  }
+  .consent input:checked {
+    background: var(--color-ink);
+    box-shadow: inset 0 0 0 3px var(--color-paper);
+  }
+  .consent a,
+  .u {
+    text-decoration: underline;
+    text-underline-position: from-font;
+  }
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--space-6);
+    margin-top: 41px;
+  }
+  .submit {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-3) var(--space-8);
+    border: 0;
+    border-radius: 0;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font: inherit;
+    font-weight: var(--weight-regular);
+    cursor: pointer;
+  }
+  .direct {
+    text-align: right;
+    font-size: var(--text-small);
+  }
+  .direct-lead {
+    opacity: 0.6;
+    letter-spacing: 0.04em;
+  }
+  .direct-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: 8px;
+    font-weight: var(--weight-regular);
+    text-decoration: none;
+  }
+
+  @media (max-width: 64rem) {
+    .cta {
+      grid-template-columns: 1fr;
+      row-gap: var(--space-12);
+      padding-top: var(--space-12);
+      padding-bottom: var(--space-12);
+    }
+    .heading,
+    .text {
+      margin-left: 0;
+    }
+  }
+  @media (max-width: 40rem) {
+    .chips {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .fields {
+      grid-template-columns: 1fr;
+    }
+    .field.half {
+      grid-column: 1 / -1;
+    }
+    .actions {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .direct {
+      text-align: left;
+    }
+  }
+</style>

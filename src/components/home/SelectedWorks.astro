@@ -1,0 +1,222 @@
+---
+import { Image } from 'astro:assets';
+import ora from '../../assets/figma/work-ora.png';
+import modablvck from '../../assets/figma/work-modablvck.png';
+import systemClub from '../../assets/figma/work-system-club.png';
+import oraWide from '../../assets/figma/work-ora-wide.png';
+import { caseHref } from '../../lib/routes';
+
+interface Item {
+  name: string;
+  case: string;
+  image: 'ora' | 'modablvck' | 'system-club';
+  description: string;
+  tags: string;
+  note?: string;
+}
+interface Props {
+  work: { heading: string; items: Item[]; wideCaption: string };
+}
+
+const { work } = Astro.props;
+const images = { ora, modablvck, 'system-club': systemClub };
+const items = await Promise.all(
+  work.items.map(async (item) => ({ ...item, href: await caseHref(item.case) })),
+);
+---
+
+<section class="works container" aria-labelledby="works-title">
+  <h2 id="works-title" class="section-label">{work.heading}</h2>
+  <ul class="grid" role="list">
+    {
+      items.map((item, i) => {
+        const Tag = item.href ? 'a' : 'div';
+        return (
+          <li class={`card card-${i + 1}`}>
+            <Tag class="card-link" href={item.href ?? undefined}>
+              <div class="media">
+                <Image
+                  src={images[item.image]}
+                  alt=""
+                  width={409}
+                  height={525}
+                  densities={[1, 2]}
+                  formats={['avif', 'webp']}
+                  loading="lazy"
+                />
+                <div class="overlay">
+                  <p class="desc">{item.description}</p>
+                  <p class="tags">{item.tags}</p>
+                </div>
+              </div>
+              <p class="name">
+                {item.name}
+                {item.href && <span class="icon icon-arrow-up-right-24" aria-hidden="true" />}
+              </p>
+            </Tag>
+            {item.note && <p class="unresolved">{item.note}</p>}
+          </li>
+        );
+      })
+    }
+  </ul>
+  <figure class="wide">
+    <Image
+      src={oraWide}
+      alt=""
+      width={1072}
+      height={475}
+      densities={[1, 2]}
+      formats={['avif', 'webp']}
+      loading="lazy"
+    />
+    <figcaption>{work.wideCaption}</figcaption>
+  </figure>
+</section>
+
+<style>
+  /* Figma "Selected Works" (5:116) and its hover variants (6:146, 6:195, 6:224):
+     the hovered card becomes the large 409 x 525 card with a dark overlay and its description. */
+  .works {
+    padding-top: var(--space-18);
+    padding-bottom: 26px;
+  }
+  .grid {
+    --big: 409px;
+    display: grid;
+    grid-template-columns: var(--big) 322px 1fr;
+    column-gap: 8px;
+    align-items: start;
+    margin: 34px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .card-3 {
+    margin-left: 1px;
+  }
+  .grid:has(.card-2:hover) {
+    grid-template-columns: 322px var(--big) 1fr;
+  }
+  .grid:has(.card-3:hover) {
+    grid-template-columns: 322px 324px 1fr;
+  }
+  .card-link {
+    display: block;
+    text-decoration: none;
+  }
+  .media {
+    position: relative;
+    height: 322px;
+    overflow: hidden;
+  }
+  .media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  /* Large card: ORA by default, or whichever card is hovered. */
+  .card-1 .media,
+  .grid:has(.card-2:hover) .card-2 .media,
+  .grid:has(.card-3:hover) .card-3 .media {
+    height: 525px;
+  }
+  .grid:has(.card-2:hover, .card-3:hover) .card-1 .media {
+    height: 322px;
+  }
+  .overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: var(--space-4);
+    padding: var(--space-6);
+    background: var(--color-overlay);
+    color: var(--color-on-dark);
+    opacity: 0;
+  }
+  .card:hover .overlay,
+  .card-link:focus-visible .overlay {
+    opacity: 1;
+  }
+  .desc {
+    max-width: 361px;
+    font-family: var(--font-accent);
+    font-size: var(--text-stat);
+    font-weight: var(--weight-semibold);
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .tags {
+    max-width: 361px;
+    font-size: var(--text-small);
+    letter-spacing: var(--tracking-small);
+  }
+  .name {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: 8px;
+    font-weight: var(--weight-regular);
+    text-transform: uppercase;
+  }
+  .card:hover .name {
+    font-weight: var(--weight-semibold);
+  }
+  .wide {
+    margin: 53px 0 0;
+  }
+  .wide :global(img) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1072 / 475;
+    object-fit: cover;
+  }
+  .wide figcaption {
+    margin-top: 8px;
+    font-size: var(--text-caption);
+    letter-spacing: 0.08em;
+    text-align: right;
+  }
+
+  /* Provisional below the desktop frame: no hover swap, cards in a column. */
+  @media (max-width: 64rem) {
+    .grid,
+    .grid:has(.card-2:hover),
+    .grid:has(.card-3:hover) {
+      grid-template-columns: 1fr 1fr;
+      row-gap: var(--space-8);
+    }
+    .card-1 {
+      grid-column: 1 / -1;
+    }
+    .card-3 {
+      margin-left: 0;
+    }
+    .media,
+    .card .media,
+    .grid:has(.card-2:hover, .card-3:hover) .card-1 .media {
+      height: auto;
+      aspect-ratio: 1;
+    }
+    .card-1 .media {
+      aspect-ratio: 409 / 525;
+    }
+    .wide {
+      margin-top: var(--space-12);
+    }
+  }
+  @media (max-width: 40rem) {
+    .grid,
+    .grid:has(.card-2:hover),
+    .grid:has(.card-3:hover) {
+      grid-template-columns: 1fr;
+    }
+  }
+  /* Touch screens have no hover: keep the description visible (provisional until mobile frames). */
+  @media (hover: none) {
+    .overlay {
+      opacity: 1;
+    }
+  }
+</style>
