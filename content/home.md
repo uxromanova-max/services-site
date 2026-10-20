@@ -98,7 +98,7 @@ faq:
     - q: "What if I don't know what to automate yet?"
       a: "That’s a normal place to start. Book a call and I’ll look at your week with you: which tasks eat the most hours, which have clear rules, and which should stay manual. If it’s too early to automate, I’ll tell you honestly. If you want a written answer, a Store Teardown or the SOP pack shows where the biggest gains are before you invest in agents."
     - q: "What if the automation breaks?"
-      # Same question and answer as on the Ops & AI page (services/ops-ai-systems.md).
+      # Same answer as on the Ops & AI page (approved by Diana).
       a: "Every build includes error alerts and a fallback to a person, so a failure doesn't pass unnoticed. For 30 days after handoff I fix anything I built that stops working, free. After that you can choose Agent Care or a fix ticket."
 ---
 

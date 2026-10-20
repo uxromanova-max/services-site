@@ -46,7 +46,7 @@ Stage 2 (home)
 - DECIDED: Email Flows card mentions the template system ("... plus reusable email templates."). Figma fix: the Product Page Sprint card repeats this text; the site uses the home.md text.
 - DECIDED: The System Club hover text and tags follow Figma. Card photo matches (item 6 resolved for this photo).
 - DECIDED: answers for the five missing FAQ questions supplied by Diana.
-- FAQ "What if the automation breaks?" reuses the answer to the same question on the Ops & AI page. Confirm it fits the home page.
+- DECIDED: FAQ "What if the automation breaks?" on the home page uses the same answer as the Ops & AI page.
 - Hover frames 6:146 / 6:195 / 6:224 use other photos than the landing frame. The site keeps the landing photos and adds the dark overlay on hover.
 - Service cards have no timeline in Figma, so timelines show only on the service pages.
 - Form service and Cal.com are connected at the end of the project (Diana); the form keeps its CHECK marker until then.
