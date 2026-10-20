@@ -28,15 +28,15 @@ Figma fixes found at stage 0 (content wins; update Figma)
 - Case template (12:1187): Result block shows +58% / +43% / +36% placeholder metrics. These will never be rendered.
 - Already fixed in Figma since the list in item 6: Store link field and the privacy link on the consent checkbox are in the CTA form.
 
-Not covered by the rule (Diana decides)
-- About stats: Figma shows "4+ Years in e-commerce", "2 stores run end to end with AI agents, no team", "7 Years across design, product and operations"; home.md shows a different, not final set (item 1). Which set, and is "2 stores ... no team" a claim you want to make?
-- Ops & AI page: Figma merges "Agents I have built" and "Agents I can build" into one list titled "Agents I have built". The structure says one list, the facts say two. How should the can-build agents be marked?
-- Home "How a project runs" (home.md) has no block in the Figma landing. By the rule it is left out; confirm.
-- Service pages: Figma has no guarantee strip or separate final button (the footer card acts as the CTA). By the rule they are left out; the guarantee line stays in the page top block. Confirm.
+Decided by Diana (stage 1 review)
+- About stats: use the Figma set ("4+ Years in e-commerce", "2 stores run end to end with AI agents, no team", "7 Years across design, product and operations"). Replaces item 1.
+- Ops & AI page: Figma holds the final content for this page (including the agents list). Build it from the Figma frame 22:1528, not from services/ops-ai-systems.md.
+- Home "How a project runs": not on the site for now. Do not add.
+- Service pages: no guarantee strip at the bottom. The guarantee is the "Delivery Guarantee" line in the top block; "Delivery Guarantee" links to the Terms & Delivery Guarantee page.
 
 Stage 1 (setup)
-- LinkedIn URL for the footer link is missing (marked CHECK in content/site.json).
-- Heading font JejuMyeongjo (Sandoll / Jeju Province): free for commercial use per its distributors; embedded name table says "All rights reserved". Confirm the licence before launch.
+- LinkedIn URL: DECIDED, https://www.linkedin.com/in/romanova23/
+- Heading font JejuMyeongjo: DECIDED, licence confirmed by Diana (source: https://www.figma.com/fonts/jeju-myeongjo/).
 - "Book a call" links point to /contact until the Cal.com link exists (stage 6).
 
 Technical
