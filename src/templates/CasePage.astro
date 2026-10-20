@@ -38,7 +38,7 @@ const imgProps = { alt: '', densities: [1, 2], format: 'webp', loading: 'lazy' }
           {info.map((r) => (
             <div class="list-row">
               <dt>{r.label}</dt>
-              <dd class:list={{ placeholder: ph(r.value) }}>{r.value}</dd>
+              <dd>{r.value}</dd>
             </div>
           ))}
         </dl>

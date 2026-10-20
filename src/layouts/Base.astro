@@ -6,6 +6,7 @@ import '@fontsource/geist/latin-600.css';
 import '@fontsource/geist/latin-700.css';
 import '@fontsource/sometype-mono/latin-400-italic.css';
 import '@fontsource/cinzel-decorative/latin-400.css';
+import '@fontsource/cormorant-infant/latin-400.css';
 import '@fontsource/cormorant-infant/latin-600.css';
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
@@ -72,7 +73,7 @@ const termsHref = await legalHref('terms');
           targets.push(el);
         }
         function walk(el, depth) {
-          if (el.matches('script, style, .draft-banner')) return;
+          if (el.matches('script, style, .draft-banner, .hero')) return;
           if (el.matches(STAGGER)) return mark(el);
           var split = depth === 0 || el.querySelector(STAGGER);
           if (!split || depth > 5 || !el.children.length) return mark(el);
@@ -85,8 +86,16 @@ const termsHref = await legalHref('terms');
           function (entries) {
             entries.forEach(function (e) {
               if (!e.isIntersecting) return;
-              e.target.classList.add('is-visible');
-              io.unobserve(e.target);
+              var el = e.target;
+              el.classList.add('is-visible');
+              io.unobserve(el);
+              // Once it has arrived, drop the reveal styles so the element's own hover
+              // transitions (buttons, links) are not overridden by the reveal transition.
+              var delay = parseFloat(el.style.getPropertyValue('--reveal-delay')) || 0;
+              setTimeout(function () {
+                el.removeAttribute('data-reveal');
+                el.classList.remove('is-visible');
+              }, (delay + 1.5) * 1000);
             });
           },
           { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },

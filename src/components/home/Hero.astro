@@ -124,6 +124,53 @@ const [l1, l2, l3, l4] = hero.headline;
     text-align: center;
   }
 
+  /* Load-in (Diana, design review 3): each element of the hero appears in turn, softly.
+     Runs only when motion is allowed (html.reveal is set in Base.astro). */
+  @keyframes hero-in {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+  }
+  @keyframes hero-fade {
+    from {
+      opacity: 0;
+    }
+  }
+  :global(.reveal) .headline span,
+  :global(.reveal) .book,
+  :global(.reveal) .intro,
+  :global(.reveal) .proof {
+    animation: hero-in 1.3s var(--ease-reveal) both;
+  }
+  :global(.reveal) .dash {
+    animation: hero-fade 1.2s var(--ease-reveal) both;
+  }
+  :global(.reveal) .headline .l1 {
+    animation-delay: 0.15s;
+  }
+  :global(.reveal) .headline .l2 {
+    animation-delay: 0.32s;
+  }
+  :global(.reveal) .dash {
+    animation-delay: 0.55s;
+  }
+  :global(.reveal) .headline .l3 {
+    animation-delay: 0.62s;
+  }
+  :global(.reveal) .headline .l4 {
+    animation-delay: 0.79s;
+  }
+  :global(.reveal) .book {
+    animation-delay: 1s;
+  }
+  :global(.reveal) .intro {
+    animation-delay: 1.12s;
+  }
+  :global(.reveal) .proof {
+    animation-delay: 1.3s;
+  }
+
   /* Provisional below the desktop frame: stack in reading order. */
   @media (max-width: 74.99rem) {
     .hero {

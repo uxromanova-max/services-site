@@ -9,6 +9,7 @@ import NeedTools from '../components/service/NeedTools.astro';
 import PriceCards from '../components/service/PriceCards.astro';
 import banner from '../assets/figma/service-banner.png';
 import sideWide from '../assets/figma/service-side-wide.png';
+import proof from '../assets/figma/service-side.png';
 import { getSite } from '../lib/site';
 import { legalHref } from '../lib/routes';
 import { fromPrice, getShared, resolveFaq } from '../lib/service';
@@ -61,6 +62,13 @@ const faq = await resolveFaq(s);
     />
   </div>
 
+  <!-- Proof: placeholder images until Diana sends real screenshots per service (Figma 12:1179). -->
+  <div class="container proof" aria-hidden="true">
+    <Image src={proof} alt="" width={352} height={322} densities={[1, 2]} format="webp" loading="lazy" />
+    <Image src={proof} alt="" width={352} height={322} densities={[1, 2]} format="webp" loading="lazy" />
+    <Image src={proof} alt="" width={352} height={322} densities={[1, 2]} format="webp" loading="lazy" />
+  </div>
+
   <div class="faq-wrap">
     <Faq heading={L.questionsHeading} bookLabel={L.bookLabel} bookingUrl={site.bookingUrl} items={faq} />
   </div>
@@ -102,6 +110,18 @@ const faq = await resolveFaq(s);
   .price-wrap {
     margin-top: 88px;
   }
+  .proof {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 78px; /* Figma: proof images 78px below the price note */
+  }
+  .proof :global(img) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 352 / 322;
+    object-fit: cover;
+  }
   .faq-wrap {
     margin-top: 28px;
   }
@@ -113,6 +133,9 @@ const faq = await resolveFaq(s);
     }
   }
   @media (max-width: 48rem) {
+    .proof {
+      grid-template-columns: 1fr;
+    }
     .steps {
       grid-template-columns: 1fr 1fr;
       row-gap: var(--space-8);

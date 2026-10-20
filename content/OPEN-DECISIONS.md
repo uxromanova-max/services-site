@@ -99,6 +99,10 @@ Design review 2 (stage-7b-states)
 - Done: FAQ question column 536px (proportional), 16px padding in each question; scroll reveal 50px with a slower, softer curve; Selected Works: the row keeps the large-card height, so the image below never moves, and the swap is slower (1s) with a symmetric curve; interaction states from the Figma "States" frame (31:2831) for all clickable elements.
 - Form error state: the red underline is in place; the small error message under a field ("error text" in Figma) needs copy for each case (empty name, invalid email, consent not ticked). Send it when the form service is connected.
 
+Design review 3 (stage-7c-review3)
+- Done: service pages FAQ link reads "Book a call" (Figma: "Book a free call"; Figma fix) with the header animation; proof placeholder images restored between the price block and the FAQ on the four standard service pages; Selected Works: names keep their weight on hover, hover title in regular weight, title at the top and tags at the bottom with 24px inside; services grid "Learn more" in regular; case Project Information values in black; hero elements appear one after another on page load.
+- Fix: links that are also scroll-reveal targets kept the reveal transition and lost their hover animation; the reveal styles are now removed once an element has appeared.
+
 Technical
 - Form service choice (verify free limits). Cal.com account/link. Custom domain later.
 - Mobile Figma frames to come later.
