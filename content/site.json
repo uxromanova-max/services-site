@@ -1,7 +1,10 @@
 {
   "_source": "Nav and footer wording from Figma (Landing 10:797, footer symbol 24:2499). Figma wins on wording of existing blocks; facts come from /content.",
   "name": "Diana Romanova",
-  "location": ["Based in Poland", "Remote Worldwide"],
+  "location": [
+    "Based in Poland",
+    "Remote Worldwide"
+  ],
   "nav": {
     "bookLabel": "Book a call"
   },
@@ -16,5 +19,25 @@
     "linkedinUrl": "https://www.linkedin.com/in/romanova23/"
   },
   "bookingUrl": "/contact",
-  "email": "uxromanova@gmail.com"
+  "email": "uxromanova@gmail.com",
+  "cta": {
+    "_source": "CTA block, Figma symbol 24:2615 (used on Home and case pages).",
+    "eyebrow": "Ready to start?",
+    "heading": "Want me to look at your store?",
+    "text": "Tell me what you sell and what feels off. I'll reply within two working days with an honest view and a next step.",
+    "serviceLabel": "Service",
+    "otherLabel": "Other",
+    "fields": {
+      "name": "Name",
+      "email": "Email",
+      "storeLink": "Store link (optional)",
+      "details": "Project details (optional)"
+    },
+    "consentLead": "I agree to the processing of my",
+    "consentLink": "personal data",
+    "submit": "Send request",
+    "bookLead": "Prefer to pick a time?",
+    "bookLabel": "Book a call directly",
+    "formAction": "CHECK: form service not chosen yet (Formspree or Web3Forms)"
+  }
 }

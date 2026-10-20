@@ -39,6 +39,18 @@ Stage 1 (setup)
 - Heading font JejuMyeongjo: DECIDED, licence confirmed by Diana (source: https://www.figma.com/fonts/jeju-myeongjo/).
 - "Book a call" links point to /contact until the Cal.com link exists (stage 6).
 
+Stage 2 (home)
+- "More about me and my CV" link: where should it go (LinkedIn, CV PDF, About page)? Marked CHECK in home.md.
+- ModaBlvck card: permission to publish (item 8). Marked CHECK on the card, so production stays blocked until confirmed.
+- FAQ answers missing (CHECK in home.md): How fast can you start? / How do we get started? / What tools do you work with? / How long until I see results? / What if I don't know what to automate yet? Plus "outside Europe" hours to confirm.
+- FAQ "What if the automation breaks?" reuses the answer to the same question on the Ops & AI page. Confirm it fits the home page.
+- Figma fix: the Product Page Sprint card repeats the Email Flows text ("Welcome, abandoned cart ... plus reusable email templates"). The site uses the home.md text "Your best-selling product page, redesigned to make buying easier."
+- Email Flows card: the site uses the Figma Email Flows card text (no "reusable email templates"). Should the card mention the template system? (item 6)
+- The System Club hover text follows Figma ("A digital store for freelancers, launched with AI agents"; tags start with "AI agents"); cases.md says "A template shop for freelancers, launched in about a week by reusing ORA's system". Confirm the Figma wording.
+- The System Club card photo (item 6): the current Figma photo is the tote bag with The System Club print. Resolved?
+- Hover frames 6:146 / 6:195 / 6:224 use other photos than the landing frame. The site keeps the landing photos and adds the dark overlay on hover.
+- Service cards have no timeline in Figma, so timelines show only on the service pages.
+
 Technical
 - Form service choice (verify free limits). Cal.com account/link. Custom domain later.
 - Mobile Figma frames to come later.

@@ -1,0 +1,209 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import photo from '../../assets/figma/services-photo.png';
+import { legalHref, serviceHref } from '../../lib/routes';
+
+type Item = { photo: true } | { service: string; text: string; dark?: boolean };
+interface Props {
+  services: {
+    heading: string;
+    guaranteeLead: string;
+    guaranteeLink: string;
+    learnMore: string;
+    items: Item[];
+    ongoingHeading: string;
+    ongoingText: string;
+  };
+}
+
+const { services } = Astro.props;
+const facts = new Map((await getCollection('services')).map((s) => [s.data.slug, s.data]));
+const termsHref = await legalHref('terms');
+const price = (from: number) => `From $${from.toLocaleString('en-US')}`;
+
+const cells = services.items.map((item) => {
+  if ('photo' in item) return item;
+  const fact = facts.get(item.service);
+  if (!fact) throw new Error(`content/home.md: unknown service "${item.service}"`);
+  return { ...item, name: fact.name, price: price(fact.from), href: serviceHref(fact.slug) };
+});
+---
+
+<section class="services container" aria-labelledby="services-title">
+  <div class="head">
+    <h2 id="services-title" class="section-label">{services.heading}</h2>
+    <p class="guarantee">
+      {services.guaranteeLead}{' '}
+      {termsHref ? <a href={termsHref}>{services.guaranteeLink}</a> : <span class="u">{services.guaranteeLink}</span>}
+    </p>
+  </div>
+  <ul class="grid" role="list">
+    {
+      cells.map((cell) =>
+        'photo' in cell ? (
+          <li class="cell photo" aria-hidden="true">
+            <Image
+              src={photo}
+              alt=""
+              width={358}
+              height={275}
+              densities={[1, 2]}
+              formats={['avif', 'webp']}
+              loading="lazy"
+            />
+          </li>
+        ) : (
+          <li class:list={['cell', { dark: cell.dark }]}>
+            <h3 class="title">{cell.name}</h3>
+            <p class="price">{cell.price}</p>
+            <p class="text">{cell.text}</p>
+            <a class="more" href={cell.href}>
+              {services.learnMore}
+              <span class="visually-hidden"> about {cell.name}</span>
+              <span class="icon icon-arrow-right" aria-hidden="true" />
+            </a>
+          </li>
+        ),
+      )
+    }
+  </ul>
+  <div class="ongoing">
+    <p class="ongoing-heading">{services.ongoingHeading}</p>
+    <p class="ongoing-text">{services.ongoingText}</p>
+  </div>
+</section>
+
+<style>
+  /* Figma "services" (10:867): 1280 x 832, grid 1072 x 550, cells ~357 x 275. */
+  .services {
+    padding-top: var(--space-18);
+    padding-bottom: 50px;
+  }
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+  .guarantee {
+    font-size: var(--text-small);
+    letter-spacing: var(--tracking-small);
+  }
+  .guarantee a,
+  .u {
+    text-decoration: underline;
+    text-underline-position: from-font;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-rows: 275px;
+    margin: 27px 0 0;
+    padding: 0;
+    list-style: none;
+    border: 1px solid var(--color-line);
+  }
+  .cell {
+    display: flex;
+    flex-direction: column;
+    padding: 43px 16px 18px;
+    border-right: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+  }
+  .cell:nth-child(3n) {
+    border-right: 0;
+  }
+  .cell:nth-child(n + 4) {
+    border-bottom: 0;
+  }
+  .title {
+    font-family: var(--font-display);
+    font-size: var(--text-card);
+    font-weight: var(--weight-regular);
+    text-transform: uppercase;
+  }
+  .price {
+    margin-top: 2px;
+    color: var(--color-muted);
+  }
+  .text {
+    max-width: 325px;
+    margin-top: auto;
+  }
+  .more {
+    align-self: flex-end;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: 22px;
+    font-weight: var(--weight-semibold);
+    text-decoration: none;
+  }
+  .photo {
+    padding: 0;
+    overflow: hidden;
+  }
+  .photo :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .dark {
+    background: var(--color-ink);
+    color: var(--color-on-dark);
+  }
+  .dark .price {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: var(--weight-regular);
+  }
+  .dark .text {
+    font-weight: var(--weight-regular);
+  }
+  .ongoing {
+    margin-top: 64px;
+    text-align: right;
+  }
+  .ongoing-heading {
+    font-family: var(--font-display);
+    font-size: var(--text-intro);
+    line-height: 24px;
+  }
+  .ongoing-text {
+    margin-top: var(--space-2);
+    font-size: var(--text-small);
+    letter-spacing: var(--tracking-small);
+  }
+
+  @media (max-width: 64rem) {
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-auto-rows: minmax(240px, auto);
+    }
+    .cell,
+    .cell:nth-child(3n),
+    .cell:nth-child(n + 4) {
+      border-right: 1px solid var(--color-line);
+      border-bottom: 1px solid var(--color-line);
+    }
+    .cell:nth-child(2n) {
+      border-right: 0;
+    }
+  }
+  @media (max-width: 40rem) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    .cell,
+    .cell:nth-child(3n) {
+      border-right: 0;
+    }
+    .photo {
+      display: none;
+    }
+    .ongoing {
+      text-align: left;
+    }
+  }
+</style>
