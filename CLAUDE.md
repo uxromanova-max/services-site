@@ -1,1 +1,59 @@
+# CLAUDE.md — Diana Romanova services site
 
+## What this is
+A simple, fast, non-animated multi-page services/portfolio site for Diana Romanova (Warsaw, remote). It sells fixed-scope services to DTC / e-commerce brands. It is separate from her heavy Next.js portfolio. Traffic comes from cold outreach and job/client applications, so clarity and trust beat flashiness.
+
+Language of the site: English. First person ("I"), one person, not an agency.
+
+## Pages
+- Home (nav, hero, about strip with 3 stat columns, selected work, services grid, how I work, FAQ, CTA form, footer)
+- 5 service pages: Store Teardown, Product Page Sprint, Email Flows, Store Refresh, Ops & AI Systems (the last one is a LONG page with its own layout)
+- 3 case pages: ORA Studio, ModaBlvck, The System Club
+- Text pages: Privacy Policy, Terms & Delivery Guarantee
+- Booking: Cal.com embedded widget (page or popup, undecided; build as popup + fallback link)
+
+## Source of truth
+1. **Design:** Figma file key `iZyXFbTsyWM6F1Bl3BenCd` (Landing page node `10-797`, 1280px desktop). Also frames for: service template, Ops & AI service page, case template, text pages. Pull tokens (colors, type, spacing) from Figma; do not guess.
+2. **Copy:** everything in `/content`. Never invent or rewrite copy, prices, numbers, tool names, claims or testimonials. If copy is missing, leave a visible `CHECK:` marker in the content file and ask Diana.
+3. If Figma and `/content` disagree, ask. Do not choose silently. Known mismatches are listed in `content/OPEN-DECISIONS.md`.
+
+## Mobile
+Designs are **desktop only for now**. Mobile frames will be added by Diana later. Build responsive with sensible fluid layouts (single column stacking, no horizontal scroll), but mark mobile as provisional and do not polish it to pixel level until mobile frames exist.
+
+## Stack (proposal, confirm with Diana at stage 0)
+- Astro, static output, minimal or zero client JS, no animation libraries, no CSS animations beyond simple hover/focus states.
+- Content in `/content` (Markdown with frontmatter / JSON) rendered through templates in `/src`. Templates: `ServicePage`, `OpsServicePage`, `CasePage`, `TextPage`, `Home`.
+- Deploy: Vercel on a `.vercel.app` URL for now (no custom domain yet). Add `noindex` (meta robots + `X-Robots-Tag`) while on `.vercel.app`.
+- Form: Formspree or Web3Forms (verify current free-tier limits before choosing). Fields: service chips, Name, Email, Store link (to add), Project details, consent checkbox that links to Privacy Policy, Submit.
+- Booking: Cal.com embed. No analytics, so no cookie banner is needed. Do not add analytics or third-party trackers without asking.
+- Build guard: a script that fails the build if any string `CHECK` or `TODO` appears in rendered output.
+- Accessibility: semantic HTML, visible focus, alt text, contrast checked, forms with labels.
+
+## Process
+Work stage by stage, one commit per stage, and after each stage take screenshots and compare with Figma:
+0. Read this file, `/content`, inspect Figma frames, propose structure and plan. **Wait for approval.**
+1. Project setup, tokens, layout shell (nav, footer), build guard, noindex.
+2. Home.
+3. Service template + 4 service pages.
+4. Ops & AI long page.
+5. Case template + 3 cases.
+6. Text pages + form + Cal.com.
+7. QA: links, a11y, performance, Figma comparison, mobile pass (when frames exist).
+
+## Honesty rules (hard)
+- No invented metrics, clients, testimonials, logos or tools. Use only what is in `/content`.
+- Guarantee is for **delivery, not business results**. Never write "guaranteed growth/conversion/revenue".
+- Case roles: ORA Studio = Diana's own brand (founder, solo). ModaBlvck = employment (AI & E-commerce Operations Specialist, Sept 2024 to Apr 2026); publication permission is unconfirmed. The System Club = founder, closed Oct 2026, shown as a build case.
+- Diana writes Shopify Liquid and custom sections/pages. Do not write "no custom code" on the site.
+- Stats on the About strip are not final (see OPEN-DECISIONS). Do not add "UGC videos made" or "AI agents built" counts.
+
+## Git
+Commit messages end with:
+```
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_011AZBaekNM7uo4seEnJWYBx
+```
+Push to a feature branch per stage when possible; do not force-push.
+
+## Owner
+Diana Romanova, uxromanova@gmail.com. She reviews in Russian; site copy stays in English. Keep questions short and ask only when blocked.
