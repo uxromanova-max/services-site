@@ -61,7 +61,7 @@ Plus Delivery Guarantee line. Revision rounds: CHECK, not decided.
 Existing draft answers (update as needed):
 - **Do you write code?** Yes, when the project needs it. Most of the work happens with theme sections and apps. When the design calls for a custom section or a new page, I build it in Liquid. I tell you at the start what is standard and what needs custom code. (Old draft saying "I don't write custom code" is WRONG.)
 - **How do you charge?** Fixed price per project, with a deposit upfront. Details are in the plan I send after the call.
-- **How fast can you start?** CHECK: real availability.
+- (superseded: see confirmed FAQ answers below)
 - **What do I need to prepare?** Store access and a few examples of what you like. I send a short list.
 - **Do you work with brands outside Europe?** Yes, remotely. Calls are easiest in European and US East Coast hours. CHECK
 - **What if it doesn't work for us?** Everything is agreed in scope before work starts. If I can't help, I say so on the call.
@@ -75,3 +75,11 @@ Button: Book a 20-minute call. Email fallback: uxromanova@gmail.com (CHECK: repl
 
 ## Footer
 "I'm looking forward to starting amazing things together" · Book a free call · Privacy Policy · LinkedIn. Based in Warsaw, working remotely. CHECK: business registration wording for Poland (pending accountant).
+
+## FAQ answers (confirmed by Diana, Oct 20) — use these in the Questions block
+- **How fast can you start?** Usually within a week of the scope being signed. I only take a few projects at a time so each one gets full attention. When you book a call, I tell you my next open slot.
+- **How do we get started?** 1. We have a 20-minute call. I ask about your store and goals, and you get an honest yes or no on whether I can help. 2. I send a one-page scope with a fixed price, dates and a delivery checklist. 3. You approve it, pay the deposit, and send access. The clock starts when I have what I need.
+- **What tools do you work with?** Shopify (including custom Liquid sections and pages), Figma, Klaviyo, Omnisend and MailerLite, GA4, Microsoft Clarity and Hotjar, Notion, Claude, ChatGPT and Gemini, Zapier, n8n and Make.com, Gorgias and Zendesk. Each service page lists exactly what I use for that project, and I work in your accounts, so you keep everything.
+- **How long until I see results?** You see the first deliverable within the project timeline, from 3 to 5 working days for a Teardown to 2 to 4 weeks for a Store Refresh. For Ops & AI Systems, the first working agent usually runs within 2 weeks. Business results, such as higher conversion or more orders, depend on your traffic and on what gets fixed, so I don't promise a number. I do show you what changed and how to track it.
+- **What if I don't know what to automate yet?** That's a normal place to start. Book a call and I'll look at your week with you: which tasks eat the most hours, which have clear rules, and which should stay manual. If it's too early to automate, I'll tell you honestly. If you want a written answer, a Store Teardown or the SOP pack shows where the biggest gains are before you invest in agents.
+(The old "How fast can you start? CHECK" bullet above is superseded by this section. The other 6 FAQ questions from Figma are still to be written.)
