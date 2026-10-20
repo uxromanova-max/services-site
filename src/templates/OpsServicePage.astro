@@ -306,10 +306,11 @@ const faq = await resolveFaq(s);
     padding: 16px;
     border-bottom: 1px dashed var(--color-line);
   }
+  /* Figma 22:1923 (updated by Diana): 64px between the number and the title, text aligned with the title. */
   .step-head {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 64px;
   }
   .step-num {
     width: 16px;
@@ -328,15 +329,18 @@ const faq = await resolveFaq(s);
     white-space: nowrap;
   }
   .step-text {
+    padding-left: 81px;
     font-size: var(--text-lead);
     text-align: justify;
   }
+  .step-label {
+    margin-left: auto;
+  }
   .key-message {
-    max-width: 643px;
-    margin: 72px 12.7% 0 auto; /* right edge on the steps list */
+    width: 74.6%; /* same column as the steps list */
+    margin: 72px auto 0;
     font-size: var(--text-small);
     letter-spacing: var(--tracking-small);
-    text-align: right;
   }
 
   .two-lists {
@@ -514,7 +518,7 @@ const faq = await resolveFaq(s);
       width: 100%;
     }
     .key-message {
-      margin-right: 0;
+      width: 100%;
     }
     .match-rows {
       width: 100%;
@@ -569,6 +573,10 @@ const faq = await resolveFaq(s);
     }
     .step-head {
       flex-wrap: wrap;
+      gap: 8px 16px;
+    }
+    .step-text {
+      padding-left: 32px;
     }
     /* Justified text leaves wide gaps in narrow columns. */
     .step-text,

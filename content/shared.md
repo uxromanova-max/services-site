@@ -16,7 +16,7 @@ servicePage:
   popularLabel: "Most common"
   goesUpHeading: "Goes up with"
   questionsHeading: "Questions"
-  bookLabel: "Book a free call"
+  bookLabel: "Book a call" # Diana, design review 3 (Figma says "Book a free call")
 
 # Case page labels (Figma case template 12:1187; "Challange" in Figma is spelled "Challenge" here).
 casePage:
