@@ -68,7 +68,7 @@ const privacyHref = await legalHref('privacy');
         {cta.consentLead}{' '}
         {
           privacyHref ? (
-            <a href={privacyHref}>{cta.consentLink}</a>
+            <a class="link-muted" href={privacyHref}>{cta.consentLink}</a>
           ) : (
             <>
               <span class="u">{cta.consentLink}</span>
@@ -80,13 +80,13 @@ const privacyHref = await legalHref('privacy');
     </label>
     {!actionReady && <p class="unresolved">{cta.formAction}</p>}
     <div class="actions">
-      <button class="submit" type="submit">
-        {cta.submit}
+      <button class="submit btn-solid" type="submit">
+        <span>{cta.submit}</span>
         <span class="icon icon-arrow-right" aria-hidden="true"></span>
       </button>
       <div class="direct">
         <p class="direct-lead">{cta.bookLead}</p>
-        <a class="direct-link" href={bookHref ?? site.bookingUrl}>
+        <a class="direct-link link-grow" href={bookHref ?? site.bookingUrl}>
           {cta.bookLabel}
           <span class="icon icon-arrow-up-right" aria-hidden="true"></span>
         </a>
@@ -155,6 +155,14 @@ const privacyHref = await legalHref('privacy');
     background: var(--color-chip);
     font-weight: var(--weight-regular);
     white-space: nowrap;
+    transition:
+      box-shadow var(--dur-state) var(--ease-out),
+      background-color var(--dur-state) var(--ease-out),
+      color var(--dur-state) var(--ease-out);
+  }
+  /* Hover: a thin black outline (Figma "States" 31:2831) */
+  .chip:hover span {
+    box-shadow: inset 0 0 0 1px var(--color-ink);
   }
   .chip input:checked + span {
     background: var(--color-ink);
@@ -190,10 +198,32 @@ const privacyHref = await legalHref('privacy');
     color: inherit;
     resize: vertical;
     field-sizing: content;
+    transition: border-color var(--dur-state) var(--ease-out);
   }
   .field ::placeholder {
     color: var(--color-ink);
     opacity: 0.7;
+    transition: color var(--dur-state) var(--ease-out);
+  }
+  /* Field states (Figma "States" 31:2831): hover lilac, typing and filled black, error red. */
+  .field input:hover,
+  .field textarea:hover {
+    border-bottom-color: var(--color-active);
+  }
+  .field input:hover::placeholder,
+  .field textarea:hover::placeholder {
+    color: var(--color-active);
+  }
+  .field input:focus,
+  .field textarea:focus,
+  .field input:not(:placeholder-shown),
+  .field textarea:not(:placeholder-shown) {
+    border-bottom-color: var(--color-ink);
+    outline: none;
+  }
+  .field input:user-invalid,
+  .field textarea:user-invalid {
+    border-bottom-color: var(--color-error);
   }
   .consent {
     display: flex;
@@ -231,19 +261,6 @@ const privacyHref = await legalHref('privacy');
     gap: var(--space-6);
     margin-top: 41px;
   }
-  .submit {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-4);
-    padding: var(--space-3) var(--space-8);
-    border: 0;
-    border-radius: 0;
-    background: var(--color-ink);
-    color: var(--color-paper);
-    font: inherit;
-    font-weight: var(--weight-regular);
-    cursor: pointer;
-  }
   .direct {
     text-align: right;
     font-size: var(--text-small);
@@ -253,12 +270,7 @@ const privacyHref = await legalHref('privacy');
     letter-spacing: 0.04em;
   }
   .direct-link {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
     margin-top: 8px;
-    font-weight: var(--weight-regular);
-    text-decoration: none;
   }
 
   @media (max-width: 64rem) {

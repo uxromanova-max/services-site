@@ -35,7 +35,7 @@ const cells = services.items.map((item) => {
     <h2 id="services-title" class="section-label">{services.heading}</h2>
     <p class="guarantee">
       {services.guaranteeLead}{' '}
-      {termsHref ? <a href={termsHref}>{services.guaranteeLink}</a> : <span class="u">{services.guaranteeLink}</span>}
+      {termsHref ? <a class="link-muted" href={termsHref}>{services.guaranteeLink}</a> : <span class="u">{services.guaranteeLink}</span>}
     </p>
   </div>
   <ul class="grid" role="list">
@@ -58,7 +58,7 @@ const cells = services.items.map((item) => {
             <h3 class="title">{cell.name}</h3>
             <p class="price">{cell.price}</p>
             <p class="text">{cell.text}</p>
-            <a class="more" href={cell.href}>
+            <a class:list={['more', 'link-muted', { 'on-dark': cell.dark }]} href={cell.href}>
               {services.learnMore}
               <span class="visually-hidden"> about {cell.name}</span>
               <span class="icon icon-arrow-right" aria-hidden="true" />

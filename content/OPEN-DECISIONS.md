@@ -95,6 +95,10 @@ Design review 1 (Diana's 10 points, stage-7-design)
 - Figma frames still show the 1280px layout with 104px gutters; the site follows Diana's review instead. Update Figma if it should stay the reference for widths.
 - The animation reference site (norvo.framer.website) is blocked by this environment's network policy, so the motion was built from Diana's description and screenshots. Add the domain to Allowed domains if it should be matched more closely.
 
+Design review 2 (stage-7b-states)
+- Done: FAQ question column 536px (proportional), 16px padding in each question; scroll reveal 50px with a slower, softer curve; Selected Works: the row keeps the large-card height, so the image below never moves, and the swap is slower (1s) with a symmetric curve; interaction states from the Figma "States" frame (31:2831) for all clickable elements.
+- Form error state: the red underline is in place; the small error message under a field ("error text" in Figma) needs copy for each case (empty name, invalid email, consent not ticked). Send it when the form service is connected.
+
 Technical
 - Form service choice (verify free limits). Cal.com account/link. Custom domain later.
 - Mobile Figma frames to come later.

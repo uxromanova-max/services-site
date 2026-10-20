@@ -23,6 +23,11 @@
   --color-chip: #f7f7f7;
   --color-overlay: rgba(0, 0, 0, 0.76); /* selected work hover */
   --color-step: #a2a2a2; /* "[ Day 1 ]" labels */
+  /* Interaction states (Figma "States" 31:2831) */
+  --color-hover: #a2a2a2;
+  --color-hover-dark: #8b8b8b; /* hover on black backgrounds */
+  --color-active: #a09ec4; /* click / pressed */
+  --color-error: #db4b4b;
 
   /* Type families */
   --font-display: 'Jeju Myeongjo', 'Times New Roman', serif;
@@ -76,8 +81,11 @@
 /* Motion (Diana, design review): subtle and smooth; off for prefers-reduced-motion. */
 :root {
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --dur-reveal: 0.9s;
-  --dur-expand: 0.7s;
+  --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-swap: cubic-bezier(0.65, 0, 0.35, 1); /* symmetric, for cards trading places */
+  --dur-reveal: 1.4s;
+  --dur-expand: 1s;
+  --dur-state: 0.45s; /* hover / press states */
 }
 
 /* Provisional responsive rules (no mobile frames yet) */
