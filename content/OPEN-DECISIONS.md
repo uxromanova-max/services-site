@@ -3,7 +3,7 @@
 Copy / design
 1. Final stat trio in About block (see home.md).
 2. Teardown price block: heading for the "credit" bullet (name undecided).
-3. Returning-client discount: 15% (recommended) vs 20%.
+3. Returning-client discount: DECIDED 15%.
 4. Is a quick first look at a store free? Not decided.
 5. FAQ answers for the 11 questions in the Figma landing are not written.
 6. Figma fixes needed: Teardown card says "mockups for the top three" (remove number); Email Flows card text; Ops & AI position; Delivery Guarantee line near hero; Store link field in form; privacy link on consent checkbox; footer line; The System Club card photo mismatch.

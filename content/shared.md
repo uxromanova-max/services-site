@@ -39,5 +39,5 @@ Price depends on scope (pages, flows or processes), who provides content, and sp
 - Care window (included): 30 days after handoff for Ops & AI Systems, 14 days for the other four services. Anything I built that stops working is fixed free. New features and changes caused by the client's tools or business changing are not included.
 - Agent Care (monthly, optional): $150 to $300 for one agent; $300 to $1,000 for 2 to 5 automations or agents; larger systems quoted individually. Depends on number and complexity. Reply within 2 working days.
 - Fix ticket: from $50 to $300 per issue. A quick reconnect costs little, a bigger repair costs more. Price quoted before I start.
-- Returning clients: 15% off any new project, fix or change within 12 months of the last project. Agent Care not discounted. Does not combine with the teardown credit. (CHECK: 15% recommended, 20% still an option; Diana to confirm.)
+- Returning clients: 15% off any new project, fix or change within 12 months of the last project. Agent Care not discounted. Does not combine with the teardown credit. (DECIDED: 15%.)
 - Reply time: within 2 working days.

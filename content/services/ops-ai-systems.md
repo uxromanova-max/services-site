@@ -103,7 +103,7 @@ Every build includes error alerts and a fallback: if an automation fails, you ge
 - **Care window (included):** 30 days after handoff, anything I built that stops working is fixed free. New features and changes caused by your tools or business changing are not included.
 - **Agent Care (monthly, optional):** monitoring, error alerts, a monthly check and a set number of fix hours. $150 to $300 per month for one agent, $300 to $1,000 per month for 2 to 5 automations or agents, larger systems quoted individually. Depends on the number of agents and how complex they are. I reply within 2 working days.
 - **Fix ticket (no subscription):** from $50 to $300 per issue, depending on the breakage. A quick reconnect costs little, a bigger repair costs more. I quote the price before I start.
-- **Returning clients:** 15% off any new project, fix or change within 12 months of your last project. Agent Care is not discounted, and the discount does not combine with the teardown credit. (CHECK: 15% vs 20%.)
+- **Returning clients:** 15% off any new project, fix or change within 12 months of your last project. Agent Care is not discounted, and the discount does not combine with the teardown credit.
 
 ## Proof
 Anonymized agent system diagram, a SOP page, a Notion workspace. Related work: ModaBlvck, ORA Studio. (CHECK: screenshots not provided yet)
