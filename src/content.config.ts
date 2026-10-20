@@ -69,7 +69,7 @@ const home = defineCollection({
     about: z.object({
       heading: z.string(),
       text: z.string(),
-      link: z.object({ label: z.string(), href: z.string() }),
+      link: z.object({ label: z.string(), href: z.string() }), // empty href: shown as plain text
       portraitAlt: z.string(),
       stats: z.array(z.object({ value: z.string(), label: z.string() })),
     }),

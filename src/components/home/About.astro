@@ -15,7 +15,8 @@ interface Props {
 }
 
 const { about } = Astro.props;
-const linkReady = !isUnresolved(about.link.href);
+const linkReady = about.link.href !== '' && !isUnresolved(about.link.href);
+const linkPending = about.link.href === '';
 ---
 
 <section class="about container" aria-labelledby="about-title">
@@ -40,6 +41,11 @@ const linkReady = !isUnresolved(about.link.href);
           {about.link.label}
           <span class="icon icon-arrow-right" aria-hidden="true" />
         </a>
+      ) : linkPending ? (
+        <span class="more">
+          {about.link.label}
+          <span class="icon icon-arrow-right" aria-hidden="true" />
+        </span>
       ) : (
         <span class="more unresolved">
           {about.link.label} ({about.link.href})

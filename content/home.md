@@ -15,7 +15,8 @@ about:
   text: "I started in design and ended up running whole stores. I led a design team as Creative Director, ran e-commerce operations and AI agents for a fashion brand, and now run my own brand, ORA Studio, with a team of AI agents I built myself. That mix is the point: I can redesign the product page, set up the email flow behind it, and build the system that keeps it running."
   link:
     label: "More about me and my CV"
-    href: "CHECK: where should this link go (LinkedIn, CV PDF or an About page)?"
+    # Will link to the CV file once the final version exists. Leave empty to show it as plain text.
+    href: ""
   portraitAlt: "Diana Romanova"
   stats:
     - value: "4+"
@@ -38,7 +39,6 @@ work:
       image: modablvck
       description: "AI and e-commerce operations for a fashion brand"
       tags: "AI agents · Operations · Ad creative · Store UX"
-      note: "CHECK: permission to publish ModaBlvck work is not confirmed"
     - name: "The System Club"
       case: the-system-club
       image: system-club
@@ -59,7 +59,7 @@ services:
       # Figma card repeats the Email Flows text here; content (home.md) wins on what the service is.
       text: "Your best-selling product page, redesigned to make buying easier."
     - service: email-flows
-      text: "Welcome, abandoned cart and post-purchase flows, designed, written and live."
+      text: "Welcome, abandoned cart and post-purchase flows, designed, written and live, plus reusable email templates."
     - photo: true
     - service: store-refresh
       text: "A cleaner Shopify store that looks like your brand and works on mobile."
@@ -82,7 +82,7 @@ faq:
     - q: "What do I need to prepare?"
       a: "Store access and a few examples of what you like. I send a short list."
     - q: "Do you work with brands outside Europe?"
-      a: "Yes, remotely. Calls are easiest in European and US East Coast hours. CHECK: confirm hours."
+      a: "Yes, remotely. I take calls from 10:00 to 24:00 Warsaw time, so the hours work for both Europe and the US."
     - q: "What if it doesn't work for us?"
       a: "Everything is agreed in scope before work starts. If I can't help, I say so on the call."
     - q: "How do we get started?"
