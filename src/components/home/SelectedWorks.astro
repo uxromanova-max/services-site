@@ -146,31 +146,31 @@ const items = await Promise.all(
     background: var(--color-overlay);
     color: var(--color-on-dark);
     opacity: 0;
-    /* Leaving: the text goes away at once, before the card shrinks. */
+    /* Leaving: everything goes away at once, before the card shrinks. */
     transition: opacity 0.2s var(--ease-out);
   }
   .overlay > * {
+    opacity: 0;
     transform: translateY(12px);
-    transition: transform 0.2s var(--ease-out);
+    transition:
+      opacity 0.15s var(--ease-out),
+      transform 0.2s var(--ease-out);
   }
-  /* Entering: the text appears only once the card has reached its full size, so it never reflows
-     while the card grows (Diana, design review 4). ORA is already large, so it shows sooner. */
+  /* Entering (Diana, design review 5): the dark overlay comes in together with the card as it
+     grows; the text appears once the card has reached about 90% of its full size, so it never
+     reflows while the card grows. 0.6 of the swap time is where the eased height passes 90%. */
   .card:hover .overlay,
   .card-link:focus-visible .overlay {
     opacity: 1;
-    transition: opacity 0.5s var(--ease-out) var(--dur-expand);
+    transition: opacity 0.8s var(--ease-out);
   }
   .card:hover .overlay > *,
   .card-link:focus-visible .overlay > * {
+    opacity: 1;
     transform: none;
-    transition: transform 0.6s var(--ease-out) var(--dur-expand);
-  }
-  .card-1:hover .overlay,
-  .card-1:hover .overlay > * {
-    transition-delay: 0.1s;
-  }
-  .grid:has(.card-2:hover, .card-3:hover) .card-1 .overlay {
-    transition-delay: 0s;
+    transition:
+      opacity 0.6s var(--ease-out) calc(var(--dur-expand) * 0.6),
+      transform 0.7s var(--ease-out) calc(var(--dur-expand) * 0.6);
   }
   /* Text is laid out at the large-card width, so it never reflows while a card changes size. */
   .desc,

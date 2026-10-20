@@ -56,7 +56,7 @@ const termsHref = await legalHref('terms');
     </main>
     <Footer privacyHref={privacyHref} termsHref={termsHref} />
     <script is:inline>
-      // Scroll reveal (Diana, design reviews 1-4). Blocks appear as they enter the screen, with a
+      // Scroll reveal (Diana, design reviews 1-5). Blocks appear as they enter the screen, with a
       // few related motions so the page does not move in one direction only:
       //   blur  - photos, bands and large display headings come out of a soft blur
       //   fade  - small labels and notes simply fade in
@@ -100,6 +100,38 @@ const termsHref = await legalHref('terms');
         var main = document.getElementById('main');
         if (main) for (var i = 0; i < main.children.length; i++) walk(main.children[i], 0);
         document.querySelectorAll('.footer .card').forEach(function (el) { mark(el, 'fade'); });
+        document.querySelectorAll('.nav').forEach(function (el) { mark(el, 'fade'); });
+        function settle(el) {
+          // Once it has arrived, drop the reveal styles so the element's own hover
+          // transitions (buttons, links) are not overridden by the reveal transition.
+          var delay = parseFloat(el.style.getPropertyValue('--reveal-delay')) || 0;
+          setTimeout(function () {
+            el.removeAttribute('data-reveal');
+            el.classList.remove('is-visible');
+          }, (delay + 2) * 1000);
+        }
+        // Page load (Diana, design review 5): whatever is on the first screen assembles one
+        // block after another, top to bottom, on every page.
+        var first = targets.filter(function (el) {
+          var r = el.getBoundingClientRect();
+          return r.top < window.innerHeight && r.bottom > 0;
+        });
+        first.sort(function (x, y) {
+          var a = x.getBoundingClientRect(), b = y.getBoundingClientRect();
+          return a.top - b.top || a.left - b.left;
+        });
+        first.forEach(function (el, i) {
+          el.style.setProperty('--reveal-delay', Math.min(0.1 + i * 0.13, 1.4).toFixed(2) + 's');
+        });
+        targets = targets.filter(function (el) { return first.indexOf(el) < 0; });
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            first.forEach(function (el) {
+              el.classList.add('is-visible');
+              settle(el);
+            });
+          });
+        });
         var io = new IntersectionObserver(
           function (entries) {
             entries.forEach(function (e) {
@@ -107,13 +139,7 @@ const termsHref = await legalHref('terms');
               var el = e.target;
               el.classList.add('is-visible');
               io.unobserve(el);
-              // Once it has arrived, drop the reveal styles so the element's own hover
-              // transitions (buttons, links) are not overridden by the reveal transition.
-              var delay = parseFloat(el.style.getPropertyValue('--reveal-delay')) || 0;
-              setTimeout(function () {
-                el.removeAttribute('data-reveal');
-                el.classList.remove('is-visible');
-              }, (delay + 1.4) * 1000);
+              settle(el);
             });
           },
           { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
