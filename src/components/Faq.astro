@@ -3,7 +3,7 @@ interface Props {
   heading: string;
   bookLabel: string;
   bookingUrl: string;
-  items: { q: string; a: string }[];
+  items: { q: string; a: string | string[] }[];
 }
 
 const { heading, bookLabel, bookingUrl, items } = Astro.props;
@@ -21,7 +21,13 @@ const id = `faq-${heading.length}`;
             <span class="icon icon-arrow-down-right closed" aria-hidden="true" />
             <span class="icon icon-arrow-up-right open" aria-hidden="true" />
           </summary>
-          <p class:list={['a', { unresolved: /CHECK|TODO/.test(item.a) }]}>{item.a}</p>
+          {Array.isArray(item.a) ? (
+            <ol class="a steps">
+              {item.a.map((step) => <li>{step}</li>)}
+            </ol>
+          ) : (
+            <p class:list={['a', { unresolved: /CHECK|TODO/.test(item.a) }]}>{item.a}</p>
+          )}
         </details>
       ))
     }
@@ -90,8 +96,15 @@ const id = `faq-${heading.length}`;
   }
   .a {
     max-width: 486px;
+    margin: 0;
     padding: 10px 0 var(--space-3);
     font-size: var(--text-small);
+  }
+  .steps {
+    padding-left: 1.25em;
+  }
+  .steps li + li {
+    margin-top: 4px;
   }
 
   @media (max-width: 64rem) {

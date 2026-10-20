@@ -45,7 +45,7 @@ Stage 2 (home)
 - DECIDED: "outside Europe" answer: calls from 10:00 to 24:00 Warsaw time, covering Europe and the US. Wording on the site: "Yes, remotely. I take calls from 10:00 to 24:00 Warsaw time, so the hours work for both Europe and the US." Confirm the wording.
 - DECIDED: Email Flows card mentions the template system ("... plus reusable email templates."). Figma fix: the Product Page Sprint card repeats this text; the site uses the home.md text.
 - DECIDED: The System Club hover text and tags follow Figma. Card photo matches (item 6 resolved for this photo).
-- FAQ answers still missing (CHECK in home.md): How fast can you start? / How do we get started? / What tools do you work with? / How long until I see results? / What if I don't know what to automate yet?
+- DECIDED: answers for the five missing FAQ questions supplied by Diana.
 - FAQ "What if the automation breaks?" reuses the answer to the same question on the Ops & AI page. Confirm it fits the home page.
 - Hover frames 6:146 / 6:195 / 6:224 use other photos than the landing frame. The site keeps the landing photos and adds the dark overlay on hover.
 - Service cards have no timeline in Figma, so timelines show only on the service pages.

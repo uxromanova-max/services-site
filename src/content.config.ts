@@ -104,7 +104,7 @@ const home = defineCollection({
     faq: z.object({
       heading: z.string(),
       bookLabel: z.string(),
-      items: z.array(z.object({ q: z.string(), a: z.string() })),
+      items: z.array(z.object({ q: z.string(), a: z.union([z.string(), z.array(z.string())]) })),
     }),
   }),
 });
