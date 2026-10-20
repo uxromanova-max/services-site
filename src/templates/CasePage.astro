@@ -1,0 +1,233 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import CtaForm from '../components/CtaForm.astro';
+import placeholder from '../assets/figma/case-placeholder.png';
+import placeholderWide from '../assets/figma/service-banner.png';
+import { getShared } from '../lib/service';
+
+interface Props {
+  item: CollectionEntry<'cases'>['data'];
+}
+
+const { item: c } = Astro.props;
+const L = (await getShared()).casePage;
+const ph = (text: string) => /^(CHECK|TODO)/.test(text);
+const info = (['client', 'industry', 'services', 'timeline', 'year'] as const)
+  .map((key) => ({ label: L[key], value: c.info[key] }))
+  .filter((row) => row.value !== '');
+const images = c.images === 'placeholder';
+const imgProps = { alt: '', densities: [1, 2], format: 'webp', loading: 'lazy' } as const;
+---
+
+<Base title={c.name} draft={c.draft}>
+  <section class="container top" aria-labelledby="case-title">
+    <div class="intro">
+      <h1 id="case-title" class="title">{c.name}</h1>
+      {c.intro.map((p) => <p class:list={{ placeholder: ph(p) }}>{p}</p>)}
+    </div>
+    {images && <Image class="img" src={placeholder} width={532} height={361} {...imgProps} loading="eager" />}
+  </section>
+
+  {
+    info.length > 0 && (
+      <section class="container row info" aria-labelledby="info-title">
+        <h2 id="info-title" class="block-label label">{L.infoHeading}</h2>
+        <dl class="list">
+          {info.map((r) => (
+            <div class="list-row">
+              <dt>{r.label}</dt>
+              <dd class:list={{ placeholder: ph(r.value) }}>{r.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    )
+  }
+
+  {
+    images && (
+      <div class="container pair">
+        <Image class="img" src={placeholder} width={532} height={361} {...imgProps} />
+        <Image class="img" src={placeholder} width={532} height={361} {...imgProps} />
+      </div>
+    )
+  }
+
+  {
+    c.challenge.length > 0 && (
+      <section class="container row text-block" aria-labelledby="challenge-title">
+        <h2 id="challenge-title" class="block-label">{L.challengeHeading}</h2>
+        <div class="text">{c.challenge.map((p) => <p class:list={{ placeholder: ph(p) }}>{p}</p>)}</div>
+      </section>
+    )
+  }
+
+  {
+    images && (
+      <div class="container">
+        <Image class="img wide" src={placeholderWide} width={1072} height={361} {...imgProps} />
+      </div>
+    )
+  }
+
+  {
+    c.solution.length > 0 && (
+      <section class="container row text-block" aria-labelledby="solution-title">
+        <h2 id="solution-title" class="block-label">{L.solutionHeading}</h2>
+        <div class="text">
+          {c.solution.map((p) => <p class:list={{ placeholder: ph(p) }}>{p}</p>)}
+          {images && <Image class="img solution-img" src={placeholder} width={532} height={361} {...imgProps} />}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    c.result.length > 0 && (
+      <section class="container row info" aria-labelledby="result-title">
+        <h2 id="result-title" class="block-label label">{L.resultHeading}</h2>
+        <ul class="list" role="list">
+          {c.result.map((r) => (
+            <li class:list={['list-row', { placeholder: ph(r) }]}>{r}</li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  <div class="cta-wrap">
+    <CtaForm />
+  </div>
+</Base>
+
+<style>
+  /* Figma "Case page template" (12:1187): text column on the left, content column (532px) from 540px. */
+  .img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 532 / 361;
+    object-fit: cover;
+  }
+  .img.wide {
+    aspect-ratio: 1072 / 361;
+  }
+  .top {
+    display: grid;
+    grid-template-columns: 450px 532px;
+    justify-content: space-between;
+    align-items: start;
+    padding-top: 24px;
+  }
+  .intro {
+    padding-top: 55px;
+  }
+  .title {
+    font-family: var(--font-display);
+    font-size: var(--text-display);
+    font-weight: var(--weight-regular);
+    line-height: normal;
+  }
+  .intro p {
+    margin-top: 16px;
+    font-size: var(--text-lead);
+    text-align: justify;
+  }
+  .intro p + p {
+    margin-top: 1.2em;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 532px;
+    column-gap: var(--space-8);
+    align-items: start;
+  }
+  .info {
+    margin-top: 88px;
+  }
+  .label {
+    margin-top: 11px;
+  }
+  .list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .list-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-4);
+    min-height: 46px;
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--color-dash);
+  }
+  .list-row:last-child {
+    border-bottom: 0;
+  }
+  .list-row dt {
+    opacity: 0.6;
+    letter-spacing: 0.08em;
+  }
+  .list-row dd {
+    margin: 0;
+    text-align: right;
+  }
+  .pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 40px;
+  }
+  .text-block {
+    margin-top: 40px;
+  }
+  .text {
+    font-size: var(--text-lead);
+    text-align: justify;
+  }
+  .text p + p {
+    margin-top: 1.2em;
+  }
+  .container > .wide {
+    margin-top: 40px;
+  }
+  .solution-img {
+    margin-top: 24px;
+  }
+  .cta-wrap {
+    margin-top: 92px; /* Figma: CTA block starts 92px below the result list */
+  }
+
+  /* Provisional below the desktop frame. */
+  @media (max-width: 75rem) {
+    .top,
+    .row {
+      grid-template-columns: 1fr 1fr;
+      column-gap: var(--space-8);
+    }
+  }
+  @media (max-width: 48rem) {
+    .top,
+    .row,
+    .pair {
+      grid-template-columns: 1fr;
+      row-gap: var(--space-6);
+    }
+    .top {
+      padding-top: var(--space-8);
+    }
+    .intro {
+      padding-top: 0;
+    }
+    .intro p,
+    .text {
+      text-align: left;
+    }
+    .label {
+      margin-top: 0;
+    }
+  }
+</style>
