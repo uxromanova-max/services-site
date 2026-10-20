@@ -1,0 +1,18 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import CasePage from '../../templates/CasePage.astro';
+import { getBuiltCases } from '../../lib/routes';
+
+// Drafts are built for previews only; production leaves them out (see isPublic in lib/env).
+export async function getStaticPaths() {
+  const cases = await getBuiltCases();
+  return cases.map((c) => ({ params: { slug: c.data.slug }, props: { item: c.data } }));
+}
+
+interface Props {
+  item: CollectionEntry<'cases'>['data'];
+}
+const { item } = Astro.props;
+---
+
+<CasePage item={item} />

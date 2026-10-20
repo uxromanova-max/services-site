@@ -18,6 +18,18 @@ servicePage:
   questionsHeading: "Questions"
   bookLabel: "Book a free call"
 
+# Case page labels (Figma case template 12:1187; "Challange" in Figma is spelled "Challenge" here).
+casePage:
+  infoHeading: "Project Information"
+  client: "Client"
+  industry: "Industry"
+  services: "Services"
+  timeline: "Timeline"
+  year: "Year"
+  challengeHeading: "Challenge"
+  solutionHeading: "Solution"
+  resultHeading: "Result"
+
 # Repeated FAQ entries, used by service pages with `shared: <key>`.
 # care: decided by Diana (stage 3): the care window is shown as its own FAQ entry.
 # {project} in "faster" is replaced by each page's rushName.

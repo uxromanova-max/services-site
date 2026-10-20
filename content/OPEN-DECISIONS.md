@@ -75,6 +75,13 @@ Stage 4 (Ops & AI page)
 - The two dark bands ("What an AI system is", "What it costs to run") are Figma shader effects; they are exported from Figma as images (no WebGL, no JS).
 - No running-cost numbers are shown (item 13); the Figma cost cards have none.
 
+Stage 5 (case template)
+- Case template from the Figma case frame (12:1187), filled with placeholders for now (Diana: copy later, approve the design first). Each case has its own file in content/cases/ with draft: true; all text fields start with "CHECK:" and show in grey in previews. Production builds leave the three case pages out (no links, no sitemap entries, noindex anyway).
+- The Figma Result block shows +58% / +43% / +36%; these are placeholders and are never rendered. Result lines must be real, checkable facts.
+- Figma fix: "Challange" is spelled "Challenge" on the site.
+- Image slots use the Figma placeholder texture until Diana supplies real images per case.
+- When the copy arrives: fill the fields in content/cases/<slug>.md (empty fields and sections hide), then set draft: false to publish.
+
 Technical
 - Form service choice (verify free limits). Cal.com account/link. Custom domain later.
 - Mobile Figma frames to come later.

@@ -133,6 +133,11 @@ a {
   white-space: nowrap;
 }
 
+/* Placeholder copy on draft pages (text starting with CHECK). Production builds fail on it. */
+.placeholder {
+  color: var(--color-step);
+}
+
 /* Unresolved content (CHECK/TODO) is shown loudly in previews; production builds fail on it. */
 .unresolved {
   outline: 2px dashed #d00;

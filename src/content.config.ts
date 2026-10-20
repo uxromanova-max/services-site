@@ -125,6 +125,30 @@ const services = defineCollection({
     ),
 });
 
+// Case pages: content/cases/*.md (one file per case; content/cases.md keeps the notes).
+const cases = defineCollection({
+  loader: glob({ base: './content/cases', pattern: '*.md' }),
+  schema: z.object({
+    draft: z.boolean().default(false),
+    slug: z.string(),
+    name: z.string(),
+    intro: z.array(z.string()).default([]),
+    info: z
+      .object({
+        client: z.string().default(''),
+        industry: z.string().default(''),
+        services: z.string().default(''),
+        timeline: z.string().default(''),
+        year: z.string().default(''),
+      })
+      .default({ client: '', industry: '', services: '', timeline: '', year: '' }),
+    challenge: z.array(z.string()).default([]),
+    solution: z.array(z.string()).default([]),
+    result: z.array(z.string()).default([]),
+    images: z.enum(['placeholder', 'none']).default('none'),
+  }),
+});
+
 // Shared service page labels and repeated FAQ answers: content/shared.md frontmatter.
 const shared = defineCollection({
   loader: glob({ base: './content', pattern: 'shared.md' }),
@@ -145,6 +169,17 @@ const shared = defineCollection({
       goesUpHeading: z.string(),
       questionsHeading: z.string(),
       bookLabel: z.string(),
+    }),
+    casePage: z.object({
+      infoHeading: z.string(),
+      client: z.string(),
+      industry: z.string(),
+      services: z.string(),
+      timeline: z.string(),
+      year: z.string(),
+      challengeHeading: z.string(),
+      solutionHeading: z.string(),
+      resultHeading: z.string(),
     }),
     faq: z.record(z.enum(['finish', 'deliver', 'faster', 'care', 'credit']), z.object({ q: z.string(), a: z.string() })),
   }),
@@ -203,4 +238,4 @@ const home = defineCollection({
   }),
 });
 
-export const collections = { site, services, shared, home };
+export const collections = { site, services, cases, shared, home };
