@@ -19,6 +19,7 @@ servicePage:
   bookLabel: "Book a free call"
 
 # Repeated FAQ entries, used by service pages with `shared: <key>`.
+# care: decided by Diana (stage 3): the care window is shown as its own FAQ entry.
 # {project} in "faster" is replaced by each page's rushName.
 faq:
   finish:
@@ -30,6 +31,10 @@ faq:
   faster:
     q: "Can you do it faster?"
     a: "Sometimes. A rush {project}, about half the standard timeline, adds 30% and is only possible when I have an open slot."
+  care:
+    # Built from the "Care and after-project" notes below (14-day care window for the four standard services).
+    q: "What happens after handoff?"
+    a: "You get a 14-day care window: anything I built that stops working is fixed free. New features and changes caused by your tools or business changing are not included."
   credit:
     q: "I already bought a teardown. Do I get credit?"
     a: "Yes, 50% of the teardown fee if you start within 30 days."

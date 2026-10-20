@@ -47,7 +47,7 @@ const site = defineCollection({
 // The Ops & AI page has its own layout and schema (stage 4), so its page fields are optional here.
 const faqEntry = z.union([
   z.object({ q: z.string(), a: z.union([z.string(), z.array(z.string())]) }),
-  z.object({ shared: z.enum(['finish', 'deliver', 'faster', 'credit']) }),
+  z.object({ shared: z.enum(['finish', 'deliver', 'faster', 'care', 'credit']) }),
 ]);
 
 const services = defineCollection({
@@ -113,7 +113,7 @@ const shared = defineCollection({
       questionsHeading: z.string(),
       bookLabel: z.string(),
     }),
-    faq: z.record(z.enum(['finish', 'deliver', 'faster', 'credit']), z.object({ q: z.string(), a: z.string() })),
+    faq: z.record(z.enum(['finish', 'deliver', 'faster', 'care', 'credit']), z.object({ q: z.string(), a: z.string() })),
   }),
 });
 

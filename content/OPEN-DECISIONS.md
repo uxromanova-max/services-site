@@ -54,12 +54,12 @@ Stage 2 (home)
 Stage 3 (service pages: Teardown, Product Page Sprint, Email Flows, Store Refresh)
 - Service copy moved into frontmatter of content/services/*.md; original notes kept below and not rendered. Shared labels and repeated FAQ answers in content/shared.md frontmatter.
 - Figma fix: Teardown "What you get" last bullet says "A short video walkthrough and/or a 30-minute call"; the call length depends on the package (Deep = 60 minutes), so the site uses the content bullet "A call or video walkthrough to go through the findings (format depends on the package)."
-- The "After" line (what changes after the project) has no place in the Figma top block, so it is not shown. Should it appear somewhere?
-- The price heading is just "Price" as in Figma; the range line from content ("$300 to $1,000, depends on how much is reviewed") is not shown.
+- DECIDED: the "After" line is not shown on the service pages.
+- DECIDED: the price heading is just "Price" as in Figma; the range line is not shown.
 - Proof block is hidden on all four pages until real screenshots exist (item 7). "Related work" links are not shown either.
-- Decorative images (wide banner after the lists, three images next to "What I need / Tools") are the Figma placeholder texture and are the same on all four pages. Will each service get its own images?
-- "Care window after handoff: 14 days" has no place in the Figma template, so it is not shown on the service pages. Where should it go (FAQ entry, price note, guarantee block)?
-- Email Flows: "Extra flow: $150 each. Extra custom-designed email: $150 to $250." is shown as a note under the price cards (where the Teardown page has its credit note).
+- DECIDED: the banner and side images are placeholders; each service (and case) will get its own images from Diana.
+- DECIDED: the care window is a FAQ entry on the four service pages. Question and answer were built from the notes in shared.md: "What happens after handoff?" / "You get a 14-day care window: anything I built that stops working is fixed free. New features and changes caused by your tools or business changing are not included." Confirm the wording.
+- DECIDED (for now): Email Flows extras are shown as a note under the price cards.
 - Tools for Product Page Sprint, Email Flows and Store Refresh were one sentence in the notes; on the page they are a bullet list with the same words (first letter capitalised, full stop added).
 - Package descriptions are split into "- " lines by sentence, as in the Figma Teardown cards.
 - Teardown walkthrough recording tool (item 9): the page says "a screen-recording tool" (Figma wording), no tool named.
