@@ -1,0 +1,21 @@
+# Keeps the `preview` branch identical to `main`, so Vercel always has a preview
+# deployment of the current site at a stable branch URL. Production (main) builds
+# fail on purpose while CHECK/TODO markers remain; the preview build only warns.
+name: Sync preview branch
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Push main to preview
+        run: git push origin HEAD:refs/heads/preview
