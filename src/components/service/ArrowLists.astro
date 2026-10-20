@@ -28,10 +28,13 @@ const { familiarHeading, getHeading, familiar, get } = Astro.props;
   /* "Sounds familiar?" / "What you get" with the 1px rule above them. */
   .lists {
     display: grid;
-    grid-template-columns: 391px 569px;
-    justify-content: space-between;
+    /* 391 | 112 | 569 of the 1072px Figma column */
+    grid-template-columns: minmax(0, 391fr) minmax(0, 112fr) minmax(0, 569fr);
     position: relative;
     padding-top: 40px;
+  }
+  .lists > :last-child {
+    grid-column: 3;
   }
   .lists::before {
     content: '';
@@ -61,14 +64,16 @@ const { familiarHeading, getHeading, familiar, get } = Astro.props;
 
   @media (max-width: 75rem) {
     .lists {
-      grid-template-columns: 1fr 1fr;
-      column-gap: var(--space-8);
+      grid-template-columns: 1fr var(--space-8) 1fr;
     }
   }
   @media (max-width: 48rem) {
     .lists {
       grid-template-columns: 1fr;
       row-gap: var(--space-12);
+    }
+    .lists > :last-child {
+      grid-column: 1;
     }
   }
 </style>

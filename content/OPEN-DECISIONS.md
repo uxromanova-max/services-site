@@ -90,6 +90,11 @@ Stage 6 (text pages, contact, thank-you, 404)
 - Thank-you page (/thanks) and 404 page: built on the text page template, provisional; title and text are CHECK placeholders. Diana: send one or two lines for each.
 - Cal.com link and the form service are connected at the end of the project (Diana's decision); the CHECK markers stay until then.
 
+Design review 1 (Diana's 10 points, stage-7-design)
+- Done: text page title-to-text gap 40px; layout widened (56px gutters, proportional columns, content up to 1680px); footer full width with 32px inset; hero composition centred as in the updated Figma frame; smooth Selected Works card expansion; scroll reveal on all pages; FAQ: one item open, smooth open/close; price card titles in two lines (balanced wrapping); Ops "What an AI system is" band full width like the footer; "What it costs to run" footnote centred; contact page: booking widget first, no email form, heading "Book a call".
+- Figma frames still show the 1280px layout with 104px gutters; the site follows Diana's review instead. Update Figma if it should stay the reference for widths.
+- The animation reference site (norvo.framer.website) is blocked by this environment's network policy, so the motion was built from Diana's description and screenshots. Add the domain to Allowed domains if it should be matched more closely.
+
 Technical
 - Form service choice (verify free limits). Cal.com account/link. Custom domain later.
 - Mobile Figma frames to come later.

@@ -116,13 +116,16 @@ const imgProps = { alt: '', densities: [1, 2], format: 'webp', loading: 'lazy' }
   }
   .top {
     display: grid;
-    grid-template-columns: 450px 532px;
-    justify-content: space-between;
+    /* 450 | 90 | 532 of the 1072px Figma column */
+    grid-template-columns: minmax(0, 450fr) minmax(0, 90fr) minmax(0, 532fr);
     align-items: start;
     padding-top: 24px;
   }
   .intro {
     padding-top: 55px;
+  }
+  .top > :global(.img) {
+    grid-column: 3;
   }
   .title {
     font-family: var(--font-display);
@@ -140,8 +143,7 @@ const imgProps = { alt: '', densities: [1, 2], format: 'webp', loading: 'lazy' }
   }
   .row {
     display: grid;
-    grid-template-columns: 1fr 532px;
-    column-gap: var(--space-8);
+    grid-template-columns: minmax(0, 540fr) minmax(0, 532fr);
     align-items: start;
   }
   .info {
@@ -203,7 +205,9 @@ const imgProps = { alt: '', densities: [1, 2], format: 'webp', loading: 'lazy' }
 
   /* Provisional below the desktop frame. */
   @media (max-width: 75rem) {
-    .top,
+    .top {
+      grid-template-columns: 1fr var(--space-8) 1fr;
+    }
     .row {
       grid-template-columns: 1fr 1fr;
       column-gap: var(--space-8);
@@ -218,6 +222,9 @@ const imgProps = { alt: '', densities: [1, 2], format: 'webp', loading: 'lazy' }
     }
     .top {
       padding-top: var(--space-8);
+    }
+    .top > :global(.img) {
+      grid-column: 1;
     }
     .intro {
       padding-top: 0;

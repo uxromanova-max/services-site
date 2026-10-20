@@ -133,6 +133,25 @@ a {
   white-space: nowrap;
 }
 
+/* Scroll reveal (see the script at the end of Base.astro). */
+.reveal [data-reveal] {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity var(--dur-reveal) var(--ease-out),
+    transform var(--dur-reveal) var(--ease-out);
+  transition-delay: var(--reveal-delay, 0s);
+}
+.reveal [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (max-width: 48rem) {
+  .reveal [data-reveal] {
+    transform: translateY(20px);
+  }
+}
+
 /* Placeholder copy on draft pages (text starting with CHECK). Production builds fail on it. */
 .placeholder {
   color: var(--color-step);

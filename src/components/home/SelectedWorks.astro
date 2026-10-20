@@ -75,30 +75,23 @@ const items = await Promise.all(
 </section>
 
 <style>
-  /* Figma "Selected Works" (5:116) and its hover variants (6:146, 6:195, 6:224):
-     the hovered card becomes the large 409 x 525 card with a dark overlay and its description. */
+  /* Figma "Selected Works" (5:116) and its hover variants (6:146, 6:195, 6:224): the hovered card
+     becomes the large card with a dark overlay and its description. Widths are fractions of the
+     1072px Figma column (409 / 322 / 324); the change is animated smoothly (Diana, design review). */
   .works {
     padding-top: var(--space-18);
     padding-bottom: 26px;
   }
   .grid {
-    --big: 409px;
+    container-type: inline-size;
     display: grid;
-    grid-template-columns: var(--big) 322px 1fr;
+    grid-template-columns: 409fr 322fr 324fr;
     column-gap: 8px;
     align-items: start;
     margin: 34px 0 0;
     padding: 0;
     list-style: none;
-  }
-  .card-3 {
-    margin-left: 1px;
-  }
-  .grid:has(.card-2:hover) {
-    grid-template-columns: 322px var(--big) 1fr;
-  }
-  .grid:has(.card-3:hover) {
-    grid-template-columns: 322px 324px 1fr;
+    transition: grid-template-columns var(--dur-expand) var(--ease-out);
   }
   .card-link {
     display: block;
@@ -106,22 +99,37 @@ const items = await Promise.all(
   }
   .media {
     position: relative;
-    height: 322px;
+    height: calc(322 / 1072 * 100cqw);
     overflow: hidden;
+    transition: height var(--dur-expand) var(--ease-out);
   }
   .media :global(img) {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform var(--dur-expand) var(--ease-out);
   }
   /* Large card: ORA by default, or whichever card is hovered. */
-  .card-1 .media,
-  .grid:has(.card-2:hover) .card-2 .media,
-  .grid:has(.card-3:hover) .card-3 .media {
-    height: 525px;
+  .card-1 .media {
+    height: calc(525 / 1072 * 100cqw);
   }
-  .grid:has(.card-2:hover, .card-3:hover) .card-1 .media {
-    height: 322px;
+  @media (hover: hover) and (min-width: 64.01rem) {
+    .grid:has(.card-2:hover) {
+      grid-template-columns: 322fr 409fr 324fr;
+    }
+    .grid:has(.card-3:hover) {
+      grid-template-columns: 322fr 324fr 409fr;
+    }
+    .grid:has(.card-2:hover) .card-2 .media,
+    .grid:has(.card-3:hover) .card-3 .media {
+      height: calc(525 / 1072 * 100cqw);
+    }
+    .grid:has(.card-2:hover, .card-3:hover) .card-1 .media {
+      height: calc(322 / 1072 * 100cqw);
+    }
+    .card:hover .media :global(img) {
+      transform: scale(1.03);
+    }
   }
   .overlay {
     position: absolute;
@@ -134,10 +142,19 @@ const items = await Promise.all(
     background: var(--color-overlay);
     color: var(--color-on-dark);
     opacity: 0;
+    transition: opacity 0.5s var(--ease-out);
+  }
+  .overlay > * {
+    transform: translateY(12px);
+    transition: transform var(--dur-expand) var(--ease-out);
   }
   .card:hover .overlay,
   .card-link:focus-visible .overlay {
     opacity: 1;
+  }
+  .card:hover .overlay > *,
+  .card-link:focus-visible .overlay > * {
+    transform: none;
   }
   .desc {
     max-width: 361px;
@@ -179,23 +196,27 @@ const items = await Promise.all(
     text-align: right;
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    .grid,
+    .media,
+    .media :global(img),
+    .overlay,
+    .overlay > * {
+      transition: none;
+    }
+  }
+
   /* Provisional below the desktop frame: no hover swap, cards in a column. */
   @media (max-width: 64rem) {
-    .grid,
-    .grid:has(.card-2:hover),
-    .grid:has(.card-3:hover) {
+    .grid {
       grid-template-columns: 1fr 1fr;
       row-gap: var(--space-8);
     }
     .card-1 {
       grid-column: 1 / -1;
     }
-    .card-3 {
-      margin-left: 0;
-    }
     .media,
-    .card .media,
-    .grid:has(.card-2:hover, .card-3:hover) .card-1 .media {
+    .card-1 .media {
       height: auto;
       aspect-ratio: 1;
     }
@@ -207,9 +228,7 @@ const items = await Promise.all(
     }
   }
   @media (max-width: 40rem) {
-    .grid,
-    .grid:has(.card-2:hover),
-    .grid:has(.card-3:hover) {
+    .grid {
       grid-template-columns: 1fr;
     }
   }
@@ -217,6 +236,9 @@ const items = await Promise.all(
   @media (hover: none) {
     .overlay {
       opacity: 1;
+    }
+    .overlay > * {
+      transform: none;
     }
   }
 </style>

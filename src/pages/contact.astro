@@ -1,18 +1,17 @@
 ---
 import Base from '../layouts/Base.astro';
-import CtaForm from '../components/CtaForm.astro';
 import { getSite, isUnresolved } from '../lib/site';
 
-// Provisional: there is no Figma frame for this page yet.
+// Provisional: there is no Figma frame for this page. Diana (design review): the Cal.com booking
+// widget comes first and there is no email form on this page.
 const site = await getSite();
 const c = site.contact;
 const calReady = !isUnresolved(c.calUrl);
 ---
 
-<Base title={c.title}>
-  <CtaForm headingLevel="h1" bookHref="#booking" />
-  <section class="container booking" id="booking" aria-labelledby="booking-title">
-    <h2 id="booking-title" class="block-label">{site.cta.bookLead}</h2>
+<Base title={site.nav.bookLabel}>
+  <section class="container booking" aria-labelledby="booking-title">
+    <h1 id="booking-title" class="title">{site.nav.bookLabel}</h1>
     <div class:list={['embed', { unresolved: !calReady }]} id="cal-embed">
       {calReady ? null : <p>{c.calUrl}</p>}
     </div>
@@ -35,13 +34,20 @@ const calReady = !isUnresolved(c.calUrl);
 
 <style>
   .booking {
+    padding-top: calc(145px - var(--nav-h));
     padding-bottom: var(--space-16);
+  }
+  .title {
+    font-family: var(--font-display);
+    font-size: var(--text-display);
+    font-weight: var(--weight-regular);
+    line-height: normal;
   }
   .embed {
     display: grid;
     place-items: center;
-    min-height: 560px;
-    margin-top: var(--space-6);
+    min-height: 640px;
+    margin-top: 40px;
     border: 1px dashed var(--color-dash);
   }
   .fallback {

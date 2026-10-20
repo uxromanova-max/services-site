@@ -99,8 +99,8 @@ const privacyHref = await legalHref('privacy');
   /* Figma "cta" (24:2615): 1280 x 594. Form column 510px starting 562px into the content. */
   .cta {
     display: grid;
-    grid-template-columns: 1fr 510px;
-    column-gap: var(--space-8);
+    /* Form column: 510 of the 1072px Figma column */
+    grid-template-columns: minmax(0, 562fr) minmax(0, 510fr);
     padding-top: 96px;
     padding-bottom: 82px;
   }

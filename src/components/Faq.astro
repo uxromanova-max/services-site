@@ -12,22 +12,23 @@ const id = `faq-${heading.length}`;
 
 <section class="faq container" aria-labelledby={id}>
   <h2 id={id} class="section-label title">{heading}</h2>
-  <div class="list">
+  <div class="list" data-accordion>
     {
       items.map((item) => (
-        <details class="item">
+        <details class="item" name={id}>
           <summary>
             <span class="q">{item.q}</span>
-            <span class="icon icon-arrow-down-right closed" aria-hidden="true" />
-            <span class="icon icon-arrow-up-right open" aria-hidden="true" />
+            <span class="icon icon-arrow-down-right" aria-hidden="true" />
           </summary>
-          {Array.isArray(item.a) ? (
-            <ol class="a steps">
-              {item.a.map((step) => <li>{step}</li>)}
-            </ol>
-          ) : (
-            <p class:list={['a', { unresolved: /CHECK|TODO/.test(item.a) }]}>{item.a}</p>
-          )}
+          <div class="a-wrap">
+            {Array.isArray(item.a) ? (
+              <ol class="a steps">
+                {item.a.map((step) => <li>{step}</li>)}
+              </ol>
+            ) : (
+              <p class:list={['a', { unresolved: /CHECK|TODO/.test(item.a) }]}>{item.a}</p>
+            )}
+          </div>
         </details>
       ))
     }
@@ -38,13 +39,52 @@ const id = `faq-${heading.length}`;
   </a>
 </section>
 
+<script>
+  // One open item at a time, opened and closed with a smooth height animation (Diana, design review).
+  // Without JS the native <details name> still keeps one item open, just without the animation.
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const DURATION = 500;
+  const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
+
+  function animate(item: HTMLDetailsElement, open: boolean) {
+    const wrap = item.querySelector<HTMLElement>('.a-wrap');
+    if (!wrap || reduce) {
+      item.open = open;
+      return;
+    }
+    if (open) item.open = true;
+    const full = wrap.scrollHeight;
+    const anim = wrap.animate(
+      [{ height: open ? '0px' : `${full}px` }, { height: open ? `${full}px` : '0px' }],
+      { duration: DURATION, easing: EASE },
+    );
+    item.classList.toggle('is-open', open);
+    anim.onfinish = () => {
+      if (!open) item.open = false;
+    };
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-accordion]').forEach((list) => {
+    const items = [...list.querySelectorAll<HTMLDetailsElement>('details')];
+    items.forEach((item) => {
+      // JS takes over exclusivity, so the native name grouping is removed to avoid double toggles.
+      item.removeAttribute('name');
+      item.querySelector('summary')?.addEventListener('click', (event) => {
+        event.preventDefault();
+        const opening = !item.classList.contains('is-open');
+        items.filter((other) => other !== item && other.classList.contains('is-open')).forEach((other) => animate(other, false));
+        animate(item, opening);
+      });
+    });
+  });
+</script>
+
 <style>
-  /* Figma "faq" (6:349) and "faq - opened" (9:545). List column: 510px starting 562px into the content. */
+  /* Figma "faq" (6:349) and "faq - opened" (9:545). List column: 510 of the 1072px Figma column. */
   .faq {
     display: grid;
-    grid-template-columns: 1fr 510px;
+    grid-template-columns: minmax(0, 562fr) minmax(0, 510fr);
     grid-template-rows: auto 1fr;
-    column-gap: var(--space-8);
     padding-top: 60px;
     padding-bottom: 32px;
   }
@@ -80,24 +120,21 @@ const id = `faq-${heading.length}`;
   .q {
     flex: 1;
   }
-  .open,
-  .item[open] .closed {
-    display: none;
+  /* The ↘ arrow turns into ↗ when the item is open (rotated, so the change is smooth). */
+  summary .icon {
+    transition: transform 0.5s var(--ease-out);
   }
-  .item[open] .open {
-    display: inline-block;
+  .item[open] summary .icon,
+  .item.is-open summary .icon {
+    transform: rotate(-90deg);
   }
-  .item[open] summary {
-    padding-bottom: 0;
-    align-items: flex-start;
-  }
-  .item[open] .icon {
-    margin-top: 3px;
+  .a-wrap {
+    overflow: hidden;
   }
   .a {
     max-width: 486px;
     margin: 0;
-    padding: 10px 0 var(--space-3);
+    padding: 0 0 var(--space-3);
     font-size: var(--text-small);
   }
   .steps {
@@ -105,6 +142,12 @@ const id = `faq-${heading.length}`;
   }
   .steps li + li {
     margin-top: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    summary .icon {
+      transition: none;
+    }
   }
 
   @media (max-width: 64rem) {

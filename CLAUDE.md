@@ -26,7 +26,9 @@ Language of the site: English. First person ("I"), one person, not an agency.
 Designs are **desktop only for now**. Mobile frames will be added by Diana later. Build responsive with sensible fluid layouts (single column stacking, no horizontal scroll), but mark mobile as provisional and do not polish it to pixel level until mobile frames exist.
 
 ## Stack (proposal, confirm with Diana at stage 0)
-- Astro, static output, minimal or zero client JS, no animation libraries, no CSS animations beyond simple hover/focus states.
+- Astro, static output, minimal client JS, no animation libraries.
+- Motion (changed by Diana at the design review): subtle scroll reveal on all pages, smooth FAQ accordion (one item open at a time), smooth expansion of the Selected Works cards. CSS transitions plus small inline/vanilla scripts only; everything respects `prefers-reduced-motion` and works without JS.
+- Layout (Diana, design review): side gutters 56px on desktop (never smaller), wider than the 1280px Figma frame; columns are proportional to the Figma 1072px content column. Footer card and full-width bands use a 32px inset on the sides and bottom.
 - Content in `/content` (Markdown with frontmatter / JSON) rendered through templates in `/src`. Templates: `ServicePage`, `OpsServicePage`, `CasePage`, `TextPage`, `Home`.
 - Deploy: Vercel on a `.vercel.app` URL for now (no custom domain yet). Add `noindex` (meta robots + `X-Robots-Tag`) while on `.vercel.app`.
 - Form: Formspree or Web3Forms (verify current free-tier limits before choosing). Fields: service chips, Name, Email, Store link (to add), Project details, consent checkbox that links to Privacy Policy, Submit.

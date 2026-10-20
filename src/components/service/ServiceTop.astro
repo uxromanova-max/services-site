@@ -37,7 +37,8 @@ const { title, pain, price, timeline, labels: L, termsHref } = Astro.props;
   /* Top block of the Figma service templates (12:948, 22:1528). Second column at 503px. */
   .top {
     display: grid;
-    grid-template-columns: 503px 1fr 244px;
+    /* 503 | 325 | 244 of the 1072px Figma column */
+    grid-template-columns: minmax(0, 503fr) minmax(0, 325fr) minmax(0, 244fr);
     grid-template-rows: auto 1fr;
     align-items: start;
     padding-top: calc(171px - var(--nav-h));
