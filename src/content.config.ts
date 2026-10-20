@@ -50,6 +50,29 @@ const faqEntry = z.union([
   z.object({ shared: z.enum(['finish', 'deliver', 'faster', 'care', 'credit']) }),
 ]);
 
+// Blocks that only the long Ops & AI page has (Figma 22:1528).
+const opsBlocks = z.object({
+  match: z.object({
+    eyebrow: z.string(),
+    heading: z.string(),
+    rows: z.array(z.object({ text: z.string(), strong: z.string(), after: z.string().optional() })),
+  }),
+  system: z.object({ heading: z.string(), text: z.string() }),
+  keyMessage: z.string(),
+  examples: z.object({ heading: z.string(), items: z.array(z.string()) }),
+  agents: z.object({ heading: z.string(), items: z.array(z.object({ name: z.string(), text: z.string() })) }),
+  cost: z.object({
+    heading: z.string(),
+    intro: z.string(),
+    cards: z.array(z.object({ title: z.string(), text: z.string() })),
+    footnote: z.string(),
+  }),
+  breaks: z.object({
+    heading: z.string(),
+    cards: z.array(z.object({ title: z.string(), tag: z.string().optional(), text: z.string() })),
+  }),
+});
+
 const services = defineCollection({
   loader: glob({ base: './content/services', pattern: '*.md' }),
   schema: z
@@ -59,10 +82,11 @@ const services = defineCollection({
       from: z.number(),
       timeline: z.string(),
       template: z.enum(['ServicePage', 'OpsServicePage']),
+      title: z.string().optional(), // page title when it differs from the short name
       pain: z.string().optional(),
       familiar: z.array(z.string()).optional(),
       get: z.array(z.string()).optional(),
-      steps: z.array(z.object({ label: z.string(), text: z.string() })).optional(),
+      steps: z.array(z.object({ label: z.string(), text: z.string(), title: z.string().optional() })).optional(),
       need: z.array(z.string()).optional(),
       tools: z.array(z.string()).optional(),
       packages: z
@@ -81,6 +105,7 @@ const services = defineCollection({
       priceNote: z.object({ heading: z.string().optional(), text: z.string() }).optional(),
       rushName: z.string().optional(),
       faq: z.array(faqEntry).optional(),
+      ops: opsBlocks.optional(),
     })
     .refine(
       (d) =>
@@ -89,6 +114,14 @@ const services = defineCollection({
           (v) => v !== undefined,
         ),
       { message: 'A ServicePage needs pain, familiar, get, steps, need, tools, packages, goesUpWith, rushName and faq' },
+    )
+    .refine(
+      (d) =>
+        d.template !== 'OpsServicePage' ||
+        [d.ops, d.pain, d.familiar, d.get, d.steps, d.need, d.tools, d.packages, d.goesUpWith, d.rushName, d.faq].every(
+          (v) => v !== undefined,
+        ),
+      { message: 'The OpsServicePage needs ops plus the standard service fields' },
     ),
 });
 

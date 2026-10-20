@@ -64,6 +64,17 @@ Stage 3 (service pages: Teardown, Product Page Sprint, Email Flows, Store Refres
 - Package descriptions are split into "- " lines by sentence, as in the Figma Teardown cards.
 - Teardown walkthrough recording tool (item 9): the page says "a screen-recording tool" (Figma wording), no tool named.
 
+Stage 4 (Ops & AI page)
+- Built from the Figma frame 22:1528 (Diana: Figma has the final content for this page). Copy is in the frontmatter of content/services/ops-ai-systems.md; FAQ answers come from the notes in the same file (Figma has only the questions). Blocks from the notes that are not in Figma (Proof, "Where is the best place to start?", "Will it keep working over time?", the intro line of "What happens when it breaks", "Under the price" line) are not shown.
+- The agents list follows Figma: one list titled "Agents I have built", including the agents the notes list under "can build" (Diana's decision for this page).
+- Figma fix: step 3 "Accounts and access" repeats the Business core text. The site uses the notes text: "We create or connect the accounts the system runs on (AI platform, automation tool, helpdesk, store). They are in your name."
+- Figma fix: step 6 label says "[ weeks 3 ]"; the site uses "[ week 3 ]" (notes).
+- "What happens when it breaks ?" keeps the space before the question mark as in Figma. Remove it?
+- "Make.com" is an underlined link in Figma (auto-link). On the site it is plain text; tell me if it should link to make.com.
+- The page title is "Operations & AI Systems" (Figma); the home grid, form chips and nav keep the short name "Ops & AI Systems".
+- The two dark bands ("What an AI system is", "What it costs to run") are Figma shader effects; they are exported from Figma as images (no WebGL, no JS).
+- No running-cost numbers are shown (item 13); the Figma cost cards have none.
+
 Technical
 - Form service choice (verify free limits). Cal.com account/link. Custom domain later.
 - Mobile Figma frames to come later.

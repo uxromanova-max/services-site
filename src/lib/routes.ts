@@ -15,6 +15,6 @@ export const serviceHref = (slug: string) => `/services/${slug}`;
 
 // Public routes for the sitemap.
 export async function getPublicRoutes(): Promise<string[]> {
-  const services = await getCollection('services', (s) => s.data.template === 'ServicePage');
+  const services = await getCollection('services');
   return ['/', ...services.map((s) => serviceHref(s.data.slug))];
 }

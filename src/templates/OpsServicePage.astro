@@ -1,0 +1,564 @@
+---
+import { Picture } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Faq from '../components/Faq.astro';
+import ServiceTop from '../components/service/ServiceTop.astro';
+import ArrowLists from '../components/service/ArrowLists.astro';
+import NeedTools from '../components/service/NeedTools.astro';
+import PriceCards from '../components/service/PriceCards.astro';
+import systemBand from '../assets/figma/ops-system-band.png';
+import costBand from '../assets/figma/ops-cost-band.png';
+import sideWide from '../assets/figma/ops-side-wide.png';
+import { getSite } from '../lib/site';
+import { legalHref } from '../lib/routes';
+import { fromPrice, getShared, resolveFaq } from '../lib/service';
+
+interface Props {
+  service: CollectionEntry<'services'>['data'];
+}
+
+const { service: s } = Astro.props;
+const ops = s.ops!;
+const site = await getSite();
+const L = (await getShared()).servicePage;
+const termsHref = await legalHref('terms');
+const faq = await resolveFaq(s);
+---
+
+<Base title={s.title ?? s.name} description={s.pain}>
+  <ServiceTop
+    title={s.title ?? s.name}
+    pain={s.pain!}
+    price={fromPrice(s.from)}
+    timeline={s.timeline}
+    labels={L}
+    termsHref={termsHref}
+  />
+  <ArrowLists familiarHeading={L.familiarHeading} getHeading={L.getHeading} familiar={s.familiar!} get={s.get!} />
+
+  <section class="container match" aria-labelledby="match-title">
+    <p class="eyebrow">{ops.match.eyebrow}</p>
+    <h2 id="match-title" class="match-title">{ops.match.heading}</h2>
+    <ul class="match-rows" role="list">
+      {
+        ops.match.rows.map((row) => (
+          <li>
+            <p>
+              {row.text} <strong>{row.strong}</strong>
+              {row.after}
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <div class="container">
+    <section class="system" aria-labelledby="system-title">
+      <Picture
+        class="band-bg"
+        src={systemBand}
+        alt=""
+        width={1072}
+        height={333}
+        widths={[536, 1072]}
+        sizes="(max-width: 1280px) calc(100vw - 2 * var(--gutter)), 1072px"
+        formats={['avif', 'webp']}
+        fallbackFormat="webp"
+        quality={55}
+        loading="lazy"
+      />
+      <h2 id="system-title" class="block-label">{ops.system.heading}</h2>
+      <p>{ops.system.text}</p>
+    </section>
+  </div>
+
+  <section class="container how" aria-labelledby="steps-title">
+    <div class="how-head">
+      <h2 id="steps-title" class="block-label">{L.stepsHeading}</h2>
+      <a class="link-arrow" href={site.bookingUrl}>
+        {site.nav.bookLabel}
+        <span class="icon icon-arrow-up-right" aria-hidden="true"></span>
+      </a>
+    </div>
+    <ol class="steps" role="list">
+      {
+        s.steps!.map((step, i) => (
+          <li>
+            <div class="step-head">
+              <span class="step-num">{i + 1}</span>
+              <h3 class="step-title">{step.title}</h3>
+              <span class="step-label">[ {step.label} ]</span>
+            </div>
+            <p class="step-text">{step.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="key-message">{ops.keyMessage}</p>
+  </section>
+
+  <div class="container two-lists">
+    <section aria-labelledby="examples-title">
+      <h2 id="examples-title" class="block-label">{ops.examples.heading}</h2>
+      <ul class="arrow-list" role="list">
+        {ops.examples.items.map((line) => <li><span class="icon icon-bullet-arrow" aria-hidden="true" /><span>{line}</span></li>)}
+      </ul>
+    </section>
+    <section aria-labelledby="agents-title">
+      <h2 id="agents-title" class="block-label">{ops.agents.heading}</h2>
+      <ul class="arrow-list" role="list">
+        {
+          ops.agents.items.map((a) => (
+            <li>
+              <span class="icon icon-bullet-arrow" aria-hidden="true" />
+              <span>
+                <strong>{a.name}</strong> {a.text}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </div>
+
+  <div class="need-wrap">
+    <NeedTools
+      needHeading={L.needHeading}
+      toolsHeading={L.toolsHeading}
+      need={s.need!}
+      tools={s.tools!}
+      wideImage={sideWide}
+      wideHeight={277}
+      labelOffset={0}
+      gap={40}
+    />
+  </div>
+
+  <div class="price-wrap">
+    <PriceCards
+      heading={L.priceHeading}
+      popularLabel={L.popularLabel}
+      goesUpHeading={L.goesUpHeading}
+      packages={s.packages!}
+      goesUpWith={s.goesUpWith!}
+      priceNote={s.priceNote}
+      compact
+    />
+  </div>
+
+  <section class="cost" aria-labelledby="cost-title">
+    <Picture
+      class="band-bg"
+      src={costBand}
+      alt=""
+      width={1280}
+      height={507}
+      widths={[640, 1280]}
+      sizes="100vw"
+      formats={['avif', 'webp']}
+      fallbackFormat="webp"
+      quality={55}
+      loading="lazy"
+    />
+    <div class="cost-inner">
+      <h2 id="cost-title" class="cost-title">{ops.cost.heading}</h2>
+      <p class="cost-intro">{ops.cost.intro}</p>
+      <ul class="cost-cards" role="list">
+        {
+          ops.cost.cards.map((c) => (
+            <li>
+              <h3 class="cost-card-title">{c.title}</h3>
+              <p>{c.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="cost-footnote">{ops.cost.footnote}</p>
+    </div>
+  </section>
+
+  <section class="container breaks" aria-labelledby="breaks-title">
+    <h2 id="breaks-title" class="block-label breaks-title">{ops.breaks.heading}</h2>
+    {
+      ops.breaks.cards.map((c) => (
+        <div class="break-card">
+          <div class="break-head">
+            <h3 class="break-name">{c.title}</h3>
+            <p class="break-tag" aria-hidden={c.tag ? undefined : 'true'}>
+              {c.tag ?? ' '}
+            </p>
+          </div>
+          <p class="break-text">{c.text}</p>
+        </div>
+      ))
+    }
+  </section>
+
+  <div class="faq-wrap">
+    <Faq heading={L.questionsHeading} bookLabel={L.bookLabel} bookingUrl={site.bookingUrl} items={faq} />
+  </div>
+</Base>
+
+<style>
+  /* Figma "Operations & AI Systems" (22:1528), 1280 x 7382. */
+  .match {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 80px;
+  }
+  .eyebrow {
+    padding: 4px 0;
+    border-bottom: 1px solid var(--color-line);
+    font-size: var(--text-small);
+    letter-spacing: var(--tracking-small);
+    text-transform: uppercase;
+  }
+  .match-title {
+    margin-top: 16px;
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: var(--weight-regular);
+  }
+  .match-rows {
+    width: min(903px, 100%);
+    margin: 29px 0 0;
+    padding: 16px 0;
+    list-style: none;
+    border: 1px dashed var(--color-line);
+  }
+  .match-rows li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 75px;
+    padding: 16px 32px;
+  }
+  .match-rows li + li {
+    border-top: 1px dashed var(--color-line);
+  }
+  .match-rows p {
+    width: min(492px, 100%);
+  }
+  .match-rows strong {
+    font-weight: var(--weight-medium);
+  }
+
+  .system {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    min-height: 333px;
+    margin-top: 82px;
+    padding: 93px 86px 60px;
+    border-radius: var(--radius-card);
+    background: #111;
+    color: var(--color-on-dark);
+  }
+  .system::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgba(0, 0, 0, 0.5);
+  }
+  .system p {
+    max-width: 625px;
+    margin-top: 41px;
+    font-weight: var(--weight-regular);
+    text-align: justify;
+  }
+  .band-bg,
+  .system :global(picture),
+  .cost :global(picture) {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .how {
+    margin-top: 80px;
+  }
+  .how-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .steps {
+    width: min(800px, 100%);
+    margin: 42px auto 0;
+    padding: 0;
+    list-style: none;
+  }
+  .steps li {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    border-bottom: 1px dashed var(--color-line);
+  }
+  .step-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .step-num {
+    width: 16px;
+    font-size: 0.80625rem; /* 12.9 */
+  }
+  .step-title {
+    flex: 1;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: var(--weight-regular);
+    text-transform: uppercase;
+  }
+  .step-label {
+    color: var(--color-step);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+  .step-text {
+    font-size: var(--text-lead);
+    text-align: justify;
+  }
+  .key-message {
+    max-width: 643px;
+    margin: 72px 140px 0 auto;
+    font-size: var(--text-small);
+    letter-spacing: var(--tracking-small);
+    text-align: right;
+  }
+
+  .two-lists {
+    display: grid;
+    grid-template-columns: 469px 469px;
+    column-gap: 94px;
+    position: relative;
+    margin-top: 88px;
+    padding-top: 88px;
+  }
+  .two-lists::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: var(--gutter);
+    right: var(--gutter);
+    border-top: 1px solid var(--color-line);
+  }
+  .arrow-list {
+    display: grid;
+    gap: 16px;
+    margin: 42px 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--text-lead);
+  }
+  .arrow-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+    text-align: justify;
+  }
+  .arrow-list .icon {
+    margin-top: 4px;
+  }
+  .arrow-list strong {
+    font-weight: var(--weight-medium);
+  }
+
+  .need-wrap {
+    margin-top: 88px;
+  }
+  .price-wrap {
+    margin-top: 88px;
+  }
+
+  .cost {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    margin-top: 88px;
+    background: #111;
+    color: var(--color-on-dark);
+  }
+  .cost::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgba(0, 0, 0, 0.6);
+  }
+  .cost-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 784px;
+    margin-inline: auto;
+    padding: 56px var(--gutter);
+    box-sizing: content-box;
+    min-height: calc(507px - 112px);
+  }
+  .cost-title {
+    font-size: var(--text-intro);
+    font-weight: var(--weight-medium);
+    text-transform: uppercase;
+  }
+  .cost-intro {
+    margin-top: 16px;
+    font-weight: var(--weight-regular);
+    text-align: center;
+  }
+  .cost-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    margin: 48px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .cost-cards li {
+    min-height: 203px;
+    padding: 31px 16px 24px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    font-size: var(--text-small);
+    font-weight: var(--weight-regular);
+  }
+  .cost-cards li + li {
+    border-left-width: 0;
+  }
+  .cost-card-title {
+    margin-bottom: 17px;
+    font-family: var(--font-display);
+    font-size: var(--text-card);
+    font-weight: var(--weight-regular);
+    text-transform: uppercase;
+  }
+  .cost-cards p {
+    max-width: 360px;
+  }
+  .cost-footnote {
+    align-self: flex-end;
+    max-width: 599px;
+    margin-top: 40px;
+    font-size: var(--text-small);
+    font-weight: var(--weight-regular);
+    text-align: right;
+  }
+
+  .breaks {
+    display: grid;
+    grid-template-columns: 324px 324px 324px;
+    column-gap: 50px;
+    margin-top: 88px;
+    row-gap: 64px;
+  }
+  .breaks-title {
+    grid-row: 1 / span 2;
+    max-width: 185px;
+  }
+  .break-card {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .break-card:nth-of-type(odd) {
+    grid-column: 2;
+  }
+  .break-card:nth-of-type(even) {
+    grid-column: 3;
+  }
+  .break-head {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .break-name {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: var(--weight-regular);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .break-tag {
+    color: var(--color-step);
+    letter-spacing: 0.08em;
+  }
+  .break-text {
+    font-size: var(--text-lead);
+    text-align: justify;
+  }
+  .faq-wrap {
+    margin-top: 32px;
+    margin-bottom: 56px;
+  }
+
+  /* Provisional below the desktop frame. */
+  @media (max-width: 75rem) {
+    .two-lists {
+      grid-template-columns: 1fr 1fr;
+      column-gap: var(--space-8);
+    }
+    .key-message {
+      margin-right: 0;
+    }
+    .breaks {
+      grid-template-columns: 1fr 1fr;
+      column-gap: var(--space-8);
+    }
+    .breaks-title {
+      grid-column: 1 / -1;
+      grid-row: auto;
+      max-width: none;
+    }
+    .break-card:nth-of-type(odd) {
+      grid-column: 1;
+    }
+    .break-card:nth-of-type(even) {
+      grid-column: 2;
+    }
+  }
+  @media (max-width: 48rem) {
+    .match-rows li {
+      padding: 16px;
+    }
+    .system {
+      padding: 48px 24px;
+    }
+    .two-lists,
+    .breaks {
+      grid-template-columns: 1fr;
+      row-gap: var(--space-12);
+    }
+    .break-card:nth-of-type(odd),
+    .break-card:nth-of-type(even) {
+      grid-column: 1;
+    }
+    .cost-cards {
+      grid-template-columns: 1fr;
+    }
+    .cost-cards li + li {
+      border-left-width: 1px;
+      border-top-width: 0;
+    }
+    .cost-footnote {
+      text-align: left;
+      align-self: flex-start;
+    }
+    .step-head {
+      flex-wrap: wrap;
+    }
+    /* Justified text leaves wide gaps in narrow columns. */
+    .step-text,
+    .arrow-list li,
+    .break-text,
+    .system p {
+      text-align: left;
+    }
+  }
+</style>
