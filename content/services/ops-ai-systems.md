@@ -82,7 +82,7 @@ ops:
         text: "when agents run through an API, you pay for tokens, and the amount depends on how many tasks run per day."
     footnote: "The agents are built on your accounts and use your tokens, because they live inside your systems. I put the expected monthly running cost into the written scope before you pay."
   breaks:
-    heading: "What happens when it breaks ?"
+    heading: "What happens when it breaks?"
     cards:
       - title: "Care window"
         tag: "[ included ]"

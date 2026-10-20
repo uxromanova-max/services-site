@@ -69,8 +69,8 @@ Stage 4 (Ops & AI page)
 - The agents list follows Figma: one list titled "Agents I have built", including the agents the notes list under "can build" (Diana's decision for this page).
 - Figma fix: step 3 "Accounts and access" repeats the Business core text. The site uses the notes text: "We create or connect the accounts the system runs on (AI platform, automation tool, helpdesk, store). They are in your name."
 - Figma fix: step 6 label says "[ weeks 3 ]"; the site uses "[ week 3 ]" (notes).
-- "What happens when it breaks ?" keeps the space before the question mark as in Figma. Remove it?
-- "Make.com" is an underlined link in Figma (auto-link). On the site it is plain text; tell me if it should link to make.com.
+- DECIDED: "What happens when it breaks?" without the space before the question mark (Figma fix).
+- DECIDED: "Make.com" stays plain text, no link (Figma shows an auto-link).
 - The page title is "Operations & AI Systems" (Figma); the home grid, form chips and nav keep the short name "Ops & AI Systems".
 - The two dark bands ("What an AI system is", "What it costs to run") are Figma shader effects; they are exported from Figma as images (no WebGL, no JS).
 - No running-cost numbers are shown (item 13); the Figma cost cards have none.
