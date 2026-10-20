@@ -1,13 +1,17 @@
 ---
 import { Image } from 'astro:assets';
-import { getEntry, type CollectionEntry } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Faq from '../components/Faq.astro';
+import ServiceTop from '../components/service/ServiceTop.astro';
+import ArrowLists from '../components/service/ArrowLists.astro';
+import NeedTools from '../components/service/NeedTools.astro';
+import PriceCards from '../components/service/PriceCards.astro';
 import banner from '../assets/figma/service-banner.png';
-import side from '../assets/figma/service-side.png';
 import sideWide from '../assets/figma/service-side-wide.png';
 import { getSite } from '../lib/site';
 import { legalHref } from '../lib/routes';
+import { fromPrice, getShared, resolveFaq } from '../lib/service';
 
 interface Props {
   service: CollectionEntry<'services'>['data'];
@@ -15,70 +19,17 @@ interface Props {
 
 const { service: s } = Astro.props;
 const site = await getSite();
-const shared = (await getEntry('shared', 'shared'))?.data;
-if (!shared) throw new Error('content/shared.md frontmatter is missing');
-const L = shared.servicePage;
+const L = (await getShared()).servicePage;
 const termsHref = await legalHref('terms');
-const price = `From $${s.from.toLocaleString('en-US')}`;
-
-const faq = (s.faq ?? []).map((item) => {
-  if (!('shared' in item)) return item;
-  const entry = shared.faq[item.shared];
-  return { q: entry.q, a: entry.a.replace('{project}', s.rushName ?? '') };
-});
+const faq = await resolveFaq(s);
 ---
 
 <Base title={s.name} description={s.pain}>
-  <section class="top container" aria-labelledby="service-title">
-    <div class="intro">
-      <h1 id="service-title" class="title">{s.name}</h1>
-      <p class="pain">{s.pain}</p>
-    </div>
-    <a class="scroll" href="#details" aria-label={L.scrollLabel}>
-      <span class="icon icon-arrow-down" aria-hidden="true"></span>
-    </a>
-    <dl class="facts">
-      <div>
-        <dt>{L.priceLabel}</dt>
-        <dd>{price}</dd>
-      </div>
-      <div>
-        <dt>{L.timeLabel}</dt>
-        <dd>{s.timeline}</dd>
-      </div>
-      <div class="guarantee">
-        <dt>{termsHref ? <a href={termsHref}>{L.guaranteeLabel}</a> : <span class="u">{L.guaranteeLabel}</span>}</dt>
-        <dd>{L.guaranteeText}</dd>
-      </div>
-    </dl>
-  </section>
-
-  <div id="details" class="container lists">
-    <section aria-labelledby="familiar-title">
-      <h2 id="familiar-title" class="block-label">{L.familiarHeading}</h2>
-      <ul class="arrow-list" role="list">
-        {s.familiar?.map((line) => <li><span class="icon icon-bullet-arrow" aria-hidden="true" />{line}</li>)}
-      </ul>
-    </section>
-    <section aria-labelledby="get-title">
-      <h2 id="get-title" class="block-label">{L.getHeading}</h2>
-      <ul class="arrow-list" role="list">
-        {s.get?.map((line) => <li><span class="icon icon-bullet-arrow" aria-hidden="true" />{line}</li>)}
-      </ul>
-    </section>
-  </div>
+  <ServiceTop title={s.name} pain={s.pain!} price={fromPrice(s.from)} timeline={s.timeline} labels={L} termsHref={termsHref} />
+  <ArrowLists familiarHeading={L.familiarHeading} getHeading={L.getHeading} familiar={s.familiar!} get={s.get!} />
 
   <div class="container">
-    <Image
-      class="banner"
-      src={banner}
-      alt=""
-      width={1072}
-      height={361}
-      densities={[1, 2]}
-      format="webp"
-      loading="lazy"
-    />
+    <Image class="banner" src={banner} alt="" width={1072} height={361} densities={[1, 2]} format="webp" loading="lazy" />
   </div>
 
   <section class="container steps-block" aria-labelledby="steps-title">
@@ -95,135 +46,28 @@ const faq = (s.faq ?? []).map((item) => {
     </ol>
   </section>
 
-  <div class="container need-tools">
-    <div class="need-col">
-      <section aria-labelledby="need-title">
-        <h2 id="need-title" class="block-label">{L.needHeading}</h2>
-        <ul class="dot-list">{s.need?.map((line) => <li>{line}</li>)}</ul>
-      </section>
-      <section aria-labelledby="tools-title">
-        <h2 id="tools-title" class="block-label">{L.toolsHeading}</h2>
-        <ul class="dot-list tools">{s.tools?.map((line) => <li>{line}</li>)}</ul>
-      </section>
-    </div>
-    <div class="side-images" aria-hidden="true">
-      <Image src={side} alt="" width={306} height={309} densities={[1, 2]} format="webp" loading="lazy" />
-      <Image src={side} alt="" width={306} height={309} densities={[1, 2]} format="webp" loading="lazy" />
-      <Image class="wide" src={sideWide} alt="" width={624} height={226} densities={[1, 2]} format="webp" loading="lazy" />
-    </div>
+  <div class="need-wrap">
+    <NeedTools needHeading={L.needHeading} toolsHeading={L.toolsHeading} need={s.need!} tools={s.tools!} wideImage={sideWide} wideHeight={226} />
   </div>
 
-  <section class="container price-block" aria-labelledby="price-title">
-    <h2 id="price-title" class="block-label">{L.priceHeading}</h2>
-    <ul class="packages" role="list">
-      {
-        s.packages?.map((p) => (
-          <li class:list={['package', { popular: p.popular }]}>
-            <h3 class="package-title">
-              {p.price} – {p.name}
-            </h3>
-            <div class="package-body">
-              {p.lead && <p class="lead">{p.lead}</p>}
-              <ul class="dash-list">{p.items.map((line) => <li>{line}</li>)}</ul>
-              {p.after && <p class="after">{p.after}</p>}
-            </div>
-            {p.popular && <p class="badge">{L.popularLabel}</p>}
-          </li>
-        ))
-      }
-      <li class="package goes-up">
-        <h3 class="package-title">{L.goesUpHeading}</h3>
-        <div class="package-body">
-          <p>{s.goesUpWith}</p>
-        </div>
-      </li>
-    </ul>
-    {
-      s.priceNote && (
-        <div class="price-note">
-          {s.priceNote.heading && <p class="note-heading">{s.priceNote.heading}</p>}
-          <p class="note-text">{s.priceNote.text}</p>
-        </div>
-      )
-    }
-  </section>
+  <div class="price-wrap">
+    <PriceCards
+      heading={L.priceHeading}
+      popularLabel={L.popularLabel}
+      goesUpHeading={L.goesUpHeading}
+      packages={s.packages!}
+      goesUpWith={s.goesUpWith!}
+      priceNote={s.priceNote}
+    />
+  </div>
 
-  <Faq heading={L.questionsHeading} bookLabel={L.bookLabel} bookingUrl={site.bookingUrl} items={faq} />
+  <div class="faq-wrap">
+    <Faq heading={L.questionsHeading} bookLabel={L.bookLabel} bookingUrl={site.bookingUrl} items={faq} />
+  </div>
 </Base>
 
 <style>
-  /* Figma "Service page template" (12:948), 1280 wide. Content column 1072, second column at 503px. */
-  .top {
-    display: grid;
-    grid-template-columns: 503px 1fr 244px;
-    align-items: start;
-    padding-top: calc(171px - var(--nav-h));
-    padding-bottom: 66px;
-  }
-  .title {
-    font-family: var(--font-display);
-    font-size: var(--text-display);
-    font-weight: var(--weight-regular);
-    line-height: normal;
-  }
-  .pain {
-    margin-top: 16px;
-    max-width: 420px;
-  }
-  .scroll {
-    margin-top: 71px;
-    justify-self: start;
-    display: inline-flex;
-  }
-  .facts {
-    display: grid;
-    gap: 23px;
-    margin: 0;
-  }
-  .facts dt {
-    font-size: var(--text-small);
-  }
-  .facts dd {
-    margin: 8px 0 0;
-    font-weight: var(--weight-medium);
-  }
-  .guarantee a,
-  .u {
-    text-decoration: underline;
-    text-underline-position: from-font;
-  }
-  .lists {
-    display: grid;
-    grid-template-columns: 391px 569px;
-    justify-content: space-between;
-    position: relative;
-    padding-top: 40px;
-  }
-  .lists::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: var(--gutter);
-    right: var(--gutter);
-    border-top: 1px solid var(--color-line);
-  }
-  .arrow-list {
-    display: grid;
-    gap: 8px;
-    margin: 17px 0 0;
-    padding: 0;
-    list-style: none;
-    font-size: var(--text-lead);
-  }
-  .arrow-list li {
-    display: flex;
-    align-items: baseline;
-    gap: 4px;
-  }
-  .arrow-list .icon {
-    position: relative;
-    top: 2px;
-  }
+  /* Figma "Service page template" (12:948); shared blocks live in components/service. */
   .banner {
     width: 100%;
     height: auto;
@@ -252,215 +96,26 @@ const faq = (s.faq ?? []).map((item) => {
   .step-text {
     font-size: var(--text-lead);
   }
-  .need-tools {
-    display: grid;
-    grid-template-columns: 380px 624px;
-    justify-content: space-between;
+  .need-wrap {
     margin-top: 86px;
   }
-  .need-col {
-    display: flex;
-    flex-direction: column;
-    gap: 80px;
-    padding-top: 24px;
-  }
-  .dot-list {
-    max-width: 342px;
-    margin: 24px 0 0;
-    padding-left: 27px;
-    font-size: var(--text-lead);
-  }
-  .dot-list.tools {
-    max-width: 380px;
-  }
-  .side-images {
-    display: grid;
-    grid-template-columns: 306px 306px;
-    justify-content: space-between;
-    align-content: start;
-    row-gap: 8px;
-  }
-  .side-images :global(img) {
-    width: 306px;
-    height: 309px;
-    object-fit: cover;
-  }
-  .side-images :global(.wide) {
-    grid-column: 1 / -1;
-    width: 624px;
-    height: 226px;
-  }
-  .price-block {
+  .price-wrap {
     margin-top: 88px;
   }
-  .packages {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    grid-template-rows: auto 1fr;
-    margin: 40px 0 0;
-    padding: 0;
-    list-style: none;
-  }
-  /* Subgrid keeps every card's description on one line, whatever the title length. */
-  .package {
-    position: relative;
-    display: grid;
-    grid-row: span 2;
-    grid-template-rows: subgrid;
-    row-gap: 9px;
-    align-content: start;
-    min-height: 399px;
-    padding: 39px 16px 24px 15px;
-    border: 1px solid var(--color-line);
-    border-left-width: 0;
-  }
-  .package:first-child {
-    border-left-width: 1px;
-  }
-  .package.popular {
-    border: 1px solid var(--color-ink);
-    padding-bottom: 56px;
-  }
-  .goes-up {
-    border-style: dashed;
-  }
-  .package-title {
-    max-width: 200px;
-    font-family: var(--font-display);
-    font-size: var(--text-card);
-    font-weight: var(--weight-regular);
-    text-transform: uppercase;
-  }
-  .package-title {
-    min-height: 64px; /* two title lines, as in Figma (body at 112px from the card top) */
-  }
-  .package-body {
-    font-size: var(--text-small);
-  }
-  .lead {
-    font-weight: var(--weight-medium);
-  }
-  .dash-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  .dash-list li::before {
-    content: '- ';
-  }
-  .after {
-    margin-top: 1.2em;
-  }
-  .badge {
-    position: absolute;
-    left: -1px;
-    right: -1px;
-    bottom: -1px;
-    padding: var(--space-2) var(--space-4);
-    background: var(--color-ink);
-    color: var(--color-paper);
-    font-size: var(--text-small);
-    font-weight: var(--weight-regular);
-    letter-spacing: var(--tracking-small);
-    text-align: center;
-    text-transform: uppercase;
-  }
-  .price-note {
-    margin-top: 37px;
-    text-align: right;
-  }
-  .note-heading {
-    font-family: var(--font-accent);
-    font-size: var(--text-intro);
-    font-weight: var(--weight-semibold);
-    line-height: 24px;
-  }
-  .note-text {
-    margin-top: 8px;
-    font-size: var(--text-small);
-    letter-spacing: var(--tracking-small);
-  }
-  .price-block + :global(.faq) {
+  .faq-wrap {
     margin-top: 28px;
   }
 
-  /* Provisional below the desktop frame. */
   @media (max-width: 75rem) {
-    .top {
-      grid-template-columns: 1fr auto;
-      row-gap: var(--space-8);
-    }
-    .scroll {
-      display: none;
-    }
-    .lists,
-    .need-tools {
-      grid-template-columns: 1fr 1fr;
-      column-gap: var(--space-8);
-    }
     .steps {
       grid-template-columns: repeat(4, minmax(0, 1fr));
       column-gap: var(--space-6);
     }
-    .side-images {
-      grid-template-columns: 1fr 1fr;
-      column-gap: 8px;
-    }
-    .side-images :global(img),
-    .side-images :global(.wide) {
-      width: 100%;
-      height: auto;
-    }
-    .packages {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-    .package:nth-child(3) {
-      border-left-width: 1px;
-    }
-    .package:nth-child(n + 3) {
-      border-top-width: 0;
-    }
   }
   @media (max-width: 48rem) {
-    .top,
-    .lists,
-    .need-tools {
-      grid-template-columns: 1fr;
-    }
-    .top {
-      padding-top: var(--space-12);
-    }
-    .lists {
-      row-gap: var(--space-12);
-    }
     .steps {
       grid-template-columns: 1fr 1fr;
       row-gap: var(--space-8);
-    }
-    .side-images {
-      display: none;
-    }
-    .packages {
-      grid-template-columns: 1fr;
-    }
-    .package,
-    .package:nth-child(3) {
-      border-left-width: 1px;
-      border-top-width: 0;
-    }
-    .package:first-child {
-      border-top-width: 1px;
-    }
-    .packages {
-      grid-template-rows: none;
-    }
-    .package {
-      grid-row: auto;
-      grid-template-rows: auto auto;
-      min-height: 0;
-    }
-    .price-note {
-      text-align: left;
     }
   }
 </style>

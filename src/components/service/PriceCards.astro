@@ -1,0 +1,184 @@
+---
+interface Package {
+  price: string;
+  name: string;
+  popular?: boolean;
+  lead?: string;
+  items: string[];
+  after?: string;
+}
+interface Props {
+  heading: string;
+  popularLabel: string;
+  goesUpHeading: string;
+  packages: Package[];
+  goesUpWith: string;
+  priceNote?: { heading?: string; text: string };
+  /** Ops page: shorter cards (260px) with the description lower (129px from the card top). */
+  compact?: boolean;
+}
+
+const { heading, popularLabel, goesUpHeading, packages, goesUpWith, priceNote, compact = false } = Astro.props;
+---
+
+<section class:list={['container', 'price-block', { compact }]} aria-labelledby="price-title">
+  <h2 id="price-title" class="block-label">{heading}</h2>
+  <ul class="packages" role="list">
+    {
+      packages.map((p) => (
+        <li class:list={['package', { popular: p.popular }]}>
+          <h3 class="package-title">
+            {p.price} – {p.name}
+          </h3>
+          <div class="package-body">
+            {p.lead && <p class="lead">{p.lead}</p>}
+            <ul class="dash-list">{p.items.map((line) => <li>{line}</li>)}</ul>
+            {p.after && <p class="after">{p.after}</p>}
+          </div>
+          {p.popular && <p class="badge">{popularLabel}</p>}
+        </li>
+      ))
+    }
+    <li class="package goes-up">
+      <h3 class="package-title">{goesUpHeading}</h3>
+      <div class="package-body">
+        <p>{goesUpWith}</p>
+      </div>
+    </li>
+  </ul>
+  {
+    priceNote && (
+      <div class="price-note">
+        {priceNote.heading && <p class="note-heading">{priceNote.heading}</p>}
+        <p class="note-text">{priceNote.text}</p>
+      </div>
+    )
+  }
+</section>
+
+<style>
+  .packages {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: auto 1fr;
+    margin: 40px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  /* Subgrid keeps every card's description on one line, whatever the title length. */
+  .package {
+    position: relative;
+    display: grid;
+    grid-row: span 2;
+    grid-template-rows: subgrid;
+    row-gap: 9px;
+    align-content: start;
+    min-height: 399px;
+    padding: 39px 16px 24px 15px;
+    border: 1px solid var(--color-line);
+    border-left-width: 0;
+  }
+  .compact .package {
+    row-gap: 26px;
+    min-height: 260px;
+  }
+  .package:first-child {
+    border-left-width: 1px;
+  }
+  .package.popular {
+    border: 1px solid var(--color-ink);
+    padding-bottom: 56px;
+  }
+  .goes-up {
+    border-style: dashed;
+  }
+  .package-title {
+    max-width: 200px;
+    min-height: 64px; /* two title lines, as in Figma */
+    font-family: var(--font-display);
+    font-size: var(--text-card);
+    font-weight: var(--weight-regular);
+    text-transform: uppercase;
+  }
+  .package-body {
+    font-size: var(--text-small);
+  }
+  .lead {
+    font-weight: var(--weight-medium);
+  }
+  .dash-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .dash-list li::before {
+    content: '- ';
+  }
+  .after {
+    margin-top: 1.2em;
+  }
+  .badge {
+    position: absolute;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    padding: var(--space-2) var(--space-4);
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font-size: var(--text-small);
+    font-weight: var(--weight-regular);
+    letter-spacing: var(--tracking-small);
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .price-note {
+    margin-top: 37px;
+    text-align: right;
+  }
+  .compact .price-note {
+    margin-top: 40px;
+  }
+  .note-heading {
+    font-family: var(--font-accent);
+    font-size: var(--text-intro);
+    font-weight: var(--weight-semibold);
+    line-height: 24px;
+  }
+  .note-text {
+    margin-top: 8px;
+    font-size: var(--text-small);
+    letter-spacing: var(--tracking-small);
+  }
+
+  @media (max-width: 75rem) {
+    .packages {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .package:nth-child(3) {
+      border-left-width: 1px;
+    }
+    .package:nth-child(n + 3) {
+      border-top-width: 0;
+    }
+  }
+  @media (max-width: 48rem) {
+    .packages {
+      grid-template-columns: 1fr;
+      grid-template-rows: none;
+    }
+    .package,
+    .package:nth-child(3) {
+      grid-row: auto;
+      grid-template-rows: auto auto;
+      min-height: 0;
+      border-left-width: 1px;
+      border-top-width: 0;
+    }
+    .package:first-child {
+      border-top-width: 1px;
+    }
+    .price-note {
+      text-align: left;
+    }
+  }
+</style>

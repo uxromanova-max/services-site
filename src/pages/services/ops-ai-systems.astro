@@ -1,0 +1,9 @@
+---
+import { getEntry } from 'astro:content';
+import OpsServicePage from '../../templates/OpsServicePage.astro';
+
+const entry = await getEntry('services', 'ops-ai-systems');
+if (!entry || entry.data.template !== 'OpsServicePage') throw new Error('content/services/ops-ai-systems.md is missing');
+---
+
+<OpsServicePage service={entry.data} />

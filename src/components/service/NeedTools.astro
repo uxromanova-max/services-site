@@ -1,0 +1,103 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import side from '../../assets/figma/service-side.png';
+
+interface Props {
+  needHeading: string;
+  toolsHeading: string;
+  need: string[];
+  tools: string[];
+  /** Wide image under the two square ones (placeholders until Diana supplies per-service images). */
+  wideImage: ImageMetadata;
+  wideHeight: number;
+  /** Distance from the top of the images to the "What I need" label (24 on the service template, 0 on Ops). */
+  labelOffset?: number;
+  /** Space between the "What I need" list and the "Tools" label (80 on the service template, 40 on Ops). */
+  gap?: number;
+}
+
+const { needHeading, toolsHeading, need, tools, wideImage, wideHeight, labelOffset = 24, gap = 80 } = Astro.props;
+---
+
+<div class="container need-tools" style={`--label-offset: ${labelOffset}px; --wide-h: ${wideHeight}px; --col-gap: ${gap}px`}>
+  <div class="need-col">
+    <section aria-labelledby="need-title">
+      <h2 id="need-title" class="block-label">{needHeading}</h2>
+      <ul class="dot-list">{need.map((line) => <li>{line}</li>)}</ul>
+    </section>
+    <section aria-labelledby="tools-title">
+      <h2 id="tools-title" class="block-label">{toolsHeading}</h2>
+      <ul class="dot-list tools">{tools.map((line) => <li>{line}</li>)}</ul>
+    </section>
+  </div>
+  <div class="side-images" aria-hidden="true">
+    <Image src={side} alt="" width={306} height={309} densities={[1, 2]} format="webp" loading="lazy" />
+    <Image src={side} alt="" width={306} height={309} densities={[1, 2]} format="webp" loading="lazy" />
+    <Image class="wide" src={wideImage} alt="" width={624} height={wideHeight} densities={[1, 2]} format="webp" loading="lazy" />
+  </div>
+</div>
+
+<style>
+  .need-tools {
+    display: grid;
+    grid-template-columns: 380px 624px;
+    justify-content: space-between;
+  }
+  .need-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--col-gap);
+    padding-top: var(--label-offset);
+  }
+  .dot-list {
+    max-width: 342px;
+    margin: 24px 0 0;
+    padding-left: 27px;
+    font-size: var(--text-lead);
+  }
+  .dot-list.tools {
+    max-width: 380px;
+  }
+  .side-images {
+    display: grid;
+    grid-template-columns: 306px 306px;
+    justify-content: space-between;
+    align-content: start;
+    row-gap: 8px;
+  }
+  .side-images :global(img) {
+    width: 306px;
+    height: 309px;
+    object-fit: cover;
+  }
+  .side-images :global(.wide) {
+    grid-column: 1 / -1;
+    width: 624px;
+    height: var(--wide-h);
+  }
+
+  @media (max-width: 75rem) {
+    .need-tools {
+      grid-template-columns: 1fr 1fr;
+      column-gap: var(--space-8);
+    }
+    .side-images {
+      grid-template-columns: 1fr 1fr;
+      column-gap: 8px;
+    }
+    .side-images :global(img),
+    .side-images :global(.wide) {
+      width: 100%;
+      height: auto;
+    }
+  }
+  @media (max-width: 48rem) {
+    .need-tools {
+      grid-template-columns: 1fr;
+    }
+    .side-images {
+      display: none;
+    }
+  }
+</style>

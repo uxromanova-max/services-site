@@ -1,0 +1,74 @@
+---
+interface Props {
+  familiarHeading: string;
+  getHeading: string;
+  familiar: string[];
+  get: string[];
+}
+
+const { familiarHeading, getHeading, familiar, get } = Astro.props;
+---
+
+<div id="details" class="container lists">
+  <section aria-labelledby="familiar-title">
+    <h2 id="familiar-title" class="block-label">{familiarHeading}</h2>
+    <ul class="arrow-list" role="list">
+      {familiar.map((line) => <li><span class="icon icon-bullet-arrow" aria-hidden="true" />{line}</li>)}
+    </ul>
+  </section>
+  <section aria-labelledby="get-title">
+    <h2 id="get-title" class="block-label">{getHeading}</h2>
+    <ul class="arrow-list" role="list">
+      {get.map((line) => <li><span class="icon icon-bullet-arrow" aria-hidden="true" />{line}</li>)}
+    </ul>
+  </section>
+</div>
+
+<style>
+  /* "Sounds familiar?" / "What you get" with the 1px rule above them. */
+  .lists {
+    display: grid;
+    grid-template-columns: 391px 569px;
+    justify-content: space-between;
+    position: relative;
+    padding-top: 40px;
+  }
+  .lists::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: var(--gutter);
+    right: var(--gutter);
+    border-top: 1px solid var(--color-line);
+  }
+  .arrow-list {
+    display: grid;
+    gap: 8px;
+    margin: 17px 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--text-lead);
+  }
+  .arrow-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+  .arrow-list .icon {
+    position: relative;
+    top: 2px;
+  }
+
+  @media (max-width: 75rem) {
+    .lists {
+      grid-template-columns: 1fr 1fr;
+      column-gap: var(--space-8);
+    }
+  }
+  @media (max-width: 48rem) {
+    .lists {
+      grid-template-columns: 1fr;
+      row-gap: var(--space-12);
+    }
+  }
+</style>

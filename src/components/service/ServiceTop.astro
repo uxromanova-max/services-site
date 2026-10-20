@@ -1,0 +1,116 @@
+---
+interface Props {
+  title: string;
+  pain: string;
+  price: string;
+  timeline: string;
+  labels: { priceLabel: string; timeLabel: string; guaranteeLabel: string; guaranteeText: string; scrollLabel: string };
+  termsHref: string | null;
+}
+
+const { title, pain, price, timeline, labels: L, termsHref } = Astro.props;
+---
+
+<section class="top container" aria-labelledby="service-title">
+  <h1 id="service-title" class="title">{title}</h1>
+  <p class="pain">{pain}</p>
+  <a class="scroll" href="#details" aria-label={L.scrollLabel}>
+    <span class="icon icon-arrow-down" aria-hidden="true"></span>
+  </a>
+  <dl class="facts">
+    <div>
+      <dt>{L.priceLabel}</dt>
+      <dd>{price}</dd>
+    </div>
+    <div>
+      <dt>{L.timeLabel}</dt>
+      <dd>{timeline}</dd>
+    </div>
+    <div>
+      <dt>{termsHref ? <a href={termsHref}>{L.guaranteeLabel}</a> : <span class="u">{L.guaranteeLabel}</span>}</dt>
+      <dd>{L.guaranteeText}</dd>
+    </div>
+  </dl>
+</section>
+
+<style>
+  /* Top block of the Figma service templates (12:948, 22:1528). Second column at 503px. */
+  .top {
+    display: grid;
+    grid-template-columns: 503px 1fr 244px;
+    grid-template-rows: auto 1fr;
+    align-items: start;
+    padding-top: calc(171px - var(--nav-h));
+    padding-bottom: 66px;
+  }
+  .title {
+    grid-column: 1;
+    max-width: 427px;
+    font-family: var(--font-display);
+    font-size: var(--text-display);
+    font-weight: var(--weight-regular);
+    line-height: normal;
+  }
+  .pain {
+    grid-column: 1;
+    grid-row: 2;
+    max-width: 434px;
+    margin-top: 16px;
+  }
+  .scroll {
+    grid-column: 2;
+    grid-row: 2;
+    display: inline-flex;
+    margin-top: 19px;
+    justify-self: start;
+  }
+  .facts {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    display: grid;
+    gap: 23px;
+    margin: 0;
+  }
+  .facts dt {
+    font-size: var(--text-small);
+  }
+  .facts dd {
+    margin: 8px 0 0;
+    font-weight: var(--weight-medium);
+  }
+  .facts a,
+  .u {
+    text-decoration: underline;
+    text-underline-position: from-font;
+  }
+
+  @media (max-width: 75rem) {
+    .top {
+      grid-template-columns: 1fr auto;
+      column-gap: var(--space-8);
+    }
+    .scroll {
+      display: none;
+    }
+    .facts {
+      grid-column: 2;
+    }
+  }
+  @media (max-width: 48rem) {
+    .top {
+      grid-template-columns: 1fr;
+      grid-template-rows: none;
+      row-gap: var(--space-8);
+      padding-top: var(--space-12);
+    }
+    .title,
+    .pain,
+    .facts {
+      grid-column: 1;
+      grid-row: auto;
+    }
+    .pain {
+      margin-top: calc(-1 * var(--space-4));
+    }
+  }
+</style>
