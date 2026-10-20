@@ -33,7 +33,7 @@ const id = `faq-${heading.length}`;
       ))
     }
   </div>
-  <a class="link-arrow book" href={bookingUrl}>
+  <a class="link-fill book" href={bookingUrl}>
     {bookLabel}
     <span class="icon icon-arrow-up-right" aria-hidden="true"></span>
   </a>
@@ -83,7 +83,7 @@ const id = `faq-${heading.length}`;
   /* Figma "faq" (6:349) and "faq - opened" (9:545). List column: 510 of the 1072px Figma column. */
   .faq {
     display: grid;
-    grid-template-columns: minmax(0, 562fr) minmax(0, 510fr);
+    grid-template-columns: minmax(0, 536fr) minmax(0, 536fr); /* list 536px (Diana, design review 2) */
     grid-template-rows: auto 1fr;
     padding-top: 60px;
     padding-bottom: 32px;
@@ -110,7 +110,7 @@ const id = `faq-${heading.length}`;
     display: flex;
     align-items: center;
     gap: var(--space-2);
-    padding: var(--space-3) 0;
+    padding: var(--space-4) 0;
     cursor: pointer;
     list-style: none;
   }
@@ -122,7 +122,16 @@ const id = `faq-${heading.length}`;
   }
   /* The ↘ arrow turns into ↗ when the item is open (rotated, so the change is smooth). */
   summary .icon {
-    transition: transform 0.5s var(--ease-out);
+    transition:
+      transform 0.5s var(--ease-out),
+      color var(--dur-state) var(--ease-out);
+  }
+  /* Arrow states (Figma "States" 31:2831): grey on hover, lilac when pressed. */
+  summary:hover .icon {
+    color: var(--color-hover);
+  }
+  summary:active .icon {
+    color: var(--color-active);
   }
   .item[open] summary .icon,
   .item.is-open summary .icon {
@@ -134,7 +143,7 @@ const id = `faq-${heading.length}`;
   .a {
     max-width: 486px;
     margin: 0;
-    padding: 0 0 var(--space-3);
+    padding: 0 0 var(--space-4);
     font-size: var(--text-small);
   }
   .steps {

@@ -27,7 +27,7 @@ const { title, pain, price, timeline, labels: L, termsHref } = Astro.props;
       <dd>{timeline}</dd>
     </div>
     <div>
-      <dt>{termsHref ? <a href={termsHref}>{L.guaranteeLabel}</a> : <span class="u">{L.guaranteeLabel}</span>}</dt>
+      <dt>{termsHref ? <a class="link-muted" href={termsHref}>{L.guaranteeLabel}</a> : <span class="u">{L.guaranteeLabel}</span>}</dt>
       <dd>{L.guaranteeText}</dd>
     </div>
   </dl>
