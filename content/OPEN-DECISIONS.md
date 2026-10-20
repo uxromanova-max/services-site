@@ -107,6 +107,9 @@ Design review 4 (stage-7d-motion)
 - Done: Selected Works: the text inside a card is laid out at its final width and appears only once the card is fully open, so it never reflows while the card grows. "What it costs to run" band: the background no longer moves on scroll (bands with a background image are left out of the scroll animation). Hero load-in is faster (about 1.4s in total), with varied motion: headline lines out of a soft blur, the button from the left, the intro from the right, the proof photo fading in.
 - Scroll reveal now has variety: photos, headings and large blocks come out of a blur; labels and small notes fade in; paired columns (lists, form and intro, rows) meet from left and right; cards appear in a wave. Small elements are grouped (FAQ list, arrow lists) instead of animating one by one. Mobile uses only vertical and blur motion.
 
+Design review 5 (stage-7e-motion)
+- Done: all scroll and load animations are slower and softer again (reveal about 1.5-1.7s; hero assembles in about 2.4s). Every page now has a load-in: the nav and the blocks on the first screen appear one after another, top to bottom. Selected Works: the dark overlay comes in together with the card as it grows; the text appears when the card has reached about 90% of its size (same rule for all three cards).
+
 Technical
 - Form service choice (verify free limits). Cal.com account/link. Custom domain later.
 - Mobile Figma frames to come later.
