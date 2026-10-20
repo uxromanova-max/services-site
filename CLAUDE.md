@@ -13,7 +13,7 @@ Language of the site: English. First person ("I"), one person, not an agency.
 - Booking: Cal.com embedded widget (page or popup, undecided; build as popup + fallback link)
 
 ## Source of truth
-1. **Design:** Figma file key `iZyXFbTsyWM6F1Bl3BenCd` (Landing page node `10-797`, 1280px desktop). Also frames for: service template, Ops & AI service page, case template, text pages. Pull tokens (colors, type, spacing) from Figma; do not guess.
+1. **Design:** Figma file key `https://www.figma.com/design/iZyXFbTsyWM6F1Bl3BenCd/Services-website?node-id=0-1&t=FQ62Y5TOMWg2VayR-1` (Landing page node `10-797`, 1280px desktop). Also frames for: service template, Ops & AI service page, case template, text pages. Pull tokens (colors, type, spacing) from Figma; do not guess.
 2. **Copy:** everything in `/content`. Never invent or rewrite copy, prices, numbers, tool names, claims or testimonials. If copy is missing, leave a visible `CHECK:` marker in the content file and ask Diana.
 3. If Figma and `/content` disagree, ask. Do not choose silently. Known mismatches are listed in `content/OPEN-DECISIONS.md`.
 
