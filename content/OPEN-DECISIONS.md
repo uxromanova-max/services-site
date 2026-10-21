@@ -114,6 +114,11 @@ Case pages filled (cases-content)
 - The three case pages use the approved copy from content/cases.md verbatim and are public (draft: false). Project information rows follow the new list: Industry, Services, Timeline, Platform, Year; ORA Studio also has a "Project: My own brand" row. The "Client" row is removed.
 - Image slots are hidden until Diana sends screenshots for each case (set images in content/cases/<slug>.md when they arrive).
 
+Design review 6 (design-review-6)
+- Load-in now plays on every page, also when you arrive by a link: it starts only after the new page is on screen (before, the browser still showed the old page while the animation ran). The nav no longer fades in, so the page always has something to show at once.
+- Updated Figma States: "Book a call directly" (underline grows on hover; pressed: lilac text and underline) and the solid button (only the arrow moves right; pressed: lilac).
+- FAQ answers run the full width up to the arrow. Form service chips in Light. Ops: "What an AI system is" text lines up with the step text of "How it works"; "What it costs to run" text in Light. Ops Tools list: every item ends with a full stop.
+
 Technical
 - Form service choice (verify free limits). Cal.com account/link. Custom domain later.
 - Mobile Figma frames to come later.

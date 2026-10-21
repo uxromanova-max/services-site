@@ -69,8 +69,10 @@ const faq = await resolveFaq(s);
         quality={55}
         loading="lazy"
       />
-      <h2 id="system-title" class="block-label">{ops.system.heading}</h2>
-      <p>{ops.system.text}</p>
+      <div class="system-inner">
+        <h2 id="system-title" class="block-label">{ops.system.heading}</h2>
+        <p>{ops.system.text}</p>
+      </div>
     </section>
   </div>
 
@@ -256,10 +258,21 @@ const faq = await resolveFaq(s);
     overflow: hidden;
     min-height: 333px;
     margin-top: 82px;
-    padding: 93px calc(var(--gutter) - var(--footer-inset) + 86px) 60px;
+    padding: 93px 0 60px;
     border-radius: var(--radius-card);
     background: #111;
     color: var(--color-on-dark);
+  }
+  /* The text lines up with the step text of "How it works" below (Diana, design review 6): the
+     inner box matches the page column, then steps the same 12.7% (centred 74.6% list) + 16px
+     padding + 81px indent in. */
+  .system-inner {
+    max-width: calc(var(--content) + 2 * var(--gutter) - 2 * var(--footer-inset));
+    margin-inline: auto;
+    padding-inline: calc(var(--gutter) - var(--footer-inset));
+  }
+  .system-inner > * {
+    margin-left: calc(12.7% + 97px);
   }
   .system::after {
     content: '';
@@ -422,7 +435,7 @@ const faq = await resolveFaq(s);
   }
   .cost-intro {
     margin-top: 16px;
-    font-weight: var(--weight-regular);
+    font-weight: var(--weight-light);
     text-align: center;
   }
   .cost-cards {
@@ -438,7 +451,7 @@ const faq = await resolveFaq(s);
     padding: 31px 16px 24px 15px;
     border: 1px solid rgba(255, 255, 255, 0.5);
     font-size: var(--text-small);
-    font-weight: var(--weight-regular);
+    font-weight: var(--weight-light);
   }
   .cost-cards li + li {
     border-left-width: 0;
@@ -458,7 +471,7 @@ const faq = await resolveFaq(s);
     max-width: 599px;
     margin-top: 40px;
     font-size: var(--text-small);
-    font-weight: var(--weight-regular);
+    font-weight: var(--weight-light);
     text-align: center;
   }
 
@@ -517,6 +530,9 @@ const faq = await resolveFaq(s);
     .steps {
       width: 100%;
     }
+    .system-inner > * {
+      margin-left: 97px;
+    }
     .key-message {
       width: 100%;
     }
@@ -544,7 +560,13 @@ const faq = await resolveFaq(s);
       padding: 16px;
     }
     .system {
-      padding: 48px 24px;
+      padding: 48px 0;
+    }
+    .system-inner {
+      padding-inline: 24px;
+    }
+    .system-inner > * {
+      margin-left: 0;
     }
     .two-lists,
     .breaks {

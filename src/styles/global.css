@@ -161,7 +161,7 @@ a {
 }
 
 /* Link with an arrow and no underline ("Book a call directly ↗"): an underline grows to the right
-   on hover; pressed: black fill, white text. */
+   on hover; pressed: text and underline in the active colour (Figma States, updated by Diana). */
 .link-grow {
   display: inline-flex;
   align-items: center;
@@ -180,8 +180,9 @@ a {
   background-size: 100% 1px;
 }
 .link-grow:active {
-  background-size: 100% 100%;
-  color: var(--color-paper);
+  background-image: linear-gradient(var(--color-active), var(--color-active));
+  background-size: 100% 1px;
+  color: var(--color-active);
 }
 
 /* Outlined button on a dark background (footer "Book a call →"): fills with white from the bottom. */
@@ -210,7 +211,7 @@ a {
   color: var(--color-active);
 }
 
-/* Solid black button ("Send request →"): the label and the arrow move apart; pressed: lilac text. */
+/* Solid black button ("Send request →"): the arrow moves to the right edge; pressed: lilac text and arrow. */
 .btn-solid {
   display: inline-flex;
   align-items: center;
@@ -228,9 +229,6 @@ a {
 }
 .btn-solid > * {
   transition: transform var(--dur-state) var(--ease-out);
-}
-.btn-solid:is(:hover, :focus-visible) > :first-child {
-  transform: translateX(-24px);
 }
 .btn-solid:is(:hover, :focus-visible) > .icon {
   transform: translateX(24px);
@@ -292,6 +290,11 @@ a {
 }
 
 /* Scroll reveal (see the script at the end of Base.astro). */
+/* The hero load-in waits until the page is on screen (html.painted, set by the same script). */
+.reveal:not(.painted) .hero,
+.reveal:not(.painted) .hero * {
+  animation-play-state: paused !important;
+}
 .reveal [data-reveal] {
   opacity: 0;
   transition:
