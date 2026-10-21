@@ -10,7 +10,7 @@ Copy / design
 5. FAQ answers for the 11 questions in the Figma landing are not written.
 6. Figma fixes needed: Teardown card says "mockups for the top three" (remove number); Email Flows card text; Ops & AI position; Delivery Guarantee line near hero; Store link field in form; privacy link on consent checkbox; footer line; The System Club card photo mismatch.
 7. Proof screenshots per service (Proof block stays empty without them).
-8. ModaBlvck: publication permission CONFIRMED by Diana. Case copy written (cases.md, new 5-part structure), all 3 cases draft:true until Diana approves. The System Club needs agent and automation details (CHECK markers). Figma landing card for The System Club still says closed Oct 2026: decide whether to keep that.
+8. ModaBlvck: publication permission CONFIRMED by Diana. Case copy written (cases.md, new 5-part structure), all 3 cases APPROVED by Diana Oct 21 (draft: false). Figma landing card for The System Club still says closed Oct 2026: decide whether to keep that.
 9. Which recording tool for Teardown walkthrough (for example Loom).
 10. Confirm packages and the Ops & AI price range.
 11. Revision rounds count; real availability for "How fast can you start".

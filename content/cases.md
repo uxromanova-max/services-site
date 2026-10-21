@@ -8,13 +8,13 @@ Layout = Figma "Case page template" (12:1187). Structure of every case (decided 
 5. Result
 
 Rules: first person, only facts Diana has stated, no revenue/growth/ad-performance claims. Figma placeholder text and the +58% / +43% / +36% metrics are NEVER rendered. Image slots stay hidden until Diana supplies screenshots (the structure above has no separate image section).
-All three cases stay `draft: true` until Diana approves the copy.
+All three cases approved by Diana (Oct 21): draft: false.
 
 ---
 
 ## 1. ORA Studio
 slug: ora-studio
-draft: true
+draft: false
 
 **Name:** ORA Studio
 **Description:** A direct-to-consumer brand built and run solo on Shopify since February 2026. The store, the content, the marketing and the operations behind them are all something I built and operate myself.
@@ -49,7 +49,7 @@ To run all of this without a team, I built a system of more than 6 AI agents: an
 
 ## 2. ModaBlvck
 slug: modablvck
-draft: true
+draft: false
 
 **Name:** ModaBlvck
 **Description:** Operations, AI agents and store fixes for a fashion brand. I worked with ModaBlvck under a contract as AI & E-commerce Operations Specialist.
@@ -79,7 +79,7 @@ Alongside that I coordinated with the 3PL, made Meta ad creatives and fixed smal
 
 ## 3. The System Club
 slug: the-system-club
-draft: true
+draft: false
 
 **Name:** The System Club
 **Description:** A store of digital products for freelancers, made by AI agents. Templates such as invoice trackers, cashflow management and profit dashboards, sold as a one-time purchase with no subscription.
