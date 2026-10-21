@@ -122,10 +122,10 @@ need:
   - "Examples of real tasks and what 'good' looks like."
   - "AI accounts and tokens on your side. I build the agents on your accounts, and once they run inside your systems they use your tokens. The token cost is paid by you, and I give you a rough monthly estimate before we start."
 tools:
-  - "Notion"
-  - "Claude, ChatGPT, Gemini,"
-  - "Google Workspace and Sheets,"
-  - "Airtable, Slack, Trello or Jira for task boards,"
+  - "Notion."
+  - "Claude, ChatGPT, Gemini."
+  - "Google Workspace and Sheets."
+  - "Airtable, Slack, Trello or Jira for task boards."
   - "Shopify Flow, and automation tools such as Zapier, n8n or Make.com."
   - "For support agents: Gorgias or Zendesk."
 packages:

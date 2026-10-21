@@ -100,7 +100,6 @@ const termsHref = await legalHref('terms');
         var main = document.getElementById('main');
         if (main) for (var i = 0; i < main.children.length; i++) walk(main.children[i], 0);
         document.querySelectorAll('.footer .card').forEach(function (el) { mark(el, 'fade'); });
-        document.querySelectorAll('.nav').forEach(function (el) { mark(el, 'fade'); });
         function settle(el) {
           // Once it has arrived, drop the reveal styles so the element's own hover
           // transitions (buttons, links) are not overridden by the reveal transition.
@@ -124,14 +123,34 @@ const termsHref = await legalHref('terms');
           el.style.setProperty('--reveal-delay', Math.min(0.1 + i * 0.13, 1.4).toFixed(2) + 's');
         });
         targets = targets.filter(function (el) { return first.indexOf(el) < 0; });
-        requestAnimationFrame(function () {
+        // Start only once the new page is actually on screen (Diana, design review 6). When you
+        // follow a link, the browser keeps showing the old page until the new one first paints;
+        // starting earlier let the animation run unseen. The nav stays visible, so there is
+        // always content for that first paint. html.painted also releases the hero load-in.
+        var started = false;
+        function start() {
+          if (started) return;
+          started = true;
+          root.classList.add('painted');
           requestAnimationFrame(function () {
-            first.forEach(function (el) {
-              el.classList.add('is-visible');
-              settle(el);
+            requestAnimationFrame(function () {
+              first.forEach(function (el) {
+                el.classList.add('is-visible');
+                settle(el);
+              });
             });
           });
-        });
+        }
+        var types = window.PerformanceObserver && PerformanceObserver.supportedEntryTypes;
+        if (types && types.indexOf('paint') >= 0) {
+          new PerformanceObserver(function (list, po) {
+            po.disconnect();
+            start();
+          }).observe({ type: 'paint', buffered: true });
+          setTimeout(start, 3000);
+        } else {
+          start();
+        }
         var io = new IntersectionObserver(
           function (entries) {
             entries.forEach(function (e) {
