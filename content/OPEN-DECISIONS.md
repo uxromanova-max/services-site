@@ -127,6 +127,9 @@ Design review 8 (about-photo)
 - Hero hover pictures: fade only (no blur or scale); a picture fades out slowly (1.4s) when the next one takes over or the cursor leaves the headline.
 - About photo: black and white by default (the dithered version from Figma, 32:3068); on hover the colour photo fades in slowly (1.8s) and fades back to black and white (2.2s) after the cursor leaves. The colour photo is mirrored to match the Figma black and white version, as in the Figma frame.
 
+Design review 9 (hero-hover-zones)
+- Hero hover pictures: each picture has a small trigger spot (60px radius) on one word: "Your", "shouldn't", "brand", "manual work". Once a picture is on, it stays while the cursor is anywhere over the picture or its spot and fades out only after the cursor leaves both; other spots under it are ignored until then.
+
 Technical
 - Form service choice (verify free limits). Cal.com account/link. Custom domain later.
 - Mobile Figma frames to come later.

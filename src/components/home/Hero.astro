@@ -77,37 +77,44 @@ const peeks = [
 </section>
 
 <script is:inline>
-  // Hover pictures (Diana, design review 7): moving over the headline fades in the picture for
-  // that part of it; leaving fades it out. Desktop with a mouse only; decorative, not clickable.
+  // Hover pictures (Diana, design reviews 7-9). Each picture has a small trigger spot on one word
+  // of the headline. Touching the spot fades the picture in; it then stays while the cursor is
+  // anywhere over the picture (or still on its spot) and fades out only once the cursor leaves
+  // both. While a picture is on, other spots under it are ignored. Desktop with a mouse only;
+  // decorative, not clickable.
   (function () {
     var stage = document.querySelector('.hero .stage');
     if (!stage || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
     var peeks = stage.querySelectorAll('.peek');
-    var spans = stage.querySelectorAll('.headline span');
-    var BOUNDS = [230, 400, 620]; // stage x where the next picture takes over
+    // Trigger spots in stage pixels, in the same order as the pictures: "Your", "shouldn't",
+    // "brand", "manual work".
+    var SPOTS = [[55, 217], [160, 280], [485, 217], [770, 364]];
+    var RADIUS = 60;
     var current = -1;
-    var hideTimer;
     function show(i) {
-      clearTimeout(hideTimer);
       if (i === current) return;
       if (current >= 0) peeks[current].classList.remove('is-on');
       if (i >= 0) peeks[i].classList.add('is-on');
       current = i;
     }
-    function onMove(e) {
-      var x = e.clientX - stage.getBoundingClientRect().left;
-      var i = 0;
-      while (i < BOUNDS.length && x >= BOUNDS[i]) i++;
-      show(i);
+    function onSpot(i, x, y) {
+      var dx = x - SPOTS[i][0], dy = y - SPOTS[i][1];
+      return dx * dx + dy * dy <= RADIUS * RADIUS;
     }
-    spans.forEach(function (span) {
-      span.addEventListener('mousemove', onMove);
-      // A short grace period, so moving between lines does not make the picture blink.
-      span.addEventListener('mouseleave', function () {
-        clearTimeout(hideTimer);
-        hideTimer = setTimeout(function () { show(-1); }, 300);
-      });
+    function onPicture(i, x, y) {
+      var p = peeks[i];
+      return x >= p.offsetLeft && x <= p.offsetLeft + p.offsetWidth && y >= p.offsetTop && y <= p.offsetTop + p.offsetHeight;
+    }
+    // Listened on the whole page: the top of a picture can sit under the nav, which is not part
+    // of the hero.
+    document.addEventListener('mousemove', function (e) {
+      var r = stage.getBoundingClientRect();
+      var x = e.clientX - r.left, y = e.clientY - r.top;
+      if (current >= 0 && (onPicture(current, x, y) || onSpot(current, x, y))) return;
+      for (var i = 0; i < SPOTS.length; i++) if (onSpot(i, x, y)) return show(i);
+      show(-1);
     });
+    document.documentElement.addEventListener('mouseleave', function () { show(-1); });
   })();
 </script>
 
