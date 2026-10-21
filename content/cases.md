@@ -1,9 +1,14 @@
 # Case pages (3)
 
-Layout = Figma "Case page template" (12:1187): case name + intro, Project information (5 rows), images, Challenge, Solution, Result (3 rows), CTA, footer. Figma placeholder text and the +58% / +43% / +36% metrics are NEVER rendered.
-Rules: first person, only facts Diana has stated, no revenue/growth/ad-performance claims. Image slots stay empty (hidden) until Diana supplies screenshots.
-All three cases stay `draft: true` until Diana approves the copy (ModaBlvck also needs publication permission).
-Project information rows used: Type · My role · Period · Platform · Services shown. (CHECK: match the 5 row labels in Figma.)
+Layout = Figma "Case page template" (12:1187). Structure of every case (decided by Diana):
+1. Name and description
+2. Project information: Industry, Services, Timeline, Platform, Year
+3. Challenge
+4. Solution
+5. Result
+
+Rules: first person, only facts Diana has stated, no revenue/growth/ad-performance claims. Figma placeholder text and the +58% / +43% / +36% metrics are NEVER rendered. Image slots stay hidden until Diana supplies screenshots (the structure above has no separate image section).
+All three cases stay `draft: true` until Diana approves the copy.
 
 ---
 
@@ -11,47 +16,50 @@ Project information rows used: Type · My role · Period · Platform · Services
 slug: ora-studio
 draft: true
 
-**Case name:** ORA Studio
-**Intro:** My own direct-to-consumer brand, built and run solo on Shopify since February 2026. Everything on the store, in the inbox and behind the scenes is something I built and still operate myself.
+**Name:** ORA Studio
+**Description:** A direct-to-consumer brand built and run solo on Shopify since February 2026. The store, the content, the marketing and the operations behind them are all something I built and operate myself.
 
 **Project information**
-- Type: Own DTC brand
-- My role: Founder, running every part of the business myself
-- Period: February 2026 to now
+- Industry: Consumer products, DTC e-commerce
+- Services: Store build, product pages, email flows, AI content production, UGC and ad creative, multi-channel marketing, ops system and AI agents
+- Timeline: February 2026 to now, ongoing
 - Platform: Shopify
-- Services shown: Store build, product pages, email flows, ops system and AI agents
+- Year: 2026
+- Project: My own (Diana's) brand. (Shown only here, not repeated in the description.)
 
 **Challenge**
-A new brand with no team still needs a store that sells, emails that follow up, fresh creative every day and someone watching suppliers, budgets and numbers. One person cannot do all of that by hand and keep it consistent.
+A new brand with no team still needs a store that sells, emails that follow up, fresh creative every day, marketing across several channels and someone watching suppliers, budgets and numbers. One person cannot do all of that by hand and keep it consistent.
 
 **Solution**
-I built the Shopify storefront and backend myself: products, variants, pricing, discount codes and inventory, with custom pages and sections where the theme fell short. I set up the full set of email flows. I bought full rights to more than 30 UGC videos from creators who show the product naturally and used them across Meta, TikTok, Instagram, the website and email. I launch and test Meta campaigns and funnels myself and produce creatives every day.
-To keep this running without a team, I built a small system of AI agents: an architect agent that writes prompts and monitors the others, plus agents for SEO blog content, Pinterest and social, analytics, finance and ad targeting. Written SOPs and a shared knowledge base keep all of them consistent.
+I built the Shopify storefront and backend myself: products, variants, pricing, discount codes and inventory, with custom pages and sections where the theme fell short. I set up the full set of email flows.
+For content, I produced AI content for the product itself and UGC, and made advertising creatives every day. I bought full rights to more than 30 UGC videos from creators who show the product naturally and used them across Meta, TikTok, Instagram, the website and email.
+For marketing, I run several channels: Meta (including paid Meta campaigns and funnels that I launch and test myself), Pinterest, and SEO and GEO.
+To run all of this without a team, I built a system of more than 6 AI agents: an architect agent that writes prompts and monitors the others, plus agents for SEO blog content, Pinterest and social, analytics, finance and ad targeting. Written SOPs and a shared knowledge base keep them consistent.
 
 **Result** (facts, not metrics)
 - A live Shopify store, built and run by one person
 - A full set of email flows, designed and running
-- A working AI agent team with an architect agent that monitors the rest
+- A working system of more than 6 AI agents, with an architect agent that monitors the rest
+- Logistics and delivery set up and running
+- Our own base of more than 300 UGC creators and influencers: people we worked with and people who came to us asking to work together
 
-(No revenue, conversion or ad-performance numbers. Do not add any. 3PL and returns handling are not covered yet.)
-
-**Images (to supply):** store screenshots (home, collection, product, mobile), email flow map and emails, UGC stills, agent system diagram.
+(No revenue, conversion or ad-performance numbers. Do not add any.)
 
 ---
 
 ## 2. ModaBlvck
 slug: modablvck
-draft: true  (needs employer permission to publish; anonymize if not granted)
+draft: true
 
-**Case name:** ModaBlvck
-**Intro:** Operations, AI agents and store fixes for a fashion brand, where I worked as AI & E-commerce Operations Specialist.
+**Name:** ModaBlvck
+**Description:** Operations, AI agents and store fixes for a fashion brand. I worked with ModaBlvck under a contract as AI & E-commerce Operations Specialist.
 
 **Project information**
-- Type: Employment, fashion e-commerce brand
-- My role: AI & E-commerce Operations Specialist
-- Period: September 2024 to April 2026
+- Industry: Fashion e-commerce
+- Services: Ops & AI systems, AI agents, store UX fixes, ad creative
+- Timeline: about 1.5 years of contract work (September 2024 to April 2026)
 - Platform: Shopify
-- Services shown: Ops & AI Systems, store UX fixes, ad creative
+- Year: 2024 to 2026
 
 **Challenge**
 The brand already had a few basic AI agents, but they could not adapt when the strategy changed. Every shift meant manual rework, and the knowledge about how things should be done lived in people's heads.
@@ -63,11 +71,9 @@ Alongside that I coordinated with the 3PL, made Meta ad creatives and fixed smal
 **Result** (facts, not metrics)
 - An agent system that adapts when the strategy changes, instead of a set of fixed scripts
 - Written business knowledge that agents and people both use
-- Work that is usually split across several roles (e-commerce management, creative design, customer support, internal documentation) covered by one person with the system behind her. (CHECK: this is Diana's own statement; keep only if she is ready to walk through it in an interview.)
+- Work that is usually split across several roles (e-commerce management, creative design, customer support, internal documentation) covered by one person with the system behind her
 
 (No performance numbers. Do not add any.)
-
-**Images (to supply, only if permitted):** anonymized agent system diagram, ad creative samples, before/after of UX fixes.
 
 ---
 
@@ -75,26 +81,27 @@ Alongside that I coordinated with the 3PL, made Meta ad creatives and fixed smal
 slug: the-system-club
 draft: true
 
-**Case name:** The System Club
-**Intro:** A template shop for freelancers, launched in about a week by reusing the operating system I had already built for ORA. The shop is now closed. I show it as a build case, not as a success story.
+**Name:** The System Club
+**Description:** A store of digital products for freelancers, made by AI agents. Templates such as invoice trackers, cashflow management and profit dashboards, sold as a one-time purchase with no subscription.
 
 **Project information**
-- Type: Own project, closed October 2026
-- My role: Founder
-- Period: about September to October 2026
-- Platform: Shopify store selling Google Sheets and Excel templates. (CHECK: confirm the shop platform)
-- Services shown: Store build, automation, content system
+- Industry: Digital products for freelancers
+- Services: Store build, SEO setup, conversion optimization, AI automation, content system
+- Timeline: launched in about a week
+- Platform: Shopify store with AI-made digital products
+- Year: 2026
 
 **Challenge**
-Test a new business idea fast: a shop for freelancers (invoice trackers, cashflow management, profit dashboards), one-time purchase, no subscription, with no team and almost no time.
+Build a store of digital products for freelancers in different niches, with the products shaped by market research and by the pain points of the target audience. Take it from zero to launch and first sales with no people on the team, using an AI automation system, in a short period of time.
 
 **Solution**
-I reused the structure and trained AI agents from ORA instead of starting from zero. AI helped create the products themselves. Publishing content to the site was automated, static creatives were produced with automation, and analytics reporting across the marketing channels was automated. The business knowledge base in Notion was run by AI agents working together with me.
+AI agents did the research and made the products. They started from market research and the pain points of the target audience, and created the templates themselves. (CHECK: add which agents did what, and the tools used.)
+I built the store on Shopify, set up SEO and optimized the site to raise conversion.
+Then I built the automation around it: content publishing to the site runs automatically, static creatives are produced with automation, and analytics reporting across the marketing channels is automated. The business knowledge base in Notion is run by AI agents working together with me. (CHECK: list the specific agents, how products were created step by step and how each automation works.)
 
 **Result** (facts, not metrics)
 - A working shop launched in about a week
-- An operating system proven on a second business
-- The shop was closed in October 2026. Nothing here claims sales or growth.
-- What I took from it: a new business can be set up fast on a ready system, and deciding whether it is worth keeping is a separate job.
-
-**Images (to supply):** site screenshots, email flow map, Pinterest boards, agent system diagram.
+- A fully AI-automated workflow for the whole business
+- Products created through AI agents
+- Automated marketing channels set up and running
+- After the system was built and the store launched, the founder needs no more than 1 to 2 hours a day on the business: a digital business with a minimal cost to launch and minimal involvement to keep selling.
