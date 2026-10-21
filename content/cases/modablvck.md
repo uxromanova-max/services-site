@@ -1,30 +1,27 @@
 ---
-# Case page. Layout: Figma case template (12:1187). Copy is not written yet: every CHECK line is a
-# placeholder (shown in grey in previews). Draft pages never reach production.
-# Facts about this case (role, dates, tags) are in content/cases.md. Leave a field empty ("") to hide it;
-# a section with no content is hidden.
-draft: true
+# Case page. Layout: Figma case template (12:1187). Copy: content/cases.md (approved by Diana, Oct 21).
+# Leave a field empty ("") to hide it; a section with no content is hidden.
+draft: false
 slug: modablvck
 name: "ModaBlvck"
 intro:
-  - "CHECK: intro, first paragraph (what the brand is and my role)."
-  - "CHECK: intro, second paragraph."
+  - "Operations, AI agents and store fixes for a fashion brand. I worked with ModaBlvck under a contract as AI & E-commerce Operations Specialist."
 info:
-  client: "CHECK: client"
-  industry: "CHECK: industry"
-  services: "CHECK: services"
-  timeline: "CHECK: timeline"
-  year: "CHECK: year"
+  industry: "Fashion e-commerce"
+  services: "Ops & AI systems, AI agents, store UX fixes, ad creative"
+  timeline: "about 1.5 years of contract work"
+  platform: "Shopify"
+  year: "2024 to 2026"
 challenge:
-  - "CHECK: challenge, first paragraph (the problem before the project)."
-  - "CHECK: challenge, second paragraph."
+  - "The brand already had a few basic AI agents, but they could not adapt when the strategy changed. Every shift meant manual rework, and the knowledge about how things should be done lived in people's heads."
 solution:
-  - "CHECK: solution (what I built or changed)."
-# Only real, checkable results. Never percentages that cannot be shown.
+  - "I wrote down the business as a shared \"brain\" that every agent reads: what the brand sells, its tone, rules, strategy and common cases. On top of it I built an architect agent that manages the agent system and the automations around it, so a change in strategy is made in one place instead of in every agent. I monitored the agents through Claude and set up AI-assisted customer support."
+  - "Alongside that I coordinated with the 3PL, made Meta ad creatives and fixed small conversion and UX problems on the website."
+# Facts, not metrics. No performance numbers.
 result:
-  - "CHECK: result 1"
-  - "CHECK: result 2"
-  - "CHECK: result 3"
-# Image slots use the Figma placeholder until real images exist.
-images: placeholder
+  - "An agent system that adapts when the strategy changes, instead of a set of fixed scripts"
+  - "Written business knowledge that agents and people both use"
+  - "Work that is usually split across several roles (e-commerce management, creative design, customer support, internal documentation) covered by one person with the system behind her"
+# Image slots stay hidden until Diana supplies screenshots.
+images: none
 ---

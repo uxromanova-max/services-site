@@ -21,11 +21,12 @@ servicePage:
 # Case page labels (Figma case template 12:1187; "Challange" in Figma is spelled "Challenge" here).
 casePage:
   infoHeading: "Project Information"
-  client: "Client"
   industry: "Industry"
   services: "Services"
   timeline: "Timeline"
+  platform: "Platform"
   year: "Year"
+  project: "Project"
   challengeHeading: "Challenge"
   solutionHeading: "Solution"
   resultHeading: "Result"

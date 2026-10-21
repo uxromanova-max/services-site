@@ -138,13 +138,14 @@ const cases = defineCollection({
     intro: z.array(z.string()).default([]),
     info: z
       .object({
-        client: z.string().default(''),
         industry: z.string().default(''),
         services: z.string().default(''),
         timeline: z.string().default(''),
+        platform: z.string().default(''),
         year: z.string().default(''),
+        project: z.string().default(''),
       })
-      .default({ client: '', industry: '', services: '', timeline: '', year: '' }),
+      .default({ industry: '', services: '', timeline: '', platform: '', year: '', project: '' }),
     challenge: z.array(z.string()).default([]),
     solution: z.array(z.string()).default([]),
     result: z.array(z.string()).default([]),
@@ -185,11 +186,12 @@ const shared = defineCollection({
     }),
     casePage: z.object({
       infoHeading: z.string(),
-      client: z.string(),
       industry: z.string(),
       services: z.string(),
       timeline: z.string(),
+      platform: z.string(),
       year: z.string(),
+      project: z.string(),
       challengeHeading: z.string(),
       solutionHeading: z.string(),
       resultHeading: z.string(),
