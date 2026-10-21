@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import portrait from '../../assets/figma/about-portrait.png';
+import portraitBw from '../../assets/figma/about-portrait-bw.png';
 import corner from '../../assets/figma/about-corner.svg?url';
 import { isUnresolved } from '../../lib/site';
 
@@ -22,15 +23,33 @@ const linkPending = about.link.href === '';
 <section class="about container" aria-labelledby="about-title">
   <h2 id="about-title" class="section-label label">{about.heading}</h2>
   <div class="photo">
-    <Image
-      src={portrait}
-      alt={about.portraitAlt}
-      width={282}
-      height={390}
-      densities={[1, 2]}
-      formats={['avif', 'webp']}
-      loading="lazy"
-    />
+    <!-- Black and white by default (Figma 32:3068, a dithered print); the colour photo fades in
+         slowly on hover and back out after the cursor leaves (Diana, design review 8). The dither
+         is kept as a lossless PNG at its 2x size so the dots stay sharp. -->
+    <div class="portrait">
+      <Image
+        class="bw"
+        src={portraitBw}
+        alt={about.portraitAlt}
+        width={282}
+        height={390}
+        widths={[564]}
+        sizes="282px"
+        format="png"
+        loading="lazy"
+      />
+      <Image
+        class="color"
+        src={portrait}
+        alt=""
+        aria-hidden="true"
+        width={282}
+        height={390}
+        densities={[1, 2]}
+        format="webp"
+        loading="lazy"
+      />
+    </div>
     <img class="corner" src={corner} alt="" width="43" height="45" />
   </div>
   <div class="body">
@@ -85,11 +104,27 @@ const linkPending = about.link.href === '';
     grid-row: 2;
     margin-top: 102px; /* photo top at 243 in the frame */
   }
-  .photo :global(img:first-child) {
+  .portrait {
+    position: relative;
+  }
+  .portrait :global(img) {
+    display: block;
     width: 100%;
     height: auto;
     aspect-ratio: 282 / 390;
     object-fit: cover;
+  }
+  .portrait :global(.color) {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    opacity: 0;
+    /* Back to black and white slowly once the cursor has left. */
+    transition: opacity 2.2s var(--ease-swap) 0.3s;
+  }
+  .portrait:hover :global(.color) {
+    opacity: 1;
+    transition: opacity 1.8s var(--ease-swap);
   }
   .corner {
     position: absolute;

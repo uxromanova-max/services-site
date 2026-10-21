@@ -123,6 +123,10 @@ Design review 7 (hero-hover)
 - Hero "Book a 20-minute call": on hover the underline slides away to the left while the arrow moves right; pressed: lilac, no line (Figma States).
 - Hero hover pictures from the Figma frames "1"-"4" next to the Landing page: moving the cursor along the headline fades in one picture for that part of it (left to right: frames 2, 4, 3, 1, at their Figma positions); leaving the headline fades it out. Not clickable, desktop with a mouse only, images load only there (WebP, lazy). Pictures are decorative (no alt text).
 
+Design review 8 (about-photo)
+- Hero hover pictures: fade only (no blur or scale); a picture fades out slowly (1.4s) when the next one takes over or the cursor leaves the headline.
+- About photo: black and white by default (the dithered version from Figma, 32:3068); on hover the colour photo fades in slowly (1.8s) and fades back to black and white (2.2s) after the cursor leaves. The colour photo is mirrored to match the Figma black and white version, as in the Figma frame.
+
 Technical
 - Form service choice (verify free limits). Cal.com account/link. Custom domain later.
 - Mobile Figma frames to come later.
