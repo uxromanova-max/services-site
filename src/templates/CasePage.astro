@@ -14,7 +14,7 @@ interface Props {
 const { item: c } = Astro.props;
 const L = (await getShared()).casePage;
 const ph = (text: string) => /^(CHECK|TODO)/.test(text);
-const info = (['client', 'industry', 'services', 'timeline', 'year'] as const)
+const info = (['industry', 'services', 'timeline', 'platform', 'year', 'project'] as const)
   .map((key) => ({ label: L[key], value: c.info[key] }))
   .filter((row) => row.value !== '');
 const images = c.images === 'placeholder';

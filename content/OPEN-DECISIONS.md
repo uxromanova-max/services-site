@@ -110,6 +110,10 @@ Design review 4 (stage-7d-motion)
 Design review 5 (stage-7e-motion)
 - Done: all scroll and load animations are slower and softer again (reveal about 1.5-1.7s; hero assembles in about 2.4s). Every page now has a load-in: the nav and the blocks on the first screen appear one after another, top to bottom. Selected Works: the dark overlay comes in together with the card as it grows; the text appears when the card has reached about 90% of its size (same rule for all three cards).
 
+Case pages filled (cases-content)
+- The three case pages use the approved copy from content/cases.md verbatim and are public (draft: false). Project information rows follow the new list: Industry, Services, Timeline, Platform, Year; ORA Studio also has a "Project: My own brand" row. The "Client" row is removed.
+- Image slots are hidden until Diana sends screenshots for each case (set images in content/cases/<slug>.md when they arrive).
+
 Technical
 - Form service choice (verify free limits). Cal.com account/link. Custom domain later.
 - Mobile Figma frames to come later.
