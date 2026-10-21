@@ -95,9 +95,9 @@ draft: true
 Build a store of digital products for freelancers in different niches, with the products shaped by market research and by the pain points of the target audience. Take it from zero to launch and first sales with no people on the team, using an AI automation system, in a short period of time.
 
 **Solution**
-AI agents did the research and made the products. They started from market research and the pain points of the target audience, and created the templates themselves. (CHECK: add which agents did what, and the tools used.)
+AI agents did the market research and created the products. They started from the pain points of the target audience and built the templates themselves. (CHECK: add how the products were made, step by step, and the tools used.)
 I built the store on Shopify, set up SEO and optimized the site to raise conversion.
-Then I built the automation around it: content publishing to the site runs automatically, static creatives are produced with automation, and analytics reporting across the marketing channels is automated. The business knowledge base in Notion is run by AI agents working together with me. (CHECK: list the specific agents, how products were created step by step and how each automation works.)
+Then I built the automation around it. Content is published to the site automatically, static creatives are produced automatically, and analytics reports across the marketing channels build themselves. The business knowledge base in Notion is run by AI agents working together with me. The system has seven agents: an Architect agent, an SEO/GEO agent, an Analytics agent, a Content Creator agent, an Email agent, an Ad agent and a Shopify Manager agent. (CHECK: add how each automation works, if you want it on the page.)
 
 **Result** (facts, not metrics)
 - A working shop launched in about a week
