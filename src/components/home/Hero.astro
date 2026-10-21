@@ -1,5 +1,10 @@
 ---
+import { Image } from 'astro:assets';
 import heroDash from '../../assets/figma/hero-dash.svg?url';
+import peek1 from '../../assets/figma/hero-hover-1.png';
+import peek2 from '../../assets/figma/hero-hover-2.png';
+import peek3 from '../../assets/figma/hero-hover-3.png';
+import peek4 from '../../assets/figma/hero-hover-4.png';
 
 interface Props {
   hero: {
@@ -14,10 +19,37 @@ interface Props {
 
 const { hero, bookingUrl } = Astro.props;
 const [l1, l2, l3, l4] = hero.headline;
+// Pictures that fade in while the cursor moves over the headline (Figma frames "1"-"4" next to
+// the Landing page). Listed left to right: the part of the headline under the cursor picks one.
+// Positions are the Figma ones, in the 935px stage.
+const peeks = [
+  { src: peek2, x: -72, y: 96, w: 334, h: 356 },
+  { src: peek4, x: 107, y: 224, w: 254, h: 292 },
+  { src: peek3, x: 408, y: 32, w: 254, h: 292 },
+  { src: peek1, x: 531, y: 333, w: 288, h: 332 },
+];
 ---
 
 <section class="hero" aria-labelledby="hero-title">
   <div class="stage">
+    <div class="peeks" aria-hidden="true">
+      {
+        peeks.map((p) => (
+          <Image
+            class="peek"
+            src={p.src}
+            alt=""
+            width={p.w}
+            height={p.h}
+            densities={[1, 2]}
+            format="webp"
+            loading="lazy"
+            decoding="async"
+            style={`left:${p.x}px;top:${p.y}px`}
+          />
+        ))
+      }
+    </div>
     <h1 id="hero-title" class="headline">
       <span class="l1">{l1}</span>
       <span class="l2">{l2}</span>
@@ -44,6 +76,41 @@ const [l1, l2, l3, l4] = hero.headline;
   <p class="proof">{hero.proof}</p>
 </section>
 
+<script is:inline>
+  // Hover pictures (Diana, design review 7): moving over the headline fades in the picture for
+  // that part of it; leaving fades it out. Desktop with a mouse only; decorative, not clickable.
+  (function () {
+    var stage = document.querySelector('.hero .stage');
+    if (!stage || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    var peeks = stage.querySelectorAll('.peek');
+    var spans = stage.querySelectorAll('.headline span');
+    var BOUNDS = [230, 400, 620]; // stage x where the next picture takes over
+    var current = -1;
+    var hideTimer;
+    function show(i) {
+      clearTimeout(hideTimer);
+      if (i === current) return;
+      if (current >= 0) peeks[current].classList.remove('is-on');
+      if (i >= 0) peeks[i].classList.add('is-on');
+      current = i;
+    }
+    function onMove(e) {
+      var x = e.clientX - stage.getBoundingClientRect().left;
+      var i = 0;
+      while (i < BOUNDS.length && x >= BOUNDS[i]) i++;
+      show(i);
+    }
+    spans.forEach(function (span) {
+      span.addEventListener('mousemove', onMove);
+      // A short grace period, so moving between lines does not make the picture blink.
+      span.addEventListener('mouseleave', function () {
+        clearTimeout(hideTimer);
+        hideTimer = setTimeout(function () { show(-1); }, 180);
+      });
+    });
+  })();
+</script>
+
 <style>
   /* Desktop: the Figma Hero frame (3:4, 1280 x 832, nav included). The composition (935px wide,
      193px from the frame edge in Figma) stays centred whatever the screen width. */
@@ -58,6 +125,45 @@ const [l1, l2, l3, l4] = hero.headline;
     bottom: 0;
     left: calc(50% - 447px); /* 640 - 193 */
     width: 935px;
+  }
+  /* Hover pictures: above the headline, never catch the mouse. Slow, soft fade with a slight
+     settle; leaving is a little quicker. Shown only with the desktop composition. */
+  .peeks {
+    display: none;
+  }
+  .peek {
+    position: absolute;
+    z-index: 2;
+    object-fit: cover;
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(1.04);
+    filter: blur(6px);
+    transition:
+      opacity 0.6s var(--ease-out),
+      transform 0.9s var(--ease-reveal),
+      filter 0.6s var(--ease-out);
+  }
+  .peek.is-on {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition:
+      opacity 0.8s var(--ease-reveal),
+      transform 1.1s var(--ease-reveal),
+      filter 0.8s var(--ease-reveal);
+  }
+  @media (hover: hover) and (pointer: fine) and (min-width: 75rem) {
+    .peeks {
+      display: block;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .peek,
+    .peek.is-on {
+      transform: none;
+      filter: none;
+    }
   }
   .headline {
     font-family: var(--font-display);

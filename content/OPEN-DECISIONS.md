@@ -119,6 +119,10 @@ Design review 6 (design-review-6)
 - Updated Figma States: "Book a call directly" (underline grows on hover; pressed: lilac text and underline) and the solid button (only the arrow moves right; pressed: lilac).
 - FAQ answers run the full width up to the arrow. Form service chips in Light. Ops: "What an AI system is" text lines up with the step text of "How it works"; "What it costs to run" text in Light. Ops Tools list: every item ends with a full stop.
 
+Design review 7 (hero-hover)
+- Hero "Book a 20-minute call": on hover the underline slides away to the left while the arrow moves right; pressed: lilac, no line (Figma States).
+- Hero hover pictures from the Figma frames "1"-"4" next to the Landing page: moving the cursor along the headline fades in one picture for that part of it (left to right: frames 2, 4, 3, 1, at their Figma positions); leaving the headline fades it out. Not clickable, desktop with a mouse only, images load only there (WebP, lazy). Pictures are decorative (no alt text).
+
 Technical
 - Form service choice (verify free limits). Cal.com account/link. Custom domain later.
 - Mobile Figma frames to come later.
