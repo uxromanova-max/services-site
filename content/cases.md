@@ -57,7 +57,7 @@ draft: true
 **Project information**
 - Industry: Fashion e-commerce
 - Services: Ops & AI systems, AI agents, store UX fixes, ad creative
-- Timeline: about 1.5 years of contract work (September 2024 to April 2026)
+- Timeline: about 1.5 years of contract work
 - Platform: Shopify
 - Year: 2024 to 2026
 
